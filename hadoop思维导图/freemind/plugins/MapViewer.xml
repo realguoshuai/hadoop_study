@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<plugin	label="plugins/MapViewer">
+	<plugin_classpath jar="map/JMapViewer.jar"/>
+	<plugin_classpath jar="map/map_plugin.jar"/>
+	<plugin_action 
+		documentation="%plugins/map/MapDialog.properties_documentation" 
+		name="%plugins/map/MapDialog.properties_name" 
+		key_stroke="%keystroke_plugins/map/MapDialog.properties_key" 
+		base="freemind.extensions.ModeControllerHookAdapter" 
+		label="plugins/map/MapDialog.properties" 
+		class_name="plugins.map.MapDialog" 
+		instanciation="OnceForRoot">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="menu_bar/extras/first/map/ShowMap"/>
+	</plugin_action>
+	
+	<!-- Context menu Show -->
+	<plugin_action 
+		documentation="%plugins/map/MapDialog_ShowMapToNode.properties_documentation" 
+		name="%plugins/map/MapDialog_ShowMapToNode.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/map/MapDialog_ShowMapToNode.properties" 
+		class_name="plugins.map.ShowMapToNodeAction" 
+		instanciation="Other">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="mindmapmode_popup/map/ShowNode"/>
+	</plugin_action>
+
+	<!-- Context menu Add osm link to node -->
+	<plugin_action 
+		documentation="%plugins/map/MapDialog_AddLinkToMapAction.properties_documentation" 
+		name="%plugins/map/MapDialog_AddLinkToMapAction.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/map/MapDialog_AddLinkToMapAction.properties" 
+		class_name="plugins.map.AddLinkToMapAction" 
+		instanciation="Other">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="mindmapmode_popup/map/AddLinkToNode"/>
+	</plugin_action>
+
+	<!-- Context menu Remove -->
+	<plugin_action 
+		documentation="%plugins/map/MapDialog_RemoveMapToNode.properties_documentation" 
+		name="%plugins/map/MapDialog_RemoveMapToNode.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/map/MapDialog_RemoveMapToNode.properties" 
+		class_name="plugins.map.RemoveMapToNodeAction" 
+		instanciation="Other">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="mindmapmode_popup/map/RemoveNode"/>
+	</plugin_action>
+
+	
+	<!-- Context menu Add image -->
+	<plugin_action 
+		documentation="%plugins/map/MapDialog_AddMapImageToNodeAction.properties_documentation" 
+		name="%plugins/map/MapDialog_AddMapImageToNodeAction.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/map/MapDialog_AddMapImageToNodeAction.properties" 
+		class_name="plugins.map.AddMapImageToNodeAction" 
+		instanciation="Other">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="mindmapmode_popup/map/AddMapImageToNodeAction"/>
+	</plugin_action>
+
+
+	<!-- Context menu Search for text in current node -->
+	<plugin_action 
+		documentation="%plugins/map/MapDialog_SearchInMapForNodeTextAction.properties_documentation" 
+		name="%plugins/map/MapDialog_SearchInMapForNodeTextAction.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		key_stroke="%keystroke_plugins/map/MapDialog_SearchInMapForNodeTextAction.properties" 
+		label="plugins/map/MapDialog_SearchInMapForNodeTextAction.properties" 
+		class_name="plugins.map.SearchInMapForNodeTextAction" 
+		instanciation="Other">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="menu_bar/edit/find/otherFinds/SearchInMapForNodeTextAction"/>
+	</plugin_action>
+
+
+	
+	<!--  Internal plugin to manage the relation map location <-> node. -->
+	<plugin_action 
+		documentation="plugins/map/MapNodePositionHolder.properties_documentation" 
+		name="plugins/map/MapNodePositionHolder.properties_name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/map/MapNodePositionHolder.properties" 
+		class_name="plugins.map.MapNodePositionHolder" 
+		instanciation="Once">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+	</plugin_action>
+
+	<plugin_registration 
+		class_name="plugins.map.Registration" 
+		isPluginBase="true">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+	</plugin_registration>
+
+
+</plugin>

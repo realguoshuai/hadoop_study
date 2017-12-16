@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<plugin label="/collaboration/database/database">
+	<plugin_classpath jar="collaboration/database/hsqldb.jar"  />
+	<plugin_classpath jar="collaboration/database/database_plugin.jar"/>
+	<plugin_registration class_name="plugins.collaboration.database.DatabaseRegistration" isPluginBase="true">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+	</plugin_registration>
+	<plugin_action 
+		documentation="%plugins/collaboration/database/database_master_plugin.description" 
+		name="%plugins/collaboration/database/database_master_plugin.name" 
+		base="freemind.extensions.PermanentNodeHookAdapter" 
+		label="plugins/collaboration/database/database_master_plugin" 
+		class_name="plugins.collaboration.database.DatabaseStarter"
+		instanciation="OnceForRoot" isSelectable="true">
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="menu_bar/extras/first/collaboration/database_master"/>
+	</plugin_action>
+	<plugin_action 
+		documentation="%plugins/collaboration/database/database_slave_starter_plugin.description" 
+		name="%plugins/collaboration/database/database_slave_starter_plugin.name" 
+		base="freemind.extensions.NodeHookAdapter" 
+		label="plugins/collaboration/database/database_slave_starter_plugin" 
+		class_name="plugins.collaboration.database.DatabaseConnector"
+		isSelectable="true">
+        <plugin_property value="menu" name="callType"/>
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<plugin_menu location="menu_bar/extras/first/collaboration/database_slave"/>
+	</plugin_action>
+	<plugin_action 
+		documentation="NONE" 
+		name="Collaboration Slave Hook" 
+		base="freemind.extensions.PermanentNodeHookAdapter" 
+		label="plugins/collaboration/database/database_slave_plugin" 
+		class_name="plugins.collaboration.database.DatabaseConnectionHook"
+		instanciation="OnceForRoot" isSelectable="false">
+        <plugin_property value="java" name="callType"/>
+		<plugin_mode class_name="freemind.modes.mindmapmode"/>
+		<!--  no menu location as this is internal -->
+	</plugin_action>
+</plugin>

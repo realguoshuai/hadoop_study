@@ -1,0 +1,23 @@
+% Formatvorlage für Spezifikation
+\documentclass[a4paper,11pt,footsepline,headsepline]{scrbook}
+\usepackage{makeidx}
+\usepackage[german]{babel}
+\usepackage[pdftex,colorlinks=true,linkcolor=blue]{hyperref}
+%\usepackage{supertab}
+\usepackage[latin1]{inputenc}
+%\usepackage{marvosym}
+\usepackage[pdftex]{graphicx}
+% Bitte die folgenden Parameter jeweils korrekt eintragen
+\author{Wolfgang Radke}
+\title{Transforming Mindmaps in \LaTeX-Files}
+\begin{document}	% Ab hier geht der eigentliche Text los
+\DeclareGraphicsExtensions{.jpg,.pdf,.mps,.png} % fur Paket graphicx
+% To include a graphics file
+%\includegraphics{filename_to_include}
+%\begin{abstract}
+%Dieses Dokument fasst die bisher erstellten Einzeldokumente zum Thema 'Smart Grid / Smart-Metering' zusammen.
+%\end{abstract}
+{\newpage\parskip0pt\tableofcontents\newpage}
+
+\input{mm2latex_latin1_TEMPLATE.tex}
+\end{document}
