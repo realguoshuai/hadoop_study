@@ -2,7 +2,7 @@
 ## hadoop 
 * [hadoop科普](https://github.com/realguoshuai/hadoop_study/wiki/%E7%A7%91%E6%99%AEHadoop)
 * [大数据书籍](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%A6%E7%B1%8D)
-## how study Hadoop
+## How Study ?
 *  [阅读官方文档]()
 *  [看大牛博客]()
   
