@@ -91,7 +91,7 @@
 <node CREATED="1513341409316" FOLDED="true" ID="ID_95683003" MODIFIED="1513351861331" POSITION="right" TEXT="Hbase">
 <node CREATED="1513342679244" ID="ID_339941295" MODIFIED="1513342750401" TEXT="&#x4e00;&#x4e2a;&#x5206;&#x5e03;&#x5f0f; &#x6309;&#x5217;&#x5b58;&#x50a8;&#x7684;&#x6570;&#x636e;&#x5e93;&#xa;&#x4f7f;&#x7528;HDFS&#x4f5c;&#x4e3a;&#x5e95;&#x5c42;&#x5b58;&#x50a8;,&#x540c;&#x65f6;&#x652f;&#x6301;MapReduce&#x7684;&#xa;&#x6279;&#x91cf;&#x5f0f;&#x8ba1;&#x7b97;&#x548c;&#x70b9;&#x67e5;&#x8be2;"/>
 </node>
-<node CREATED="1513342761362" FOLDED="true" ID="ID_1794947055" MODIFIED="1513351861331" POSITION="right" TEXT="Hive">
+<node CREATED="1513342761362" ID="ID_1794947055" MODIFIED="1513925797695" POSITION="right" TEXT="Hive">
 <node CREATED="1513342766667" ID="ID_452462835" MODIFIED="1513342833256" TEXT="&#x4e00;&#x4e2a;&#x5206;&#x5e03;&#x5f0f; &#x6309;&#x5217;&#x5b58;&#x50a8;&#x7684;&#x6570;&#x636e;&#x4ed3;&#x5e93;&#xa;&#x7ba1;&#x7406;HDFS&#x4e2d;&#x5b58;&#x50a8;&#x7684;&#x6570;&#x636e;,&#x5e76;&#x63d0;&#x4f9b;&#x57fa;&#x4e8e;sql&#xa;&#x7684;&#x67e5;&#x8be2;&#x8bed;&#x8a00;&#x7528;&#x4ee5;&#x67e5;&#x8be2;&#x6570;&#x636e;"/>
 </node>
 <node CREATED="1513341480933" FOLDED="true" ID="ID_1287688171" MODIFIED="1513351861331" POSITION="left" TEXT="&#x8c37;&#x6b4c;&#x4e09;&#x7bc7;&#x8bba;&#x6587;">
