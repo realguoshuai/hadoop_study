@@ -10,6 +10,6 @@
 * [hadoop伪分布式搭建](https://github.com/realguoshuai/hadoop_study/tree/master/hadoop%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/hadoop/hadoop%E9%9B%86%E7%BE%A4%E6%90%AD%E5%BB%BA)
 * [hadoop介绍](https://github.com/realguoshuai/hadoop_study/tree/master/hadoop%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/hadoop/hadoop%E7%A7%91%E6%99%AE)
 * [hadoop经典面试题及解题思路](https://github.com/realguoshuai/hadoop_study/tree/master/hadoop%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/hadoop/%E9%9D%A2%E8%AF%95%E9%A2%98)
-#### 持续更新..
+#### 持续更新...
   
     
