@@ -29,5 +29,5 @@
 ## Solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-#### 持续更新....
+#### 持续更新...最近工作比较忙
     
