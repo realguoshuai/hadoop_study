@@ -26,10 +26,10 @@
 ## kafka
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-## Solr
+## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-## Redis
+## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 #### 持续更新..
