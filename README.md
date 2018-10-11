@@ -32,5 +32,5 @@
 ## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-#### 持续更新...
+#### 持续更新..
     
