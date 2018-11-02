@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="0">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../maven/repository/org/noggit/noggit/0.6" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../../maven/repository/org/noggit/noggit/0.6" recursive="false" />
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: net.sf.json-lib:json-lib:jdk15:2.3">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../maven/repository/net/sf/json-lib/json-lib/2.3/json-lib-2.3-jdk15.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../../maven/repository/net/sf/json-lib/json-lib/2.3/json-lib-2.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../../../maven/repository/net/sf/json-lib/json-lib/2.3/json-lib-2.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
