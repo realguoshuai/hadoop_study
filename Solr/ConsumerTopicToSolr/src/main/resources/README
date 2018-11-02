@@ -28,3 +28,4 @@
     kafka_passingTime=passingTime
 5:Main两者的前后顺序必须严格对应,字段中的value值必须完全跟kafka和solr中对应
   如果出错,先检查一遍Main.xml文件,
+6:kafka.properties和solr.properties我去掉了 ,网上都有
