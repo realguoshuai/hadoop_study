@@ -1,0 +1,30 @@
+1:开发目的:实现参数配置化,通过配置Main.xml和trigger.properties可以让代码在所有现场运行
+2:程序流程:数据源从kafka的topic获取到 通过文档转换,调用solrJ的adddocs方法创建Solr索引
+3:Main.xml
+作用:最重要的配置文件!!
+    用作不同城市的参数配置
+    不同城市配置项不同 只需要更改对应的value值
+    根据实际情况 增加或减少
+注意:kafka和solr的字段必须一一对应!!! 代码中只是在遍历时按照顺序读 写
+格式:
+    <property name="kafka_recordId">  ---> 名字只是标记,随便起但不建议
+        <value>recordId</value>       --> kafka传来数据需要存的字段名(必须完全一致)
+    </property>
+    <property name="solr_id">         --->随便起(dom4j解析xml换照name解析的)
+        <value>id</value>             -->solr中的字段,根据solr的admin查看
+    </property>
+4:trigger.properties文件
+作用:用作数据源的字段是否修改,分为触发属性跟修改字段
+注意:如果kafka传来的数据格式跟solr保存的格式一致,不需要改
+    新发布到某地的默认false
+触发属性 true  or  false(只要不是true就行)
+实例:
+    passTimeChange = true 执行 2018-10-26 08:26:40-->2018-10-22T10:53:49Z
+    licenseTypeChange = true 执行  02-->2
+修改字段:kafka的record中的字段
+    当kafka传过来的数据源需要改动时,修改下列参数  1.0只支持时间格式和车辆类型
+实例:
+    kafka_licenseType=licenseType
+    kafka_passingTime=passingTime
+5:Main两者的前后顺序必须严格对应,字段中的value值必须完全跟kafka和solr中对应
+  如果出错,先检查一遍Main.xml文件,
