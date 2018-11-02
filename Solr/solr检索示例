@@ -1,0 +1,177 @@
+**********************************************************************************************************
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-10T00:00:00Z TO 2017-02-13T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001 360107008002 360107011001 360107011002 360104009003 360104009004 360104001103 360104001104 360104019003 360104019004 360104005001 360104005002 360111005003 360111005004)&
+facet=true&
+facet.field=license&
+f.license.facet.mincount=5&
+f.license.facet.limit=10&
+f.license.facet.sort=count&
+facet.offset=0&
+facet.threads=16&
+indent=on&
+wt=json&
+rows=0
+
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-13T00:00:00Z TO 2017-02-16T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001 360107008002 360107011001 360107011002 360104009003 360104009004 360104001103 360104001104 360104019003 360104019004 360104005001 360104005002 360111005003 360111005004)&
+fq=license:(2該A06X82 2該A8X219 2該A19X27 2該A12X22 2該A8X121 2該A03X68 2該A05X62 2該A12X07 2該A12X92 2該A9X197)&
+facet=true&
+facet.field=license&
+facet.limit=10&
+indent=on&
+wt=json&
+rows=0
+
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fl=license,point_id,pass_time&
+fq=pass_time:[2017-02-10T00:00:00Z TO 2017-02-16T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001 360107008002 360107011001 360107011002 360104009003 360104009004 360104001103 360104001104 360104019003 360104019004 360104005001 360104005002 360111005003 360111005004)&
+fq=license:(2該A06X82 2該A8X219 2該A19X27 2該A12X22 2該A8X121 2該A03X68 2該A05X62 2該A12X07 2該A12X92 2該A9X197)&
+group=true&
+group.field=license&
+group.sort=pass_time desc&
+group.main=true&
+indent=on&
+wt=json&
+rows=10
+
+
+*********************************************************************************************************
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-10T00:00:00Z TO 2017-02-13T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001 360107008002 360107011001 360107011002 360104009003 360104009004 360104001103 360104001104 360104019003 360104019004 360104005001 360104005002 360111005003 360111005004)&
+fq=is_taxi:0&
+facet=true&
+facet.field=license&
+f.license.facet.mincount=5&
+f.license.facet.limit=1000&
+f.license.facet.sort=count&
+facet.offset=0&
+facet.threads=16&
+indent=on&
+wt=json&
+rows=0
+
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-13T00:00:00Z TO 2017-02-16T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004)&
+fq=is_taxi:0&
+facet=true&
+facet.field=license&
+f.license.facet.limit=3000&
+f.license.facet.sort=count&
+f.license.facet.mincount=1&
+facet.offset=0&
+facet.threads=16&
+indent=on&
+wt=json&
+rows=0
+
+
+
+
+https://192.168.94.48:20026/Solr/SolrServerAdmin/0/solr/kkrecords/select?
+q=WJ*&
+fq=passingTime:[2018-03-01T00:00:00Z%20TO%202018-03-31T00:00:00Z]&
+df=licenseNumber&
+stats=true&
+stats.facet=pointId&
+rows=0&
+indent=on&
+wt=json
+stats.field={!count=true sum=true mean=true}speed&
+
+
+狟蔥掀瞰=ㄗヶ奀僇徹陬棒杅-綴奀僇徹陬棒杅ㄘ/ヶ奀僇徹陬棒杅
+
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-10T00:00:00Z TO 2017-02-13T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001)&
+fq=is_taxi:0&
+indent=on&
+wt=json&
+rows=0
+
+
+http://192.168.94.8:8983/solr/kkdata_201702/select?
+df=license&
+q=*:*&
+fq=pass_time:[2017-02-13T00:00:00Z TO 2017-02-16T00:00:0Z]&
+fq=point_id:(360104011002 360104015001 360104014003 360104016002 360104008001 360104008002 360104000503 360104000504 360104018003 360104018004 360104004003 360104004004 360107008001)&
+fq=is_taxi:0&
+indent=on&
+wt=json&
+rows=0
+
+
+珗俴陬煦昴
+**********************************************************************************************************
+http://192.168.94.8:8983/solr/kkdata_201703/select?
+q=2該A16X3*&
+fq=pass_day:[2017-03-05T00:00:00Z TO 2017-03-12T00:00:00Z]&
+fq=night_num:[1 TO *]&
+df=license&
+facet=true&
+facet.field=license&
+f.license.facet.mincount=1&
+facet.threads=16&
+rows=10&
+indent=on&
+wt=json
+
+
+http://192.168.94.8:8983/solr/kkdata_201703/select?
+q=2該A16X3*&
+fq=pass_day:[2017-03-05T00:00:00Z TO 2017-03-12T00:00:00Z]&
+fq=night_num:[1 TO *]&
+df=license&
+stats=true&
+stats.field={!count=true sum=true mean=true}night_num&
+stats.field={!count=true sum=true mean=true}night_len&
+stats.facet=license&
+rows=0&
+indent=on&
+wt=json
+
+
+http://192.168.94.48:20026/Solr/SolrServerAdmin/0/solr/kkrecords/select?
+q=*:*&
+fq=passingTime:[2017-03-05T00:00:00Z TO 2017-03-12T00:00:00Z]&
+df=licenseNumber&
+stats=true&
+stats.facet=licenseNumber&
+rows=0&
+indent=on&
+wt=json
+
+
+http://192.168.94.8:8983/solr/kkdata_201703/select?
+q=2該A16X3*&
+df=license&
+fq=pass_day:[2017-03-05T00:00:00Z TO 2017-03-12T00:00:00Z]&
+stats=true&
+stats.field={!tag=piv1 count=true sum=true mean=true}night_num&
+facet=true&
+facet.pivot={!stats=piv1}license&
+rows=0&
+indent=on&
+wt=json

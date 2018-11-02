@@ -1,0 +1,273 @@
+
+solr 知识点网址
+
+	
+
+
+
+
+
+
+
+
+SOlr   优化
+
+Schema优化 
+
+	字段属性调优: 
+	
+		1、index=true比index=false在索引时占用更多的内存、索引合并和优化时间更长，索引体积也响应变的更大，如果你不需要针对该域进行检索，可以设置为index=false.
+		2、如果不关心Term在文档中出现的次数对最终文档的影响可以设置omitNorms=true，即取消标准化因此对score的影响。它能减少磁盘空间的占用并加快索引速度.
+		3、如果你不需要对该域进行高亮，你还可以设置omitPositions=true进一步减小索引体积.
+		4、如果只需要利用倒排索引结构根据指定的Term找到对应的document，不需要计算Term在Document中的出现频率来考虑每个索引文档的权重，那么还可以设置omitTermFreqAndPositions=true即忽略TF计算以及Term在TermVector中的位置信息，这样能够进一步减小索引体积.
+		5、对于stored属性而言，在响应结果集中通过FL参数返回stored=true的域的执行开销很大，因为域值需要存储到硬盘写IO，查询时提取域值需要磁盘读IO，如果不需要存储可以设置stored=false，进一步优化索引的体积.
+		6、如果你想要存储的域值长度并不大， 但是为了能够缓解提取存储域带来的磁盘IO，此时可以设置compressed=true即启用域值数据压缩。开启compressed会降低磁盘IO但会增大CUP开销.
+		7、如果并不是一直都需要使用存储域，你可以设置域延迟加载，尤其是当你开启了域值数据压缩。设置延迟加载开启延迟加载之后，要返回的字段会被SetNonLazyFieldSelector立即加载，其他的域为延迟加载。启用域延迟加载，需要在solrconfig.xml中进行如下配置.
+			<enableLazyFieldLoading>false</enableLazyFieldLoading>
+		8、如果你的域值很大，可以使用ExternalFileField域(外部文件)，他不支持solr查询，只能用于显示和function计算，还可以将域值储存在外部系统，比如redis等，当需要域值的时候根据solr的UniqueKey去缓存中提取.
+		9、对于Java里的日期时间类型的数据，建议你使用Solr里的date域类型，如果你需要进行日期时间范围区间查询，那么建议使用Solr里的date域类型，而不是使用string域类型.
+		10、可以对facet域、排序域设置为docValue=true，它将会生成一个额外的正排表，会提升分面和排序的效率.
+
+创建集合优化
+
+	索引更新与提交调优(创建索引和更新数据):
+	
+		1、提交方式,  不建议使用显示硬提交，建议在solrConfig里面配置自动软/硬提交方式.
+					solr提供了两种提交方式：硬提交和软提交。硬提交(hard commit)指的是在客户端每提交一批数据都通知服务器把数据刷新到硬盘上，检索的时候数据可以立马可见；软提交(soft commit)是让服务器自己控制在一定的时间范围之内刷新数据。很明显，硬提交是非常损耗性能的操作，并且它还会阻塞其他数据的提交，所以我们选择软提交，具体配置方式如下所示：
+						<autoCommit> 
+							   <maxTime>${solr.autoCommit.maxTime:30000}</maxTime> 
+							   <openSearcher>false</openSearcher> 
+						 </autoCommit>
+						 
+						<autoSoftCommit> 
+						  <maxTime>${solr.autoSoftCommit.maxTime:60000}</maxTime> 
+						</autoSoftCommit>
+					 在这份配置文件中，我们指定了服务器每隔60秒对数据做一次软提交，另外推荐opensearch设置为false，否则每次提交都会开启一个opensearch，这个也会损耗性能。
+		2、创建集合,  
+			2-1 单机模式下，在提交索引的时候建议使用ConcurrentUpdateSolrClient类，对于solrCloud模式下建议使用CloudSolrClient类来更新或提交索引.
+			2-2 默认情况下，solr会将document的每个域域值进行索引，当在对一些大文档进行索引的时候，因为创建索引过程中solr需要将document缓存在内存中，如果域的域值很大，内存占用就很大，可能触发更频繁的GC，GC可能会导致暂停索引创建过程，对一些大文本域使用的域类型配置LimitTokenCountFilterFactory来限制实际索引的文本长度，从而减少索引过程中内存占用.
+			2-3 分词器设置, 在创建索引的时候，需要对文本进行分词处理时，建议配置停止词来剔除掉无用的噪音词，从而减少索引体积，同时还可以避免噪音词印象最终的检索结果,很显然使用分词器的话会对数据做进一步处理，也是会使得性能大幅度降低的，再不使用全文检索的情况下可以不使用分词器来提高速度。	
+			2-4 集合副本 ,  solr一个collection会有多个分片（shard），多个shard分别位于不同的节点上，每个节点上可能会有shard的多个复制，其中一个为leader shard，在追求极限速度的情况下，可以将副本数设置为1，这样减去了副本间的数据同步等资源消耗。不过这样做带来的弊端就是数据容灾性降低，和检索性能急剧下降。
+			2-5 集合分片 ,  在一台物理机上，我们可以部署多个solr实例，在每个实例上可以设置多个shard，这样在索引数据的时候，一个collection会有多个shard在同时入数据，显然速度是可以大幅提升的。不过shard数也不能太多，机器资源是有限的，当太多shard同时写数据，会导致内存和IO压力很大，效果适得其反，应该根据自己得硬件情况进行合理设置。另外，如果是采用的SSD硬盘，设置多个solrhome也会有不错的效果。
+			2-6 划分集合 ,  当数据积累的越来越多的时候，哪怕多个shard，每个shard的数量也是巨量的，这个时候，不仅查询性能急剧下降，由于lucene倒排序索引的原理建索引速度也会越来越慢。所以我们尝试控制每个shard数据量不会太大，进行了按业务划分索引库，或者按天按小时建立索引库，这样数据分布到多个collection中，均衡了每个索引库的压力。
+		3、禁用CompoundFile（复合）文件：开始复合文件虽然可以减少段文件个数，但是它会使得你的索引创建时间增加7%～33%，具体配置如下
+			<useCompoundFile>false</useCompoundFile> 
+			<mergePolicy class=”org.apache.lucene.index.TieredMergePolicy”>
+			<float name=”noCFSRatio”＞0.0</float>
+			</mergePolicy>
+		4、如果索引速度经过一系列优化还是比较慢，建议可以使用MapReduce框架，利用多台机器的资源并行创建solr索引，从而加快索引速度
+		
+	索引集合数据的均衡分布(均匀的分布在集合的不同的分片上):
+	
+		solr提供了两种路由方式：哈希路由（composite）,指定路由（implict）.
+			指定路由速度相比于哈希路由，在单节点下速度并没有提升，但是在多节点下，集群的吞吐量有明显的提升，可以真正做到水平拓展，对于物理机数量充足的情况下，可以满足每天海量索引的更新。
+			
+		1, 哈希路由（composite）
+			哈希路由，创建collection的时候需要明确指定shard数量，后期shard可以进行分裂（split）操作，但是不能增加或者删除shard。solr默认的就是采用这种路由模式，利用计算文档ID的哈希值，来判断将此文档索引到哪个分片之上，这样做的好处是可以使得每个shard上数据负载均衡，但在追求极限速度之下，会浪费掉不少时间。第一，计算hash值需要耗时；第二，数据在各个分片之间迁徙分发需要消耗网络以及内存资源。
+			
+		2, 指定路由（implict）
+			 直接路由，指定索引具体落在路由到哪个shard，该模式同样在创建collection时需要具体指定shard数量，后期可以动态追加分片以及删除分片，但是如果一个分片过大时不能进行分裂的。
+				1）索引要特殊方式通过以下URL新建
+					http://xxxx.xxxx.xxx.xxx:port/solr/admin/collections?action=CREATE&name=implicit1&shards=shard1,shard2,shard3&router.name=implicit
+				2）在solr4.x版本中通过更改schemal.xml在5.0以上更改managed-schema文件添加以下字段定义：
+					<field name="_route_" type="string"/>
+				3）利用SolrJ添加文档的时候需要加入以下字段：
+					doc.addField("_route_","shard_x")
+					
+	客户端对Solr集群的操作优化:
+	
+		客户端操作需要注意的事项: 
+		
+			两个参数需要根据自己应用程序的JVM来设置，如果设置的过大，会导致内存溢出。
+			1) 队列大小，这个指的是队列中最多存储多少个请求之后向服务器进行提交.
+			2) 线程数，表示内部开几个线程来提交数据.
+			
+		Java客户端主要有下面几种接口：HttpSolrClient，ConcurrentUpdateSolrClient，CloudSolrClient.
+		
+			1) HttpSolrClient在定义的时候需要明确指定一个solr节点路径，他在提交数据的时候也只能提交到这个节点上.
+			2) ConcurrentUpdateSolrClient(比较适合指定路由的模式) 接口在同样是指定具体solr节点路径的是个异步提交的模式,在对客户端添加数据的时候，客户端会将文档缓存到内存队列中，让队列中的数据达到一定数量时，客户端会自动一次性向solr服务器发起一个http请求.
+						public SolrClient CreateHttpClient() {
+							ModifiableSolrParams params = new ModifiableSolrParams();
+							params.set(HttpClientUtil.PROP_MAX_CONNECTIONS, 128);
+							params.set(HttpClientUtil.PROP_MAX_CONNECTIONS_PER_HOST, 32);
+							params.set(HttpClientUtil.PROP_FOLLOW_REDIRECTS, false);
+							params.set(HttpClientUtil.PROP_ALLOW_COMPRESSION, true);
+							params.set(HttpClientUtil.PROP_USE_RETRY, true);
+							HttpClient httpClient = HttpClientUtil.createClient(params);
+							httpLists.add(httpClient);
+							ConcurrentUpdateSolrClient client = new ConcurrentUpdateSolrClient(solrUrl + "/" + collectionName, 50, 1);
+							client.setConnectionTimeout(zkClientTimeOut);
+							client.setSoTimeout(zkConnectTimeOut);
+							client.setPollQueueTime(500);
+							client.setParser(new BinaryResponseParser());
+							client.setRequestWriter(new BinaryRequestWriter());
+							return client;
+						}
+			3) CloudSolrClient(比较适用于哈希路由的模式 ) 就比较简单了，这个在定义时只需要指定zookeeper地址就好了，因为solr节点注册时，会将节点信息同步到zookeeper中，在提交数据时，CloudSolrClient会和zookeeper进行通信，发现solr云中的索引库，然后利用LBHttpSolrClient来提交数据.
+						public SolrClient CreateCloudSolrClient() {
+							CloudSolrClient csClient = new CloudSolrClient(zkUrl);
+							csClient.setZkConnectTimeout(zkConnectTimeOut);
+							csClient.setZkClientTimeout(zkClientTimeOut);
+							csClient.setDefaultCollection(collectionName);
+							csClient.setParallelUpdates(true);
+							csClient.setRequestWriter(new BinaryRequestWriter());
+							csClient.connect();
+							return csClient;
+						}
+
+	服务器端优化:
+	
+		段合并:
+			solr的索引是由段组成，更新索引的时候是写入一个段的信息，几个段共同组成一个索引，在solr优化索引的时候或其他的时候，solr的段是会合并的。所以我们可以对相关参数进行控制，对段的大小以及合并的频率进行调整，来提交系统资源利用效率.
+			1) mergeFactor这个参数是合并因子，只当内存中有N个文档时则合并成一个段，当存在N个段文件时则合并成一个新的段文件。
+				适量加大mergeFactor参数，来降低合并频率，频繁的段合并会消耗大量系统资源。
+			2) minMergeSize，指定最小的合并段大小，如果段的大小小于这个值，则可以参加合并。
+			3) maxMergeSize，当一个段的大小大于这个值的时候就不参与合并了。
+			4) maxMergeDocs，当文档数据量大于这个的时候，这个段就不参与合并了。
+			
+		索引ID 自动生成:
+		
+			在Solr中，每一个索引，都要有一个唯一的ID，类似于关系型数据库表中的主键。我们在创建文档的时候，需要自己生成一串UUID来标示文档，但是由于ID比较长，在索引过程中，会占用一些额外的网速和内存等资源，我们可以控制在服务器端让solr自己生成UUID.
+			1）修改schema.xml文件，将ID字段修改为UUID类型
+				<field name="id" type="uuid" indexed="true" stored="true" required="true" multiValued="false" /> 
+				<fieldType name="uuid" class="solr.UUIDField" indexed="true" />
+			2）配置solrconfig.xml文件，添加更新策略配置，生成UUID
+				<updateRequestProcessorChain name="uuid">
+					 <processor class="solr.UUIDUpdateProcessorFactory">
+						  <str name="fieldName">id</str>
+					 </processor>
+					 <processor class="solr.LogUpdateProcessorFactory" />
+					 <processor class="solr.DistributedUpdateProcessorFactory" />
+					 <processor class="solr.RunUpdateProcessorFactory" />
+				</updateRequestProcessorChain>
+			3）配置requestHandler
+				<requestHandler name="/dataimport" class="solr.DataImportHandler">
+					<lst name="defaults">
+					  <str name="config">tika-data-config.xml</str>
+					  <str name="update.chain">uuid</str>    
+				   </lst>
+				</requestHandler>
+				 
+				<requestHandler name="/update" class="solr.UpdateRequestHandler">
+					   <lst name="defaults">
+						<str name="update.chain">uuid</str>
+					   </lst>  
+				</requestHandler>
+				 
+				  <!-- for back compat with clients using /update/json and /update/csv -->  
+				  <requestHandler name="/update/json" class="solr.JsonUpdateRequestHandler">
+						<lst name="defaults">
+						 <str name="stream.contentType">application/json</str>
+						 <str name="update.chain">uuid</str>
+						</lst>
+				  </requestHandler>
+				  <requestHandler name="/update/csv" class="solr.CSVRequestHandler">
+						<lst name="defaults">
+						 <str name="stream.contentType">application/csv</str>
+						 <str name="update.chain">uuid</str>
+						</lst>
+				  </requestHandler>
+				 
+				  <requestHandler name="/update/extract"
+								  startup="lazy"
+								  class="solr.extraction.ExtractingRequestHandler" >
+					<lst name="defaults">
+					  <str name="xpath">/xhtml:html/xhtml:body/descendant:node()</str>
+					  <str name="capture">content</str>
+					  <str name="fmap.meta">attr_meta_</str>
+					  <str name="uprefix">attr_</str>
+					  <str name="lowernames">true</str>
+					  <str name="update.chain">uuid</str>
+					</lst>
+				</requestHandler>
+
+		
+集合查询 优化	
+
+	Solr查询性能优化:
+	
+		1、如果你的查询需要在三个域上进行查询，此时可以用copyField将三个域合并成为一个域，在合并之后的域上进行查询。因为在单个域上进行查询比在N个域上进行查询效率要高。但是使用copyField之后，你无法为每个单独的域进行加权
+		2、应该优先让那些能够过滤掉大部分索引文档的FilterQuery先执行
+		3、在对数字域进行范围查询的时候，可以调整precisionStep来对rangeQuery进行优化。precisionStep默认值是4，这个值越大，分解出来的索引前缀索引就越多，数字范围查询越快，但是会增大索引体积
+		
+
+		
+		
+Solr  底层优化
+
+	Solr缓存 优化:
+		solr默认的4中缓存类型 和 前端HTTP协议层启用HTTP缓存:
+		
+		1, filterCache
+				用于缓存Filter Query从硬盘提取出来的Document的无序ID ，下次执行相同的FieldQuery就直接会命中缓存。Solr会默认为每一个FilterQuery提供FilterCache.
+			1-1 应用场景：
+				1)  缓存所有FilterQuery返回的结果集，solr会将主Q查询的结果集和Filter缓存的无序Document ID set集合取交集
+				2)  当facet.method=enum时候会命中Filter缓存
+				3)  如果solrconfig.xml中配置了<useFilterForSortedQuery/>true</useFilterForSortedQuery>，那么对于Solr排序操作也会使用Filter缓存。
+				4)  Filter缓存通常还会用于其他Solr查询，比如facet.query、 group.query
+			1-2 不适用场景：
+				价格区间、时间区间查询：全品类价格区间太多，时间精确到秒。如果对每一个价格区间的FilterQuery都启用FilterCache需要大量的内存支撑，另外由于区间太复杂，缓存命中率也会大大下降，所以这个时候我们可以类似这样的FilterQuery禁用Filter缓存.
+		2、documentCache
+			1) DocumentCache(即文档缓存):用于储存已经从磁盘上提取出来的Lucence中的document对象。Document缓存保存的最大项数：应该大于返回结果集中可能的最大值*查询的最大并发量。 这样做的目的是因为为了确保solr不在从磁盘上提取索引文档，但是随着doc数目越来也多，documentCache占用的内存就会越来越大.
+			2) 当你开启了document缓存并且开启了延迟加载，那么indexReader所提取的对象仅仅包含fl参数指定的Field，其他的Field会被延迟加载，这么做可以减少document缓存对内存的占用，当延迟加载的域，被后续请求到，那么indexReader会临时从硬盘加载该域
+	　		3) 注意的是document缓存并不能进行缓存预热，也就意味这次当打开了一个SolrIndexSearcher的时候，缓存并不会提前进行加载，因为document缓存使用的是lucence内部的document ID，当索引数据变化了之后，该ID也会发生变化
+		3、queryResultCache
+			QueryResult缓存(查询结果集缓存)：用于缓存查询的TOP N结果集的有序的Document ID，按照排序域进行排序。查询结果集缓存的内存占用明显要比Filter小，因为只有q，fq，sort参数同时一致的查询才会命中缓存
+		4、fieldValueCache
+			fieldValueCache(即域值缓存)：与lucence中的fieldCache相似，但是不同的是FieldValueCache支持每个document对应多个值(多值域的多个值域，或者单值域因分词产生多个Term)。此缓存多用于facet查询，缓存的key为域的名称，value为docid到多个值的映射的数据结构。如果solrconfig.xml中没有定义＜fieldValueCache＞，那么Solr会自动为你生成一个size=10, max Size= 10 000，无autowarm的＜fieldValueCache>
+		5, HTTP  缓存
+			HTTP缓存：除了可以在后台服务层启用Solr缓存之外，你还可以在前端HTTP协议层启用HTTP缓存，对于没有更新的资源，可以直接从HTTP缓存中直接返回，避免了同样的查询请求频繁请求服务器，这能在一定程度上减轻Solr Server的负载压力。如果想要开启HTTP缓存，配置如下：
+			<httpCaching never304=”false”>											<httpCaching lastModifiedFrom=”openTime” etagSeed=”Solr”>
+				<cacheControl>max-age=30,  public</cacheControl> 		或 				<cacheControl>max-age=30,  public</cacheControl> 			
+			</httpCaching>															</httpCaching>
+			never304参数设置为false 即表示开启Solr中的HTTP缓存，默认never304=true即禁用HTTP缓存。 Solr中的HTTP缓存只支持GET和HEAD请求，不支持POST请求。 SolrHTTP缓存兼容HTTPI.O和HTTPl.l协议头信息。
+		6, solrconfig.xml 事件监昕器来自动触发缓存自动预热。
+			1) newSearcher用于当一个新的IndexSearcher实例被创建时，除了从旧IndexSearcher实例自动预热一部分缓存之外，还可以显式的指定一个查询来对缓存进行预热。 当某个查询耗时很长时，你可以提前通过newSearcher监昕器进行预热，这样后续你再执行该慢查询时会直接命中缓存。
+			2) firstSearcher表示当一个新的IndexSearcher实例正在被初始化并且当前没有旧的Index Searcher实例用于新的IndexSearcher实例进行缓存自动预热，此时你需要显式的指定一个查询来自动预热缓存。 这个firstSearcher主要用于配置Solr刚启动时执行什么查询并放入缓存。 因为Solr刚启动时，缓存肯定是空的，为了保证刚启动的一段时间内的查询性能高效，因此你需要配置firstSearcher来提取预热。
+			3) 当使用que可Result缓存时，你还可以额外添加＜queryResultWindowSize＞配置来对其进行优化。 当一个查询被执行，返回的DocumentID会被收集，比如查询匹配的documentID是［10, 19）之间，如果queryWindowSize= 50，那么DocumentID [0, 50] 会被收集并缓存，在此范围内的Document将会命中缓存.
+
+			
+			
+			
+			
+			
+			
+总结 
+
+1, 创建集合： 
+	
+	单个shard的数据不能超过5000W条，副本数量不要超过3个
+	数据量大可以测试  shard分裂或者 数据分流到不同的集合中
+	
+	集合数量， 当数据量过大，划分数据到不同的集合，以提高效率。
+	集合 shard 分片，加大数量会提高存储数据的时间，数量过大会导致内存和IO压力很大。
+	shard 分片划分方式：哈希路由（composite） 默认指定分片数量不可改变同时根据数据哈希划分分片,
+						指定路由（implict）  开始指定分片数量后期可以动态增删，分片数据量大时不能添加新分片。
+	
+	
+	
+
+
+
+	集合字段：集合的 默认 ID 字段修改schema.xml文件，将ID字段修改为UUID类型
+		设置： 
+		copyfiled能不用copyfield这个元素就不用，这个属性会对字段做双倍存储，显然非常耗性能，好处就是在查询的时候，想要对多个字段进行检索只需要检索一个字段。
+		omitPositions=false（高亮显示）   不使用中文分词器或者使用高亮功能。
+		termPositions termOffsets的值全都设置成false。
+		index=false （不作为索引字段）  不需要被检索的字段的index属性，设置成false，这样solr就不会对这个字段进行索引
+		stored=false（数据不需要存储） 只用于搜索的，而不需要作为查询结果的field（特别是一些比较大的field）的stored设置为false，这个字段的值将不会被存储，但可以被检索，会减少不小的IO开销。
+		compressed=true（域值数据压缩，针对小数据存储）
+		docValue=true（facet域、排序域设置提升分面和排序的效率）
+		multValued=true 可以将长的报文 分段存储 
+		
+		
+		
+2， 分片 
+	每个分片的存储的数据量的最佳为 5000w
+	查询当前分片的数据
+	http://192.168.102.180:9983/solr/test1/select?q=%3A&shard=shard1
+
+	手动二次分片
+		http://192.168.102.180:9983/solr/admin/collections?action=SPLITSHARD&collection=test1&shard=shard1
+	切片手动二次分裂后，会将原切片上的数据分裂为新的两个切片，删除原有的切片并不影响数据的操作。
+		
