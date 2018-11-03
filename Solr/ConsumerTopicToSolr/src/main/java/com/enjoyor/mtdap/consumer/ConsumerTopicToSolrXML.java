@@ -142,7 +142,9 @@ public class ConsumerTopicToSolrXML {
                         map.get(xmlList.get(i)).toString().length() > 1 ? map.get(xmlList.get(i)).toString().substring(1)
                                 : map.get(xmlList.get(i)).toString());
             } else {
-                doc.addField(xmlList.get(i + 1), map.get(xmlList.get(i)).toString());
+                //todo 该程序在JJ市部署 空指针   有的卡口采集的数据没有方向字段
+                if(null!= map.get(xmlList.get(i))) doc.addField(xmlList.get(i + 1), map.get(xmlList.get(i)).toString());
+                //logger.error("查看Main.xml文件的第 "+i+" 组");
             }
             i += 2;
         }
