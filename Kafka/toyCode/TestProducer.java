@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap.test;
+package test;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
