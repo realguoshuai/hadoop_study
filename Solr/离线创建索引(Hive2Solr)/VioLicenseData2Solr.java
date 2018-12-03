@@ -34,16 +34,17 @@ public class VioLicenseData2Solr {
     private static HashMap map3 = null;
 
     /*
-    * 从hive中同步大数据到Solr中
-    * 现场非现场从两张表得到
+    * 从hive中同步违法数据到Solr中(离线)
+    * 现场违法非现场违法从两张表得到
     * mtdap_nanchang.base_vio_violation where message_source = '1'非现场
     * mtdap_nanchang.base_vio_surveil 非现场
+    * 因为hive最终存的是对应编码,所以需要从另外三张字典表取到id对应的具体值
+    * 1:
     * 第一次在全量导,第二次根据从Solr中拿到的最近的id,在hive中更新
     * 先实现全量导
-    * 传入三个参数: url,0(现场表)或1(非现场),date(可为空);// 获取需要同步数据的日期
+    * 传入三个参数: url,0(现场表)或1(非现场),date(可为空);// 获取需要同步数据的日期,留着 可按照天进行同步
     * 2:
-    * 将字典表放到HashMap(id,name)中 在hive查到值后做转义 存获取到id对应的value
-    * 做转义
+    * 将字典表放到HashMap(id,name)中 在hive查到值后做字典转换 存获取到id对应的value
     * */
     public static void main(String[] args) throws SolrException, SQLException, ClassNotFoundException {
 
