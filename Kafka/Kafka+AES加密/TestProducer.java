@@ -1,7 +1,7 @@
-package com.enjoyor.mtdap.test;
+package com.guoshuai.mtdap.test;
 
 import com.alibaba.fastjson.JSON;
-import com.enjoyor.mtdap.producer.AcquireKkData;
+import com.guoshuai.mtdap.producer.AcquireKkData;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.kafka.common.utils.Utils;
