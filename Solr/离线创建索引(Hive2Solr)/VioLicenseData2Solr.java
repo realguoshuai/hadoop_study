@@ -1,7 +1,7 @@
-package com.guoshuai.mtdap.synchrodata.fastsearch;
+package com.enjoyor.mtdap.synchrodata.fastsearch;
 
-import com.guoshuai.mtdap.pojo.ChooseOnePojo;
-import com.guoshuai.mtdap.util.SolrException;
+import com.enjoyor.mtdap.pojo.ChooseOnePojo;
+import com.enjoyor.mtdap.util.SolrException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
@@ -32,19 +32,19 @@ public class VioLicenseData2Solr {
     private static HashMap map1 = null;
     private static HashMap map2 = null;
     private static HashMap map3 = null;
+    private static int queryCount;
 
     /*
-    * 从hive中同步违法数据到Solr中(离线)
-    * 现场违法非现场违法从两张表得到
+    * 从hive中同步大数据到Solr中
+    * 现场非现场从两张表得到
     * mtdap_nanchang.base_vio_violation where message_source = '1'非现场
     * mtdap_nanchang.base_vio_surveil 非现场
-    * 因为hive最终存的是对应编码,所以需要从另外三张字典表取到id对应的具体值
-    * 1:
     * 第一次在全量导,第二次根据从Solr中拿到的最近的id,在hive中更新
     * 先实现全量导
-    * 传入三个参数: url,0(现场表)或1(非现场),date(可为空);// 获取需要同步数据的日期,留着 可按照天进行同步
+    * 传入三个参数: url,0(现场表)或1(非现场),date(可为空);// 获取需要同步数据的日期
     * 2:
-    * 将字典表放到HashMap(id,name)中 在hive查到值后做字典转换 存获取到id对应的value
+    * 将字典表放到HashMap(id,name)中 在hive查到值后做转义 存获取到id对应的value
+    * 做转义
     * */
     public static void main(String[] args) throws SolrException, SQLException, ClassNotFoundException {
 
@@ -58,20 +58,19 @@ public class VioLicenseData2Solr {
         String url = args[0]; //jdbc 连接的url
         String date = null;
         String tableNum=null;
-        if (args.length==2) {
+        /*三个参数 就不走着一段了*/
+        if (args.length>=2) {
             tableNum=args[1];
-
         }
         /*第三个参数指定同步哪张表*/
-        if(args.length==3){
+        if(args.length>=3){
             date = args[2];// 获取需要同步数据的日期
         }
 
-        //todo 先获取字典表
-         map1 = DicConverPlace();
-         map2 = DicConverClassify();
-         map3 = DicConverBehavior();
-
+         //获取字典表
+         map1 = DicConverPlace(url);
+         map2 = DicConverClassify(url);
+         map3 = DicConverBehavior(url);
 
         //3. 注册驱动包
         try {
@@ -100,13 +99,11 @@ public class VioLicenseData2Solr {
 
         //1.选择hive execution engine
         LOG.info("正在切换hive execution engine... ");
-        System.out.println("正在切换hive execution engine... ");
         /*现场违法数据*/
         String hiveTableName =tableNum.toString().equals("0") ?
                 "mtdap_nanchang.base_vio_violation":
                 "mtdap_nanchang.base_vio_surveil";
         LOG.info("hiveTableName: "+hiveTableName);
-        System.out.println("hiveTableName: "+hiveTableName);
         String sql = tableNum.toString().equals("0")?
                 "select vio_num,vio_time,vio_place,license_num,license_type,vio_classify,vio_behavior from "+hiveTableName :
                 "select record_id,vio_time,vio_place,license_num,license_type,vio_classify,vio_behavior from "+hiveTableName;
@@ -114,22 +111,18 @@ public class VioLicenseData2Solr {
         try {
             String result =null;
             hiveStmt.execute("set fiber.execution.engine = hive");
-            System.out.println("执行hive引擎成功");
             if (date != null && tableNum.toString().equals("0")) {
-                hiveStmt.executeQuery(sql +" where year = '" + date.substring(0, 10) + "' and first_pass_time >= '" + date + "' and first_pass_time < date_add('" + date + "',1)"
-                +"and message_source = '1'");
+                hiveStmt.executeQuery(sql +" where   vio_time >= '" + date + "' and vio_time < date_add('" + date + "',1)"
+                +" and message_source = '1'");
             }else if(date != null && !tableNum.toString().equals("0")){
-                hiveStmt.executeQuery(sql +" where year = '" + date.substring(0, 10) + "' and first_pass_time >= '" + date + "' and first_pass_time < date_add('" + date + "',1)");
+                hiveStmt.executeQuery(sql +" where    vio_time >= '" + date + "' and vio_time < date_add('" + date + "',1)");
             }else{
-                //result = sql + "limit 10";
                 hiveStmt.executeQuery(sql);
             }
             LOG.info("result: "+result);
             hiveRs = hiveStmt.getResultSet();
-            System.out.println("hiveRs "+hiveRs);
         } catch (Exception e) {
             LOG.error("hive读取数据失败：" + e.getStackTrace());
-            System.out.println("hive读取数据失败：" + e.getStackTrace());
         }
 
         VioLicenseData2Solr VioLicenseData2Solr = new VioLicenseData2Solr();
@@ -148,54 +141,53 @@ public class VioLicenseData2Solr {
             Collection<SolrInputDocument> documents = new ArrayList<SolrInputDocument>();
             SolrInputDocument doc;
             ChooseOnePojo pojo = chooseOne(hiveTableName);
-            System.out.println("id: "+pojo.getId()+" 来源表: "+pojo.getBe_from());
             while (hiveRs.next()) {
-               /*  System.out.println(hiveRs.getString(pojo.getId())
-                +" "+hiveRs.getString("vio_time")
-                +" "+hiveRs.getString("vio_place")
-                +" "+hiveRs.getString("license_num")
-                +" "+hiveRs.getString("license_type")
-                +" "+hiveRs.getString("vio_classify")
-                +" "+hiveRs.getString("vio_behavior")
+                /*System.out.println(hiveRs.getString(pojo.getId())
+                        + " " + hiveRs.getString("vio_time")
+                        + " " + hiveRs.getString("vio_place")
+                        + " " + hiveRs.getString("license_num")
+                        + " " + hiveRs.getString("license_type")
+                        + " " + hiveRs.getString("vio_classify")
+                        + " " + hiveRs.getString("vio_behavior")
                 );*/
-               //todo vio_place,vio_classify,vio_behavior三个字段需要进行字典转换
-
                 doc = new SolrInputDocument();
                 /*添加到对应的field中*/
                 doc.addField("id", hiveRs.getString(pojo.getId()));
-                //todo 日期格式转换
-                if(hiveRs.getString("vio_time")!=null) doc.addField("vio_time", ChangeTimeFormat(hiveRs.getTimestamp("vio_time").toString()));
-                /*if(hiveRs.getString("vio_place")!=null) doc.addField("vio_place", hiveRs.getString("vio_place"));*/
-                if(hiveRs.getString("vio_place")!=null) doc.addField("vio_place", DicConverPlace(map1,hiveRs.getString("vio_place")));
-                if(hiveRs.getString("license_num")!=null) doc.addField("license_num", hiveRs.getString("license_num"));
-                if(hiveRs.getString("license_type")!=null) doc.addField("license_type", hiveRs.getString("license_type"));
-                /*if(hiveRs.getString("vio_classify")!=null) doc.addField("vio_classify", hiveRs.getString("vio_classify"));*/
-                if(hiveRs.getString("vio_classify")!=null) doc.addField("vio_classify", DicConverClassify(map2,hiveRs.getString("vio_classify")));
-                /*if(hiveRs.getString("vio_behavior")!=null) doc.addField("vio_behavior", hiveRs.getString("vio_behavior"));*/
-                if(hiveRs.getString("vio_behavior")!=null) doc.addField("vio_behavior", DicConverBehavior(map3,hiveRs.getString("vio_behavior")));
-                doc.addField("be_from",pojo.getBe_from());
-                System.out.println("doc: "+doc);
+                //日期格式转换
+                if (hiveRs.getString("vio_time") != null)
+                    doc.addField("vio_time", ChangeTimeFormat(hiveRs.getTimestamp("vio_time").toString()));
+                if (hiveRs.getString("vio_place") != null)
+                    doc.addField("vio_place", DicConverPlace(map1, hiveRs.getString("vio_place")));
+                if (hiveRs.getString("license_num") != null)
+                    doc.addField("license_num", hiveRs.getString("license_num"));
+                if (hiveRs.getString("license_type") != null)
+                    doc.addField("license_type", hiveRs.getString("license_type"));
+                if (hiveRs.getString("vio_classify") != null)
+                    doc.addField("vio_classify", DicConverClassify(map2, hiveRs.getString("vio_classify")));
+                if (hiveRs.getString("vio_behavior") != null)
+                    doc.addField("vio_behavior", DicConverBehavior(map3, hiveRs.getString("vio_behavior")));
+                doc.addField("be_from", pojo.getBe_from());
+                System.out.println("doc: " + doc);
                 boolean add = documents.add(doc);
-                System.out.println("结果 "+add+"条数: "+counter);
+                System.out.println("添加到documents结果 " + add + " 添加条数: " + counter);
                 counter++;
-                /*10万条提交一次*/
-                if (counter % 10000 == 0) {
+
+                if (counter % 1000 == 0) {
                     i++;
                     LOG.info("---------- 正在插入 第 " + i + " 批次");
                     UpdateResponse updateResponse = cloudSolrClient.add(documents);
-
                     cloudSolrClient.commit();
                     long end = System.currentTimeMillis();
                     documents = new ArrayList<SolrInputDocument>();
-                    LOG.info("100000 条耗费时间：" + (end - start));
-                    start = System.currentTimeMillis();
+                    LOG.info("1000 条耗费时间：" + (end - start));
                 }
-
             }
+            /*补数据 剩余的数据逐条补*/
             if (documents.size() > 0) {
                 UpdateResponse updateResponse = cloudSolrClient.add(documents);
             }
-            cloudSolrClient.commit();//提交，将所有更新提交到索引中
+            /*提交，将剩下的一次型提交到索引中*/
+            cloudSolrClient.commit();
         } catch (Exception e) {
             LOG.error("solr插入数据失败：" + e.getStackTrace());
         } finally {
@@ -272,26 +264,24 @@ public class VioLicenseData2Solr {
     }
     /*日期格式转换*/
     private static String ChangeTimeFormat(String recordTime) {
-        //System.out.println("record: "+recordTime);//2018-07-29 00:08:57
         String sub1 = recordTime.substring(0, 10);//2018-07-29
         String sub2 = recordTime.substring(11);//00:08:57
         StringBuffer sb =new StringBuffer();
         StringBuffer buffer = sb.append(sub1).append("T").append(sub2).append("Z");
         String concat = buffer.toString();
-        //System.out.println("chaned: "+concat);
         return concat;
     }
-    /*字典转换 废弃:不能使用方法,期望执行一次
+    /*字典转换
     * 实现:需要先从hive中查出三张字典表,分别放入到3个HashMap中(id,name)
     * 在result时,根据查出到id,获取到对应的name,存到Solr中
     * */
 
-    private static HashMap DicConverPlace()throws SQLException, ClassNotFoundException{
+    private static HashMap DicConverPlace(String url)throws SQLException, ClassNotFoundException{
         Class.forName("com.huawei.fiber.FiberDriver");
         Connection hiveConn = null;
         Statement hiveStmt = null;
         ResultSet hiveRs = null;
-        hiveConn = DriverManager.getConnection("jdbc:fiber://fiberconfig=D:/fiber.xml;defaultDriver=hive");
+        hiveConn = DriverManager.getConnection(url);
         hiveStmt = hiveConn.createStatement();
         String sql1 ="select * from dictionary.dic_vio_place";
         hiveStmt.execute("set fiber.execution.engine = hive");
@@ -306,12 +296,12 @@ public class VioLicenseData2Solr {
         return map1;
     }
 
-    private static HashMap DicConverClassify()throws SQLException, ClassNotFoundException{
+    private static HashMap DicConverClassify(String url)throws SQLException, ClassNotFoundException{
         Class.forName("com.huawei.fiber.FiberDriver");
         Connection hiveConn2 = null;
         Statement hiveStmt2 = null;
         ResultSet hiveRs2 = null;
-        hiveConn2 = DriverManager.getConnection("jdbc:fiber://fiberconfig=D:/fiber.xml;defaultDriver=hive");
+        hiveConn2 = DriverManager.getConnection(url);
         hiveStmt2 = hiveConn2.createStatement();
         String sql2 ="select * from dictionary.dic_vio_classify";
         hiveStmt2.execute("set fiber.execution.engine = hive");
@@ -326,12 +316,12 @@ public class VioLicenseData2Solr {
         return map2;
     }
 
-    private static HashMap DicConverBehavior()throws SQLException, ClassNotFoundException{
+    private static HashMap DicConverBehavior(String url)throws SQLException, ClassNotFoundException{
         Class.forName("com.huawei.fiber.FiberDriver");
         Connection hiveConn3 = null;
         Statement hiveStmt3 = null;
         ResultSet hiveRs3 = null;
-        hiveConn3 = DriverManager.getConnection("jdbc:fiber://fiberconfig=D:/fiber.xml;defaultDriver=hive");
+        hiveConn3 = DriverManager.getConnection(url);
         hiveStmt3 = hiveConn3.createStatement();
         String sql3 ="select * from dictionary.dic_vio_behavior";
         hiveStmt3.execute("set fiber.execution.engine = hive");
@@ -346,6 +336,30 @@ public class VioLicenseData2Solr {
        return map3;
     }
 
+    private  static int queryCount(String tableNum,String date)throws SQLException, ClassNotFoundException{
+        int count =0;
+        Class.forName("com.huawei.fiber.FiberDriver");
+        Connection hiveConn = null;
+        Statement hiveStmt = null;
+        ResultSet hiveRs = null;
+        hiveConn = DriverManager.getConnection("jdbc:fiber://fiberconfig=D:/fiber.xml;defaultDriver=hive");
+        hiveStmt = hiveConn.createStatement();
+        String sql = tableNum.toString().equals("0")?
+                "select count(1)  from mtdap_nanchang.base_vio_violation where  vio_time>='"+date +
+                        "' and vio_time < date_add('" + date+"',1)" +
+                        " and message_source='1'" :
+                "select count(1)  from mtdap_nanchang.base_vio_surveil  where   vio_time>='"+date +
+                        "' and vio_time < date_add('" + date+"',1)";
+        System.out.println("sql: "+sql);
+        hiveStmt.execute("set fiber.execution.engine = hive");
+        hiveStmt.executeQuery(sql);
+        hiveRs = hiveStmt.getResultSet();
+        while(hiveRs.next()){
+            count = hiveRs.getInt(1);
+        }
+        return count;
+    }
+
     private static String DicConverPlace(HashMap<String,String> map1,String id){
         String name =null;
         Set<String> keySet = map1.keySet();
@@ -354,7 +368,6 @@ public class VioLicenseData2Solr {
                 name = map1.get(key);
             }
         }
-        System.out.println("map中id对应的name值:"+name);
         return name;
     }
 
@@ -366,7 +379,6 @@ public class VioLicenseData2Solr {
                 name = map2.get(key);
             }
         }
-        System.out.println("map中id对应的name值:"+name);
         return name;
     }
 
@@ -378,7 +390,6 @@ public class VioLicenseData2Solr {
                 name = map3.get(key);
             }
         }
-        System.out.println("map中id对应的name值:"+name);
         return name;
     }
 
