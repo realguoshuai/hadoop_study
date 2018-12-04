@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap.test;
+package com.guoshuai.mtdap.test;
 
 import kafka.utils.ShutdownableThread;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
