@@ -1,0 +1,3 @@
+## 
+
+## conf文件夹中删除掉了core-site.xml hdfs-site.xml hbase-site.xml文件,项目导入本地是需要从服务器copy自己的放进去
