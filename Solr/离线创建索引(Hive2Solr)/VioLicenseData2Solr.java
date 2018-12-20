@@ -1,7 +1,7 @@
-package com.enjoyor.mtdap.synchrodata.fastsearch;
+package com.guoshuai.synchrodata.fastsearch;
 
-import com.enjoyor.mtdap.pojo.ChooseOnePojo;
-import com.enjoyor.mtdap.util.SolrException;
+import com.guoshuai.pojo.ChooseOnePojo;
+import com.guoshuai.util.SolrException;
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.client.solrj.response.UpdateResponse;
 import org.apache.solr.common.SolrInputDocument;
