@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap.common;
+package com.guoshuai.mtdap.common;
 
 
 import org.apache.solr.client.solrj.SolrClient;
