@@ -1,9 +1,9 @@
-package com.enjoyor.mtdap.consumer;
+package com.guoshuai.mtdap.consumer;
 
 
-import com.enjoyor.mtdap.common.InitPropertiesUtil;
-import com.enjoyor.mtdap.common.SolrClientHelper;
-import com.enjoyor.mtdap.common.TimeHelper;
+import com.guoshuai.mtdap.common.InitPropertiesUtil;
+import com.guoshuai.mtdap.common.SolrClientHelper;
+import com.guoshuai.mtdap.common.TimeHelper;
 import net.sf.json.JSONObject;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.TopicPartition;
