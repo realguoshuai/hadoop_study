@@ -1,0 +1,150 @@
+REPL:scala的命令行 界面  cmd:scala-->会编译成class的字节码文件,由jvm运行   :q 退出
+val 常量 var 变量
+    注:Scala中,变量或函数的类型,总是在变量或函数后面   (1:Long)
+Scala中每行结束不需要使用分号,除非一行中存在多条语句
+val i1,i2=100  //将 i1 i2 的初始值都设成100,并且值不可变
+8大类型: Byte Short Int Long Double Float Boolean Char
+    注意:这些都是类,Scala不区分基本类型跟类
+    你可以对数字执行方法 1.toString() ==> "1" 1.to(10) =>Range(1,2,3,4,5,6,7,8,9,10)
+运算符:
+    跟Java一样,但是 a+b 实际上是a.+(b)的简写
+    +是方法名,所以你可以使用任何符号来为方法命名
+    a 方法 b  是 a.方法(b)的简写 => 方法是一个带有两个参数的方法(一显式,一隐式)
+        1.to(10) 即 1 to 10
+    Scala 没有++  -- 需要使用 +=1或-=1
+    scala处理BigInt 比java好多了
+        val x:BigInt =1234567890
+        Scala:
+            x * x * //1881676371789154860897069000
+        Java:
+            x.multiply(x).multiply(x)
+    Scala可以自定义运算符,Java不允许重载运算符
+调用函数和方法:
+    Scala 可以随时使用数学函数 import scala.math._
+    sqrt(2)     //平方根 1.4142135623730951
+    pow(2,4)    //方 16.0
+    min(3.Pi)   //最小 3.0
+Scala中不带参数的方法可以省略()
+    eg: "hello".distinct 去除重复的字符串
+Apply() 通过伴生对象的apply方法是Scala中构建对象的常用手段
+        eg:Array(1,2,3) =>Array.apply(1,2,3)
+O C:ScalaDoc上每个类上都有
+    C 代表:类
+    O 代表:伴生对象
+标注带有implicit的方法对应的是隐式转换
+大量的方法只是Scala应对各种可能的一种方式,遇到就去查,不要重复造轮子
+
+
+=============================
+
+Scala中每一个表达式都是一种类型 ,他们都有一个公共的超类Any
+    if(x>0) "hello scala" else 1
+    () 用作占位,表示无用值   :Unit 无返回值,类属于Java,C++ 的 void
+                           Unit 实际上有一个表示无值的值   void 没有值
+
+{}中包含一系列的表达式,块中的最后一个表达式就是块的值
+
+readLine函数,从控制台读取一行输入
+
+变量<-表达式 形式支持多个 ##生成器##(n to m) , 可以使用;隔开
+    for(i <- 1 to 3; j<- 4 to 7 reverse) println(x + y)
+
+每个生成器都可以带一个 ##守卫## :即(if开头的Boolean表达式)
+    for(i <- 1 to 3; j<- 4 to 7 reverse) println(i + j)
+yield:如果for循环的循环体以yield开始,则该循环会构造出一个集合,每次迭代生成集合中的一个值
+    for(i <- 1 to 5) yield i * 2
+        //Vector(2,4,6,8,10)
+Vector: 是Scala的一个集合/容器,用来保存其他对象
+         Vector 转数组  .toArray()
+         val b = for( i <- 1 to n) yield Random.nextInt(n)  //Vector(7, 8, 8, 7, 5, 8, 2, 8, 5, 7)
+
+from: ##定义## ,可以使用任意多的定义
+    for(i<- 1 to 5;from = 4 - 2; j<- from to 5 ) println(from)
+
+注: 除了循环中,  生成器/守卫/定义 也可以在大括号使用
+
+=======函数========
+递归函数
+    def fac(n:Int):Int = if(n<=0) 1 else n * fac(n-1)
+    //fac(3)==>6
+变长参数
+    def sum(args:Int*)={
+    var result =0
+    for(arg <- args) result += arg
+    result
+    }
+head,tail
+    head:代表首个元素
+    tail:代表其余元素的序列
+
+当函数没有返回值时: 即 #过程#
+    可以省略 =    eg: def sum(args:Int*){ ...}
+    或者: :Unit= eg: def sum(args:Int*):Unit={ ...}
+
+lazy: 懒值   (一般用于初始化开销比较大的语句)
+    当val常量被声明为 lazy时,它的初始化将被推迟,直到首次被使用
+    写法: lazy val str1="hello"
+
+
+========数组========
+定长数据 Array
+        val num = new Array[Int](10)  //10个整数的数组  初始化全为 0
+        val str = new Array[String](10)  //10个字符串的数组  初始化全为 null
+     可以不指定参数:
+             val str1 = new Array("hello","scala")   自动推测出为String 类型
+     使用()而不是[]来获取元素
+             str1(0)="hello"
+变长数组 ArrayBuffer
+        import scala.collection.mutable.ArrayBuffer
+        val a = new ArrayBuffer[Int]    一个空的缓存数据,准备存放 int类型的值
+     a+=1  使用+=  在尾端添加值
+        ArrayBuffer[Int](1)
+        a+=(2,3,4,5)   //输出 res6: a.type = ArrayBuffer(1, 2, 3, 4, 5)
+     ++=          追加集合
+     trimEnd(5)   移除最后5个元素
+     insert(2,6)  在下标为2之前插入6  在...之前
+     remove(2)    移除下标为2的
+     remove(2,3)  第二个参数表示移除多少元素
+     init
+
+遍历数组
+  for循环
+      for(i<- 0 until a.length) println(i+":"+a(i))
+
+  until 返回所有小于(但不包括)上限的数字
+      0 until 10 ==> for(i<- 0 until a.length) println(i+":"+a(i))
+      实际上是:0.until(10)
+  两个输出一次:
+      0 until (a.length,2)
+  倒叙输出:
+      (0 until a.length).reverse
+
+  增强for循环
+      for(elem <- a) println(elem)
+      变量elem 先被设为a(0),然后a(1),a(2)
+
+
+数组转换
+    scala的数组转换不换修改原始数组,是产生一个新的数组
+        val a =Array(2,3,5,7,11)
+        val result = for (elem <- a) yield 2 * elem
+  for(...) yield 循环创建一个与原数组相同的新集合
+
+    可以跟##守卫## 连用
+    for(elem <- a if elem % 2 ==0) yield 2 * elem
+    注意: 产生的是一个新的集合,所以不会对原有的产生影响
+
+    函数式写法:(代替 守卫+yield)
+    a.filter(_ % 2==0).map(2 * _)
+
+------------------------------------------------------
+_: 指集合中的每一个元素
+    在元祖中:_1,_2 指代元组中的第一,第二个元素
+
+Scala 中使用Java包
+import java.util.TimeZone  直接可以调用内置的方法 就可以使用
+                           TimeZone.getAvailableIDs
+-------------------------------------------------------
+
+
+========元祖========
