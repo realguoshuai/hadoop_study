@@ -27,6 +27,9 @@
 ### sparkStreaming
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
+### HBase
+*  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
+*  见HBase目录,不定期更新
 ## kafka
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
