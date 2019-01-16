@@ -48,6 +48,8 @@ object DemoFlinkEventTimeAndChkMain {
         env.getCheckpointConfig.setCheckpointingMode(CheckpointingMode.EXACTLY_ONCE)
         /*设置检查点的时间间隔*/
         env.getCheckpointConfig.setCheckpointInterval(10000)
+        /*环境中设置并行度  默认是2*/
+        env.setParallelism(5)
 
         val dataStream = env.addSource(new DemoEventsSource)
           /*自定义时间戳和水印*/
@@ -71,18 +73,18 @@ object DemoFlinkEventTimeAndChkMain {
                 var count = 0L
                 for(elem <- input) {
                     count+= 1L
-                    println(elem)
+                    //println(elem)
                 }
                 total += count
                 out.collect(count)
             }
-            /*释放*/
+            /*从自定义快照中恢复数据*/
             override def restoreState(state: util.List[UDFState]): Unit = {
                 /*从头开始算*/
                 val udfState = state.get(0)
                 total = udfState.getState
             }
-            /*快照*/
+            /*实现自定义快照*/
             override def snapshotState(checkpointId: Long, timestamp: Long): util.List[UDFState] = {
                 /*将最新的计算 保存起来*/
                 val udfList: util.ArrayList[UDFState] = new util.ArrayList[UDFState]()
@@ -92,7 +94,7 @@ object DemoFlinkEventTimeAndChkMain {
                 udfList
             }
         })
-            .print()
+          .print()
 
         env.execute()
     }
