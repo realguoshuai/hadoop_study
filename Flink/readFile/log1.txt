@@ -1,0 +1,11 @@
+LiuYang,female,20
+YuanJing,male,10
+GuoYijun,male,5
+CaiXuyu,female,50
+Liyuan,male,20
+FangBo,female,50
+LiuYang,female,20
+YuanJing,male,10
+GuoYijun,male,50
+CaiXuyu,female,50
+FangBo,female,60
