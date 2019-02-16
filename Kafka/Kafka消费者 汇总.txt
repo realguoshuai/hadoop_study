@@ -1,0 +1,22 @@
+公司:
+实时计算1.0 sparkStreaming  14个实时计算程序  
+	数据 kafka:mtdap-kkdata(现场kakoudata)  --> sparkStreaming ---> kafka ---> hbase(phoenix)
+实时计算2.0 flink
+	数据 kafka:mtdap-kkdata(kkakoudata) --> flink ---> kafka ---> hbase
+
+14个实时计算程序 既是kafka消费者 又是kafka生产者 
+
+每天产生的交通卡口数据,被每个路口的卡口设备拍摄后,通过flume采集下来,再通过kafka生产者 将源源不断的数据(事件)流,
+发送到实时计算程序,经过计算后通过消费者程序入库到HBase.
+	每一个实时计算程序(既是消费者,又是生产者,中间通过flink(spark)实时计算对原始数据进行处理 实时计算出有用的数据)
+	计算周期:30s(大多数),3分钟(重点拥堵),30分钟(点位流量计算)
+一个kafka的topic 支持多个consumer消费,有另一个消费者程序将数据实时创建索引到Solr中,供页面查询(比hbase查询速度更快) 
+
+现场没集群的就部署单机Solr 由缉查布控系统使用  有集群的公司/南充 快速搜车都是集成到大数据项目
+
+公司测试环境的数据是通过kafka生产者程序模拟:mtdap-kkdata(500w) mtdap2-kkdata(1500w)
+    500w数据是拿到现实一周的真实数据,将日期年月日换成当前的日期 作为实时数据测试
+现场的数据是直接接入的
+
+实时计算
+
