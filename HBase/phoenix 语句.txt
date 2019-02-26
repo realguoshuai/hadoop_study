@@ -1,0 +1,33 @@
+1:创建表
+create table MTDAP2.BASE_KKDATA_7DAY_STANDARD(
+record_id bigint not null primary key,
+point_id  varchar,
+license_type varchar,
+license_color varchar,
+license_num varchar,
+pass_time   timestamp,
+lane_number integer,
+speed integer,
+veh_color varchar,
+brand varchar
+) DEFAULT_COLUMN_FAMILY='dcf',SALT_BUCKETS=32,IMMUTABLE_ROWS=true,disable_wal=true;
+	#关闭压缩,关闭预写日志WAL
+	#创建表 直接varchar,integer 不给指定大小
+2:创建索引表
+create index IDX_BASE_KKDATA_7DAY_STANDARD on MTDAP2.BASE_KKDATA_7DAY_STANDARD(pass_time) include(record_id,point_id,license_type,license_color,license_num,lane_number,speed,veh_color,brand);
+	#二次索引表 create index 索引表名 on 表名(索引字段) include(除了非主键+索引字段外所有字段)
+	
+3:删除索引表
+drop index IDX_BASE_KKDATA_7DAY_STANDARD on MTDAP2.BASE_KKDATA_7DAY_STANDARD;
+
+4:删除表
+drop table MTDAP2.BASE_KKDATA_7DAY_COMMON;
+
+5查看phoenix 是否走索引:
+explain 
+explain + phoenix sql;   
+
+
+select * from  MTDAP2.BASE_KKDATA_7DAY_STANDARD; 不走索引 
+select column1,column2 from MTDAP2.BASE_KKDATA_7DAY_STANDARD; 走索引 
+
