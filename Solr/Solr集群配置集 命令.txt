@@ -1,0 +1,29 @@
+
+Solr集群模式下配置集操作
+
+
+
+1:修改配置文件
+solrctl confset --list 
+confWithHDFS
+confWithSchema
+confWithHBase
+confWithDisk
+
+2:获取confWithSchema 配置集  到本地目录
+solrctl confset --get confWithSchema /home/test/
+
+3:新建一个配置集  创建collection使用它   写数据 测试
+solrctl confset --create confWithCommon   /home/test/
+
+4:更新本机新建配置集到集群
+
+solrctl confset --update VioLicenseConf /home/test/
+
+
+####copy一份,作为新的配置集#######
+		将不需要的managed-schema中配置schema字段删除,在页面上哪行重新添加 所有用这个配置集的共享
+1:cp -r  confWithSchemaChange/   confWithCommon/
+2:solrctl  confset --update confWithCommon /home/confWithCommon
+3:下载配置集到本地 
+solrctl confset --get confWithCommon /home/confWithCommon/
