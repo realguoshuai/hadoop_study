@@ -31,7 +31,7 @@
 #### Spark Structured Streaming
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-### HBase
+### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
 *  见HBase目录,不定期更新
 ## kafka
@@ -45,6 +45,6 @@
 ## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-#### 持续更新...
+#### 持续更新..
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
 * 由于精力有限 今年计划重心是在实时计算上  flink 和 sparkStreaming   spark结构化流公司不用  有空再去搞
