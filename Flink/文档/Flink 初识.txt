@@ -132,7 +132,34 @@ flink人大视频
 https://www.bilibili.com/video/av42427050/
 
 
-
+=================flink开发步骤==========
+第一步:构建环境
+val streamEnv = StreamExecutionEnvironment.getExecutionEnvironment
+streamEnv.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
+第二步:添加数据源
+val prop:Properties = new Properties()
+prop.setProperty("bootstrap.servers",kafkaProp.getProperty("bootstrap.servers"))
+val consumer010= new FlinkKafkaConsumer010(kafkaProp.getProperty("source.topic")
+				 ,new SimpleStringSchema(),prop)
+consumer010.setStartFromLatest()
+val dataStream = streamEnv.addSource(consumer010)
+第三步:数据预处理
+val outputStream = dataStream
+.map(x=>getRecord(x))
+.filter(!_._1.isEmpty)
+.map(x=>recordProcess(x)) 
+第四步:设置时间戳和水印
+.assignTimestampsAndWatermarks(new TimestampExtractor(basicProp.getProperty("job.interval").toInt))
+第五步:数据分组
+.keyBy(0)
+第六步:指定时间窗口+聚合计算+输出格式
+.timeWindow(Time.seconds(basicProp.getProperty("max.lagged.time").toInt))
+.reduce((v1,v2)=>(v1._1,v1._2,v1._3+v2._3,v1._4+v2._4))
+.map(x=>toJson(x))
+第七步:输出
+outputStream.addSink(producer010)
+第八步:执行flink
+env.execute(basicProp.getProperty("application.name"))
 
 
 
