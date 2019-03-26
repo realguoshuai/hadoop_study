@@ -42,7 +42,7 @@
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-*  全文检索
+*  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
 ## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
