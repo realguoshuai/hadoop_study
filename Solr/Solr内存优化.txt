@@ -1,0 +1,34 @@
+当solr中数据量变大后,我们就要考虑对solr内存进行调优了
+常见现象:线上solr突然启动不了,一启动就自动kill  
+		原因就是solr安装时使用的默认512m  内存不足 solr程序就会通过oom脚本将solr实例杀死，导致程序无法正常使用
+		
+如果在solr使用过程中遇到oom,可以使用下面三种方式解决(推荐在安装时修改默认512为4G):
+1: 在solr启动时指定内存
+./solr start -m 2g
+
+2: 修改solr.in.sh脚本
+位置在solr的bin目录下
+
+cd /home/solr-6.2.0/bin  
+vim  solr.in.sh
+找到 默认的:  SOLR_HEAP="512"   -->修改为 4g
+
+3:修改solr文件(推荐!!!)
+vim solr
+找到 :
+JAVA_MEM_OPTS=()
+
+if [ -z "$SOLR_HEAP" ] && [ -n "$SOLR_JAVA_MEM" ]; then
+
+  JAVA_MEM_OPTS=($SOLR_JAVA_MEM)
+
+else
+
+  SOLR_HEAP="${SOLR_HEAP:-2g}"
+
+  JAVA_MEM_OPTS=("-Xms$SOLR_HEAP" "-Xmx$SOLR_HEAP")
+
+fi
+在下面添加两行:
+SOLR_JAVA_MEM="-Xms4g -Xmx8g"
+JAVA_MEM_OPTS=($SOLR_JAVA_MEM)
