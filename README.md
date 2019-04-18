@@ -40,7 +40,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
 *  开源的消息队列,流计算架构一定要有的一个组件
 ## Eleasticsearch
-*  占坑
+*  占坑,可以直接使用dbms+es实现几千万数据可视化 汇总,底层跟solr一样
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -50,6 +50,8 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 ## kerberos
 *  这个真恶心 人机/机机
+### springboot 
+*  用空还是要学一下 最近做了个springboot实现solr rest服务 套的公司应用层模板
 #### 持续更新..
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
 * 由于精力有限 今年计划重心是在实时计算上  flink 和 sparkStreaming   spark结构化流公司不用  有空再去搞
