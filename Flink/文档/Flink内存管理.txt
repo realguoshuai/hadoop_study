@@ -1,0 +1,59 @@
+大数据开源框架底层都是使用JVM 
+	比如:Hadoop,Spark,Storm,Flink
+基于JVM的数据分析引擎都需要将大量数据加载到内存中
+需要解决的问题:
+1 Java对象存储密度低
+	Boolean属性对象占用16个字节内存(对象头8个,Boolean属性1个,对齐7个,实际上只需要一个bit(1/8字节))
+2 Full GC会极大影响性能
+	如果为了处理更大数据量,给定更多内存后,GC会达到秒甚至分钟级
+3 OOM问题影响稳定性
+	OutOfMemoryError是分布式计算框架最容易遇到的问题,影响分布式框架的健壮性和性能
+	产生原因:
+		当JVM中所有的对象大小超过分配给JVM的内存时,就会产生oom,导致jvm崩溃
+Spark,Flink,HBase开始管理JVM内存 目的是为了获得像C一样的性能以及避免OOM的发生
+
+-------------Flink的内存管理----------------
+MemorySegment(默认32kb,最小的内存分配单位):
+Flink 并不是将大量对象存在堆上,将对象都序列化到一个预分配的内存块(MemorySegment)
+可以理解为flink定制的java.nio.ByteBuffer
+	底层可以是java字节数组 byte[],也可以是申请在堆外的ByteBuffer
+flink的每条记录都会以序列化的形式存储到一个或多个MemorySegment
+
+TaskManager:Flink的worker 节点,用来执行用户代码的jvm进程
+TaskManager的jvm heap堆内存结构:
+	1:free heap 
+	2:memory manager(sorting,hashing,caching)
+	3:network buffers (shuffle/broadcast)
+详解:
+NetworkBuffer:一定数量的32kb大小的buffer,主要用于数据的网络传输
+	TaskManager启动时会自动分配NetworkBuffer,默认数量2048 
+		通过taskmanager.network.numberOfBuffers配置
+Memory Manager Pool:一个由MemoryManager管理,由多个MemorySegement组成的超大集合
+	Flink中的算法(sort/shuffle/join)会向这个内存池申请MemorySegment,
+		将序列化的数据存于其中,使用完后释放会内存池.默认,池子占了堆内存的70%
+Free(remaining) Heap:这部分剩余的内存,留给用户代码以及TaskManager 的数据结构使用
+		可以看作为GC角度中的新生代,主要存放用户代码生成的短期对象
+		特点:数据结构一般都很小
+Note:
+Memory Manager Pool 主要在Batch模式下使用
+在Steaming模式下,该池子不会预分配内存,也不会向该池子请求内存块.也就是说该部分的内存都是可以给用户代码使用的
+		
+Flink底层 使用类似DBMS 的sort和join算法,直接操作二进制数据
+	从而使序列化/反序列化带来的开销达到最小,底层实现更像c/c++
+如果需要处理的数据超出内存限制,这部分数据会存储到硬盘上
+如果要操作多个MemorySegment就像操作一块大的连续内存一样,使用逻辑视图来方便操作
+
+
+
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+
