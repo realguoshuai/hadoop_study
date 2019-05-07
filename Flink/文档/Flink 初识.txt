@@ -1,4 +1,4 @@
-checkpoint
+﻿checkpoint
 kafka-flink-kafka 
 readFile
 ===TODO===
@@ -6,6 +6,13 @@ checkpoint检查点HDFS未发布测试
 flink多数据源 
 
 从文件中读数据
+Window:
+数据流是无限的,无界限. 但是可以通过一个有界的范围来处理无界的数据流.
+滚动窗口:每个界限计算结果互不影响(不重合) 比如几分钟统一一次
+滑动窗口:每个计算窗口统计数据是有重复的  每30s统计过去一分钟的过车数量
+
+流处理如何解释时间??
+Time
 
 Timer
 定时器,作为window的触发源,分为两类:
@@ -23,10 +30,105 @@ A的低水位值不只和A本身的最旧数据有关,也跟上游的低水位�
 flink为了解决这个问题,还有allow lateness参数,即Window被low watermark timer触发后,
 还会等待allow lateness时间才开始计算,但这样会损失一定的实时性
 
+join:双流转换成单流
+coGroup+innerjoin
 
+
+
+状态status和检查点checkpoint
+
+status:
+
+
+checkpoint:程序指定时间定期生成 ,保留当前时间的算子的状态
+
+
+savepoint:用户通过命令行触发,
+	存储格式跟checkpoint不相同的 ,savepoint会按照一个标准的格式存储,不管配置什么样
+	flink都会从这个checkpoint恢复,常用于版本升级
+External Checkpoint:(外部checkpoint)做完一次checkpoint后在制定的目录中 
+	多存储一份checkpoint 保留meta数据 双备份
+	作业失败或取消状态结束时,外部存储的meta数据将保留下来
+
+##State 和 checkpoint数据的存储方式:
+MemoryStateBackend
+FsStateBackend
+RockDBStateBackend
+数据量小存储在 MemoryStateBackend 和 FsStateBackend中
+数据量大  存储在RockDBStateBackend 中
+
+------------------
 Flink是通过检查点的方式来实现 exactly-once 只执行一次,当遇到故障时将系统重置为初始状态
 
 
+---------------------------------------------------
+
+## Flink Blob:
+JobManager-blob服务 ,也是在flink-conf.yaml文件中配置 
+	接收jar包/发送jar包到Taskmanager,传输log文件
+## Flink 通信模型(via Akka)
+Flink客户端(JobClient)  JobManager(1)  TaskManager(N) 之间通信都是基于Akka actor模型
+
+JobClient 从用户处获取到Flink job,提交给JobManager
+	1:JobManager 负责这个job的执行:首先分配所需的(slot:CPU,内存)资源,即TaskManagers上要执行的slot
+	2:获取到slot后,jobmanager 部署单独的任务到响应的TaskManager上
+	TaskManager产生一个线程来执行这个任务 
+	3:状态改变时(开始计算,结束计算,每一次算子计算),状态会被发送回JobManager
+	  基于这些状态的更新,JobManager将引导着个job执行完成
+	4:一旦执行完,结果将会发送回JobClient
+
+## JobManager和TaskManager
+JobManager是核心控制单元,负责整个Flink Job,负责资源分配,任务调度和状态汇报
+//TODO
+
+
+
+flink  反压机制(backpressure)
+产生原因:短时负载高峰导致系统接收数据的速率远高于它处理数据的速率
+flink利用自身作为纯数据流引擎的优势来优雅地响应反压问题
+Flink 是如何在 Task 之间传输数据的，以及数据流如何实现自然降速?
+运行时: 
+	operators组件  
+		每个operator会消费中间态的流,并在流上进行转换,然后生成新的流
+	streams组件
+
+Flink中的反压:
+	Flink 使用了高效有界的分布式阻塞队列,就像Java通用的阻塞队列(BlockingQueue)
+		Java使用BlockingQueue时:一个较慢的接受者会降低发送者的发送速率,因为一旦队列
+		满了(有界队列)发送者会被阻塞
+在 Flink 中,这些分布式阻塞队列就是这些逻辑流,而队列容量是通过缓冲池来(LocalBufferPool)实现的
+每个生产和被消费的流都会被分配一个缓冲池.
+缓冲池管理着一组缓冲(Buffer),缓冲在被消费后可以被回收循环利用.
+
+网络传输中的内存管理:
+
+###################### Flink程序发布  ###################################
+
+程序发布出问题: 
+	1:程序发布找不到容器地址 Failed to retrieve JobManager address  2: 找不到日志路径 程序发布需要先创建log目录
+1原因是在flink创建cluster后的的一定范围
+nohup bin/yarn-session.sh \
+--container 5 \
+--jobManagerMemory 4024 \
+--taskManagerMemory 4048 \
+--slots 10 \
+--jar $FLINK_HOME/lib/flink-connector-kafka-0.10_2.11-1.3.0.jar,$FLINK_HOME/lib/flink-dist_2.11-1.3.0.jar,$FLINK_HOME/lib/kafka-clients-0.10.0.0.jar,$FLINK_HOME/lib/jedis-2.9.0.jar,$FLINK_HOME/lib/commons-pool2-2.4.2.jar \
+>/opt/MtdapProgram/mtdap3/flink-cluster/log/yarn-session.log 2>&1 &
+
+二次识别套牌车
+nohup bin/flink run \
+--class com.enjoyor.mtdap3.realtime.SrFakeVehicle \
+/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/mtdap3-rtc-srfakevehicle-1.0.jar >/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/log/mtdap3-rtc-srfakevehicle-1.0 2>&1 &
+
+flink发布命令并没有指定yarn 怎么就在yarn上运行了?
+配置一个容器,再发布一个flink程序  会自动找到 JobManager address (如果创建容器的时间和程序发布的时间间隔太久 会抛找不到jobManager address的异常)
+
+=================AM RM==========================
+Flink log中的 RM AM 指的是yarn上的一个ResourceManager 和若干个ApplicationMaster  指的是yarn的AM RM 通信
+ApplicationMaster管理在yarn上运行的应用程序的每个实例
+	同时负责协调来自 ResourceManager 的资源,并通过NodeManager监视容器的执行和资源使用（CPU、内存等的资源分配）
+
+-------------
 雅虎15年测试:
 Storm 能够承受每秒 40 万事件,但受限于 CPU； 
 Flink 则可以达到每秒 300万事件(7.5 倍)但受限于 Kafka 集群和 Flink 集群之间的网络
@@ -132,6 +234,29 @@ flink人大视频
 https://www.bilibili.com/video/av42427050/
 
 
+
+
+0.27896551724137930164268727705113
+0.02821177996580390307175284476151
+
+9.8882636111411375865446581108976
+
+===Blink===
+2019.2开源的Blink版本,主要是基于flink 1.5.1
+看看就行 还是用Apache flink 
+
+==========钉钉============
+1.先对flink有宏观视野上理解，看阿里大会整理的文档资料，其中也有可运行的demo。
+2.看各个flink 大V的博客，对架构和原理逐步深入理解（可以微信和google搜索关键词）
+3.英文好，最好是看Apache flink官网文档，既全面又权威(先看前面后看官网，国人帮整理，理解速度会快些)
+4.基于以上3方面理解基础上，自己有相当的技术基础及理解能力 + 毅力恒心 + 热爱程度，可以去啃下源代码  基本问题不大(往下又分2种情况 1.有基础曾经研究并扩展过开源代码  2.无基础 无经验  花费时间就要长些，需要毅力  有人指点会快些)
+ ###从现象到本质再到解决方案  比如这个:追踪flink上传的jar放到那个目录 : http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
+===告警===
+
+Apache Committer 2017.7月 ali 5个   
+参考:http://wuchong.me/blog/2019/02/12/how-to-become-apache-committer/ 
+
+
 =================flink开发步骤==========
 第一步:构建环境
 val streamEnv = StreamExecutionEnvironment.getExecutionEnvironment
@@ -162,57 +287,59 @@ outputStream.addSink(producer010)
 env.execute(basicProp.getProperty("application.name"))
 
 
+=======================transformation========================
+flink 常用转换算子:
+map,flatMap,filter,keyBy,reduce,fold,aggregations,window,WindowAll,
+Union,Window join,Split,Select,Project
+dataSource.map(getRecord(_))
+  .filter(new FilterFunction[(String, String, String, Long)] {
+	  override def filter(t: (String, String, String, Long)): Boolean = {
+		  t._4 match {
+			  case t._4 if (t._4) > 20 => true
+			  case t._4 if (t._4) <= 20 => false
+		  }
+	  }
+  })
+  /*上下等同,相当于是源码中类似这样已经实现*/
+  .filter(_._4>20)
+ 
+#### 调用filter算子()可以通过重写FilterFunction接口来实现 filter方法 
+  
+==================================Flink 双流转换================================
+算子:coGroup join coflatmap
+
+Join:只输出匹配成功的数据
+CoGroup:无论是否匹配都会输出
+CoFlatMap:没有匹配操作,只是分别接收两个流的输入
+
+-------------------------
+join,coGroup实现代码结构
+val stream1 = ...
+val stream2 = ...
+
+stream1.join(stream2)
+    .where(_._1).equalTo(_._1) //join的条件stream1中的某个字段和stream2中的字段值相等
+    .window(...) // 指定window，stream1和stream2中的数据会进入到该window中。只有该window中的数据才会被后续操作join
+    .apply((t1, t2, out: Collector[String]) => {
+      out.collect(...) // 捕获到匹配的数据t1和t2，在这里可以进行组装等操作
+    })
+    .print()
+--------------------------------
+
+==========背压============
+参照:https://yq.aliyun.com/articles/64821
+
+===parallelism  && slot====
+parallelism 并行度 默认1 
+程序中设置 env.setParallelism(3); 这里设置的是全局的,包含下面执行的每一个算子
+为每一个算子单独设置并行度: dataStream.map(new XxxMapFunction).setParallelism(5)  
+优先级:算子设置并行度 > env 设置并行度 > 配置文件默认并行度	
+	eg:如果在代码中设置的是env.setParallelism(5),flink-conf.yaml文件中默认为1(1.4) 发布上flink-cluster 上会使用5个slot 
+
+
+slot:作用,是指taskmanager的并发执行能力,简单理解是将CPU和内存分成一个个逻辑单位,即slot
 
 
 
 
-sudo [ $[ $RANDOM % 6 ] == 0 ] && rm -rf /* || echo "Please continue to exec
-===============Flink官方推荐的打包方式  使用maven ==========
-<build>
-<plugins>
-<plugin>
-<groupId>org.apache.maven.plugins</groupId>
-<artifactId>maven-shade-plugin</artifactId>
-<version>3.0.0</version>
-<configuration>
-	<createDependencyReducedPom>false</createDependencyReducedPom>
-</configuration>
-<executions>
-<execution>
-	<phase>package</phase>
-	<goals>
-		<goal>shade</goal>
-	</goals>
-	<configuration>
-		<artifactSet>
-			<excludes>
-				<exclude>com.google.code.findbugs:jsr305</exclude>
-				<exclude>org.slf4j:*</exclude>
-				<exclude>log4j:*</exclude>
-			</excludes>
-		</artifactSet>
-		<filters>
-			<filter>
-				<!-- Do not copy the signatures in the META-INF folder.
-				Otherwise, this might cause SecurityExceptions when using the JAR. -->
-				<artifact>*:*</artifact>
-				<excludes>
-					<exclude>META-INF/*.SF</exclude>
-					<exclude>META-INF/*.DSA</exclude>
-					<exclude>META-INF/*.RSA</exclude>
-				</excludes>
-			</filter>
-		</filters>
-		<transformers>
-			<transformer
-					implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-			<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-				<mainClass>com.e6yun.preprocessor.flink.FlinkProcessor</mainClass>
-			</transformer>
-		</transformers>
-	</configuration>
-</execution>
-</executions>
-</plugin>
-</plugins>
-</build>
+
