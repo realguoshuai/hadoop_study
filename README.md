@@ -23,6 +23,7 @@
 *  [阅读官方文档](https://ci.apache.org/projects/flink/flink-docs-release-1.3/)
 *  流计算利器,但是资料比较少,建议直接看官方文档 我会将自己的翻译的文档不定期上传到Flink的目录下
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/blob/master/%E8%AF%BE%E7%A8%8B%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.md)
+*  [QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
 ## Spark
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
