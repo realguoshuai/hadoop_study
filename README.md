@@ -41,7 +41,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
 *  开源的消息队列,流计算架构一定要有的一个组件
 ## Eleasticsearch
-*  占坑,可以直接使用dbms+es实现几千万数据可视化 汇总,底层跟solr一样,都是基于lucene
+*  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -51,7 +51,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 ## kerberos
 *  这个真恶心 人机/机机 
-*  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好
+*  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
 ### springboot 
 *  用空还是要学一下 最近做了个springboot实现solr rest服务 套的公司应用层模板
 #### 持续更新..
