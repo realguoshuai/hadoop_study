@@ -1,0 +1,19 @@
+--------------------------------BUG--------------------------
+java.lang.NoSuchMethodError: org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer010.<init>(Ljava/lang/String;Lorg/apache/flink/streaming/util/serialization/SerializationSchema;Ljava/util/Properties;)V
+	所有程序的pom文件都要换掉  配置文件修改  重新发布,问题解决,原因是沿用之前1.3版本的pom文件
+
+bug:java.util.NoSuchElementException: None.get
+	redis取不到数据,一直重启
+	需要依赖redis的 local_vehicle 但是为 NULL
+	
+bug:org.apache.kafka.common.errors.TimeoutException: Timeout expired while fetching topic metadata
+Connection to node -2 could not be established. Broker may not be available. 
+The configuration 'key.serializer' was supplied but isn't a known config
+	代码中加上安全验证 kafka安全协议
+
+bug:车辆轨迹计算一直重启: 20个小时后
+redis.clients.jedis.exceptions.JedisDataException: OOM command not allowed when used memory > 'maxmemory'.
+	影响范围:所有往redis写数据的flink程序都会重启
+	redis内存满了,在配置文件中将页面上内存调大位4G 重启 就行了
+	注意:配置更改后第一次重启是同步配置,并没有生效.页面会显示配置过期, 需要重启服务
+再计算全市实时流量,发现计算出的数据骤减为个位数,排查后发现资源给的太少的 -p 5或者代码中设置环境变量并行度5
