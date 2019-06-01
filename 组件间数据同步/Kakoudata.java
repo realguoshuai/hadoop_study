@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap.datasynch;
+﻿package com.mtdap.datasynch;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,11 +7,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import com.enjoyor.mtdap.config.HiveConfig;
-import com.enjoyor.mtdap.jdbc.HiveJdbc;
-import com.enjoyor.mtdap.jdbc.PhoenixJdbc;
-import com.enjoyor.mtdap.pojo.Kkdata;
-import com.enjoyor.mtdap.util.DateTimeUtil;
+import com.mtdap.config.HiveConfig;
+import com.mtdap.jdbc.HiveJdbc;
+import com.mtdap.jdbc.PhoenixJdbc;
+import com.mtdap.pojo.Kkdata;
+import com.mtdap.util.DateTimeUtil;
 
 public class Kakoudata {
 
