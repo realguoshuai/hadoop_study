@@ -1,21 +1,22 @@
-phoenix ×Ô¶¨Òåº¯ÊıUDF-²âÊÔ
+phoenix è‡ªå®šä¹‰å‡½æ•°UDF-æµ‹è¯•(ç”¨äºè½¨è¿¹åæŸ¥)
 201906041152,001|201906041155,002|...
-Ê±¼ä,¿¨¿Ú
+æ—¶é—´1,å¡å£1|æ—¶é—´2,å¡å£2
 
-ÊäÈë: ²ÎÊı1:201906041152,001|201906041155,002|... ×Ö·û´® ²ÎÊı2: 201906040000-201906042359
-	ÅĞ¶ÏÊÇ·ñÔÚ²ÎÊı2·¶Î§
-ÅĞ¶Ï: 201906041152,001|201906041155,002|... ×Ö·û´®
-Êä³ö0,001,2,002
-1:¼Ì³ĞScalarFunctionÀà ÊµÏÖ×Ô¶¨Òåº¯Êı ´ò°ü
-2:ÉÏ´«µ½hdfsÉÏ
+è¾“å…¥: å‚æ•°1:201906041152,001|201906041155,002|... å­—ç¬¦ä¸² å‚æ•°2: 201906040000 å­—ç¬¦ä¸² å‚æ•°3:201906042359
+	åˆ¤æ–­æ˜¯å¦åœ¨å‚æ•°2èŒƒå›´
+åˆ¤æ–­: 201906041152,001|201906041155,002|... æ˜¯å¦åœ¨å‚æ•°2,å‚æ•°3çš„èŒƒå›´åŒºé—´ (æ˜¯è¾“å‡º1,å¦ è¾“å‡º2)
+è¾“å‡º0,001|1,002
+å®ç°æ­¥éª¤
+1:ç»§æ‰¿ScalarFunctionç±» å®ç°è‡ªå®šä¹‰å‡½æ•° æ‰“åŒ…
+2:ä¸Šä¼ åˆ°hdfsä¸Š
 3:CREATE FUNCTION judgeTrackTime(varchar) returns varchar as 'com.enjoyor.mtdap.UDFS.PhoenixUdfDemo' using jar 'hdfs://hacluster/MTDAP/UDF/PhoenixUDF.jar'
 
-hdfsÉÏ´«:hdfs dfs -put file:/opt/PhoenixUDF.jar hdfs://hacluster/MTDAP/UDF/
-²é¿´ÎÄ¼ş:hadoop fs -ls hdfs://hacluster/MTDAP/UDF
-É¾³ıÎÄ¼ş:hadoop fs -rm  hdfs://hacluster/MTDAP/UDF/PhoenixUDF.jar
+hdfsä¸Šä¼ :hdfs dfs -put file:/opt/PhoenixUDF.jar hdfs://hacluster/MTDAP/UDF/
+æŸ¥çœ‹æ–‡ä»¶:hadoop fs -ls hdfs://hacluster/MTDAP/UDF
+åˆ é™¤æ–‡ä»¶:hadoop fs -rm  hdfs://hacluster/MTDAP/UDF/PhoenixUDF.jar
 
 ------------------------------------------------------------------------
-³ÌĞòµÄÅäÖÃÎÄ¼şºÍ·şÎñ¶Ë¶¼ĞèÒªÌí¼ÓÒ»ÏÂÅäÖÃ
+æ³¨æ„:ç¨‹åºçš„hbase-site.xmlé…ç½®æ–‡ä»¶å’ŒæœåŠ¡ç«¯éƒ½éœ€è¦æ·»åŠ ä¸€ä¸‹é…ç½®
 <property>
   <name>phoenix.functions.allowUserDefinedFunctions</name>
   <value>true</value>
@@ -31,5 +32,5 @@ hdfsÉÏ´«:hdfs dfs -put file:/opt/PhoenixUDF.jar hdfs://hacluster/MTDAP/UDF/
 
 
 
-Òì³£:Èç¹û²»Ìí¼ÓÉÏÃæµÄ
-Å×:User defined functions are configured to not be allowed. To allow configure phoenix.functions.allowUserDefinedFunctions to true.
+å¼‚å¸¸:å¦‚æœä¸æ·»åŠ ä¸Šé¢çš„
+æŠ›:User defined functions are configured to not be allowed. To allow configure phoenix.functions.allowUserDefinedFunctions to true.
