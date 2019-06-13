@@ -354,9 +354,13 @@ stream1.join(stream2)
     .print()
 --------------------------------
 
-==========背压============
+==========背压/反压============
 参照:https://yq.aliyun.com/articles/64821
+https://www.cnblogs.com/lanyun0520/p/5676617.html
 
+背压
+一个任务的back pressure警告(high),则意味着该任务产生数据的速度要高于下游Operator消化的速度
+数据沿着job的数据流图向下游流动(如从source到sink),而背压则是沿着相反的方向传播,逆流而上,可以理解为 水流漫上去
 ===parallelism  && slot====
 parallelism 并行度 默认1 
 程序中设置 env.setParallelism(3); 这里设置的是全局的,包含下面执行的每一个算子
