@@ -47,6 +47,7 @@
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
+*  solr 实施创建索引写入延迟问题 (增量3000w/天)
 ## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -57,4 +58,5 @@
 *  用空还是要学一下 最近做了个springboot实现solr rest服务 套的公司应用层模板
 #### 持续更新..
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
-* 由于精力有限 今年计划重心是在实时计算上Flink,下半年有时间会尝试学习es,将solr实现业务转到es
+* 今年计划重心是在实时计算上Flink,下半年会尝试学习es,将公司现有的solr业务转到es,solr升级迫在眉睫
+* 本地Git 有问题了  暂时不能上传文档了 修复后一起上传
