@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="HydraSettings">
+    <option name="hydraStorePath" value="E:\development\MTDAP2.0\realtime-flink\mtdap3-rtc-tailnumlimit\.hydra\idea" />
+    <option name="noOfCores" value="1" />
+    <option name="projectRoot" value="E:\development\MTDAP2.0\realtime-flink\mtdap3-rtc-tailnumlimit" />
+    <option name="sourcePartitioner" value="auto" />
+  </component>
+</project>

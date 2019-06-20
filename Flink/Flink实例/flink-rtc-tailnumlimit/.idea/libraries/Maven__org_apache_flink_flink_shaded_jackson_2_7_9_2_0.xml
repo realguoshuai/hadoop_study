@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.flink:flink-shaded-jackson:2.7.9-2.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/apache/flink/flink-shaded-jackson/2.7.9-2.0/flink-shaded-jackson-2.7.9-2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/apache/flink/flink-shaded-jackson/2.7.9-2.0/flink-shaded-jackson-2.7.9-2.0-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/apache/flink/flink-shaded-jackson/2.7.9-2.0/flink-shaded-jackson-2.7.9-2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.scala-lang:scala-compiler:2.11.11">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/scala-lang/scala-compiler/2.11.11/scala-compiler-2.11.11.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/scala-lang/scala-compiler/2.11.11/scala-compiler-2.11.11-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/scala-lang/scala-compiler/2.11.11/scala-compiler-2.11.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.xerial.snappy:snappy-java:1.1.2.6">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../maven/repository/org/xerial/snappy/snappy-java/1.1.2.6/snappy-java-1.1.2.6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
