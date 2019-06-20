@@ -2,8 +2,8 @@ package com.guoshuai.realtime.details
 
 import java.util.{Date, Properties}
 
-import com.enjoyor.mtdap3.utils.TimeHelper._
-import com.enjoyor.mtdap3.utils.{InitPropertiesUtil, JedisClusterUtil, RegularExpressUtil, TimeHelper}
+import com.guoshuai.utils.TimeHelper._
+import com.guoshuai.utils.{InitPropertiesUtil, JedisClusterUtil, RegularExpressUtil, TimeHelper}
 import net.minidev.json.JSONObject
 import net.minidev.json.parser.JSONParser
 import org.apache.flink.runtime.state.filesystem.FsStateBackend
