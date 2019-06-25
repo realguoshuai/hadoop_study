@@ -1,0 +1,1 @@
+ps aux --sort –rss  查看服务器内存占用情况
