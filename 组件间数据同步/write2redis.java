@@ -1,8 +1,8 @@
-package com.enjoyor.mtdap.other;
+﻿package com.guoshuai.mtdap.other;
 
-import com.enjoyor.mtdap.common.JedisClusterUtil;
-import com.enjoyor.mtdap.common.PhoenixJdbc;
-import com.enjoyor.mtdap.phoenix2redis.FlowParamsSynch;
+import com.guoshuai.mtdap.common.JedisClusterUtil;
+import com.guoshuai.mtdap.common.PhoenixJdbc;
+import com.guoshuai.mtdap.phoenix2redis.FlowParamsSynch;
 import net.minidev.json.JSONObject;
 import org.apache.log4j.Logger;
 
