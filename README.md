@@ -51,6 +51,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
 *  solr 实施创建索引写入延迟问题 (增量3000w/天)
+*  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 ## redis
 *  [Redis命令参考](//http://doc.redisfans.com/)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
