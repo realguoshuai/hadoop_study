@@ -1,6 +1,6 @@
 # 套牌车分析
 nohup spark-submit \
---class com.enjoyor.mtdap.realtime.FakeVehicle  \
+--class com.guoshuai.mtdap.realtime.FakeVehicle  \
 --name MTDAP_FakeVehicle \
 --jars $SPARK_HOME/lib/streamingClient/kafka-clients-0.8.2.1.jar,$SPARK_HOME/lib/streamingClient/kafka_2.10-0.8.2.1.jar,$SPARK_HOME/lib/streamingClient/spark-streaming-kafka_2.10-1.5.1.jar,$SPARK_HOME/lib/streamingClient/phoenix-core-4.4.0-HBase-1.0.jar,$SPARK_HOME/lib/streamingClient/jredisclient-0.0.1.jar,$SPARK_HOME/lib/streamingClient/commons-pool2-2.3.jar \
 --executor-memory 2G \

@@ -1,8 +1,8 @@
-package com.enjoyor.soa.traffic.rest.solr.service;
+package com.guoshuai.soa.traffic.rest.solr.service;
 
 
-import com.enjoyor.soa.traffic.util.pojo.Page;
-import com.enjoyor.soa.traffic.util.pojo.ResultPojo;
+import com.guoshuai.soa.traffic.util.pojo.Page;
+import com.guoshuai.soa.traffic.util.pojo.ResultPojo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public interface ISolrVehSearService {
     /**
      * Description
      * Param @param licenseNumber  号牌号码 String  可以为null，支持模糊查询
-     * return com.enjoyor.soa.traffic.util.pojo.ResultPojo
+     * return com.guoshuai.soa.traffic.util.pojo.ResultPojo
      **/
 
     ResultPojo getLicenseNumberSuggest(String licenseNumber, Page page);

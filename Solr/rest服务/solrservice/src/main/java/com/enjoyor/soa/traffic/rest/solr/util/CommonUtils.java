@@ -1,4 +1,4 @@
-package com.enjoyor.soa.traffic.rest.solr.util;
+package com.guoshuai.soa.traffic.rest.solr.util;
 
 
 import org.apache.commons.beanutils.BeanUtils;

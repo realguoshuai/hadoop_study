@@ -16,11 +16,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 09:50:59,033 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 09:50:59,033 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 09:50:59,062 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 09:50:59,062 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 09:50:59,063 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -36,9 +36,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 09:50:59,068 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 09:50:59,068 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 09:50:59,068 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 09:50:59,069 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 09:50:59,079 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 09:50:59,079 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:50:59,069 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:50:59,079 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 09:50:59,079 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 09:54:22,574 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -57,11 +57,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 09:54:23,324 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 09:54:23,324 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 09:54:23,338 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 09:54:23,338 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 09:54:23,338 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -77,9 +77,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 09:54:23,348 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 09:54:23,348 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 09:54:23,348 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 09:54:23,349 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 09:54:23,388 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 09:54:23,388 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:54:23,349 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:54:23,388 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 09:54:23,388 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 09:54:54,424 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -98,11 +98,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 09:54:55,272 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:34)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:24)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 09:54:55,272 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 09:54:55,287 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 09:54:55,287 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 09:54:55,287 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -118,9 +118,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 09:54:55,298 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 09:54:55,298 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 09:54:55,298 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 09:54:55,298 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 09:54:55,299 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 09:54:55,299 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:54:55,298 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:54:55,299 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 09:54:55,299 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 09:56:17,749 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -139,11 +139,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 09:56:18,866 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 09:56:18,866 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 09:56:18,889 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 09:56:18,889 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 09:56:18,890 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -159,9 +159,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 09:56:19,617 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 09:56:19,617 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 09:56:19,617 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 09:56:19,617 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 09:56:19,618 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 09:56:19,619 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:56:19,617 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 09:56:19,618 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 09:56:19,619 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:00:01,793 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -180,11 +180,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:00:02,860 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:00:02,860 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:00:02,917 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:00:02,917 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:00:02,917 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -200,9 +200,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:00:03,384 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:00:03,384 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:00:03,384 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:00:03,384 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:00:03,385 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:00:03,386 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:00:03,384 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:00:03,385 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:00:03,386 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:00:58,285 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -221,11 +221,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:00:59,078 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:00:59,078 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x58594a11 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:00:59,095 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:00:59,096 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:00:59,096 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -241,9 +241,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:00:59,104 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:00:59,104 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:00:59,105 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:00:59,105 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:00:59,106 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:00:59,107 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:00:59,105 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:00:59,106 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x727eb8cb connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:00:59,107 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:01:49,459 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -262,11 +262,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:01:52,179 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:01:52,179 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:01:52,215 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:01:52,215 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:01:52,216 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -282,9 +282,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:01:52,222 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:01:52,223 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:01:52,223 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:02:31,687 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:02:35,126 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:02:35,127 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:02:31,687 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:02:35,126 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:02:35,127 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:02:54,586 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -303,11 +303,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:02:57,545 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:02:57,545 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:02:57,579 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:02:57,579 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:02:57,580 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -323,9 +323,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:02:57,586 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:02:57,586 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:02:57,587 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:03:00,235 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:03:00,261 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:03:00,261 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:03:00,235 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:03:00,261 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:03:00,261 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:03:25,507 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -344,11 +344,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:03:28,381 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:03:28,381 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x398dada8 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:03:28,414 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:03:28,414 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:03:28,414 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -364,9 +364,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:03:28,425 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:03:28,425 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:03:28,426 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:03:59,753 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:03:59,765 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:03:59,766 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:03:59,753 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:03:59,765 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x1672fe87 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:03:59,766 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:04:11,779 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -385,11 +385,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:04:13,309 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:35)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:04:13,309 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3c9d0b9d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:04:13,326 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:04:13,326 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:04:13,328 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -405,9 +405,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:04:13,333 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:04:13,333 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:04:13,333 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:04:13,334 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:04:13,335 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:04:13,335 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:04:13,334 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:04:13,335 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0xef9296d connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:04:13,335 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:19:38,533 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:394)
@@ -428,10 +428,10 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
 2018-12-20 10:27:03,662 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:394)
@@ -452,10 +452,10 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
 2018-12-20 10:27:26,035 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:394)
@@ -476,10 +476,10 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
 2018-12-20 10:31:26,714 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:356)
@@ -498,11 +498,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:31:27,937 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x45b9a632 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:31:27,937 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x45b9a632 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:31:27,954 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=3.4.6-1569965, built on 02/20/2014 09:09 GMT
 2018-12-20 10:31:27,954 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:31:27,955 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -518,9 +518,9 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:31:28,458 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.name=Administrator
 2018-12-20 10:31:28,458 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.home=C:\Users\Administrator
 2018-12-20 10:31:28,458 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:user.dir=E:\development\test\mtdap-hbase
-2018-12-20 10:31:28,459 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
-2018-12-20 10:31:28,460 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x460d0a57 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:31:28,460 [main] WARN  [com.enjoyor.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:31:28,459 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
+2018-12-20 10:31:28,460 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x460d0a57 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:31:28,460 [main] WARN  [com.guoshuai.mtdap.hbase.impl.TableOperationImpl] - Can not initialize connection or admin.
 2018-12-20 10:42:27,864 [main] ERROR [org.apache.hadoop.util.Shell] - Failed to locate the winutils binary in the hadoop binary path
 java.io.IOException: Could not locate executable null\bin\winutils.exe in the Hadoop binaries.
 	at org.apache.hadoop.util.Shell.getQualifiedBinPath(Shell.java:394)
@@ -541,11 +541,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:19)
-2018-12-20 10:42:28,569 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.CreateTableSample.<init>(CreateTableSample.java:22)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:19)
+2018-12-20 10:42:28,569 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:42:28,586 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=V100R002C30, built on 01/05/2017 10:33 GMT
 2018-12-20 10:42:28,586 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:42:28,586 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -564,31 +564,31 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:42:28,747 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.free=114MB
 2018-12-20 10:42:28,747 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.max=1806MB
 2018-12-20 10:42:28,748 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.total=123MB
-2018-12-20 10:42:28,884 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
+2018-12-20 10:42:28,884 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
 2018-12-20 10:42:29,471 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:42:29,471 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:42:29,472 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:42:29,617 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor2 24002
-2018-12-20 10:42:29,642 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:42:29,643 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor2
-2018-12-20 10:42:29,663 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:42:29,697 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50047, server: enjoyor2/192.168.95.42:24002
-2018-12-20 10:42:29,704 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor2/192.168.95.42:24002, sessionid = 0x1c000005859c4528, negotiated timeout = 90000
+2018-12-20 10:42:29,617 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai2 24002
+2018-12-20 10:42:29,642 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:42:29,643 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai2
+2018-12-20 10:42:29,663 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:42:29,697 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50047, server: guoshuai2/192.168.95.42:24002
+2018-12-20 10:42:29,704 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai2/192.168.95.42:24002, sessionid = 0x1c000005859c4528, negotiated timeout = 90000
 2018-12-20 10:42:31,336 [main] WARN  [org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory] - The short-circuit local reads feature cannot be used because UNIX Domain sockets are not available on Windows.
-2018-12-20 10:42:31,503 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:42:31,504 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
+2018-12-20 10:42:31,503 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:42:31,504 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
 2018-12-20 10:42:31,508 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:42:31,508 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:42:31,508 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:42:31,519 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor3 24002
-2018-12-20 10:42:31,523 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:42:31,523 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor3
-2018-12-20 10:42:31,523 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:42:31,529 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50051, server: enjoyor3/192.168.95.43:24002
-2018-12-20 10:42:31,534 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4bdf, negotiated timeout = 90000
-2018-12-20 10:42:32,314 [main] INFO  [com.enjoyor.mtdap.hbase.basic.CreateTableSample] - name space TEST not exist, will create first.
-2018-12-20 10:42:32,314 [main] INFO  [com.enjoyor.mtdap.hbase.basic.CreateTableSample] - TEST不存在
-2018-12-20 10:42:33,007 [main] INFO  [com.enjoyor.mtdap.hbase.basic.CreateTableSample] - Create table TEST:T1 successful!
+2018-12-20 10:42:31,519 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai3 24002
+2018-12-20 10:42:31,523 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:42:31,523 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai3
+2018-12-20 10:42:31,523 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:42:31,529 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50051, server: guoshuai3/192.168.95.43:24002
+2018-12-20 10:42:31,534 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4bdf, negotiated timeout = 90000
+2018-12-20 10:42:32,314 [main] INFO  [com.guoshuai.mtdap.hbase.basic.CreateTableSample] - name space TEST not exist, will create first.
+2018-12-20 10:42:32,314 [main] INFO  [com.guoshuai.mtdap.hbase.basic.CreateTableSample] - TEST不存在
+2018-12-20 10:42:33,007 [main] INFO  [com.guoshuai.mtdap.hbase.basic.CreateTableSample] - Create table TEST:T1 successful!
 2018-12-20 10:42:33,009 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing master protocol: MasterService
 2018-12-20 10:42:33,011 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing zookeeper sessionid=0xe2000ac3e94c4bdf
 2018-12-20 10:42:33,016 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0xe2000ac3e94c4bdf
@@ -613,11 +613,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.ModifyTableSample.<init>(ModifyTableSample.java:20)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:24)
-2018-12-20 10:43:47,751 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.ModifyTableSample.<init>(ModifyTableSample.java:20)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:24)
+2018-12-20 10:43:47,751 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:43:47,772 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=V100R002C30, built on 01/05/2017 10:33 GMT
 2018-12-20 10:43:47,772 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:43:47,772 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -636,33 +636,33 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:43:47,812 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.free=114MB
 2018-12-20 10:43:47,812 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.max=1806MB
 2018-12-20 10:43:47,812 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.total=123MB
-2018-12-20 10:43:47,844 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
+2018-12-20 10:43:47,844 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
 2018-12-20 10:43:48,159 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:43:48,159 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:43:48,159 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:43:48,347 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor1 24002
-2018-12-20 10:43:48,388 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:43:48,388 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor1
-2018-12-20 10:43:48,390 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:43:48,401 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50084, server: enjoyor1/192.168.95.41:24002
-2018-12-20 10:43:48,409 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor1/192.168.95.41:24002, sessionid = 0x1b000006a92d4ce9, negotiated timeout = 90000
+2018-12-20 10:43:48,347 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai1 24002
+2018-12-20 10:43:48,388 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:43:48,388 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai1
+2018-12-20 10:43:48,390 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:43:48,401 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50084, server: guoshuai1/192.168.95.41:24002
+2018-12-20 10:43:48,409 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai1/192.168.95.41:24002, sessionid = 0x1b000006a92d4ce9, negotiated timeout = 90000
 2018-12-20 10:43:50,843 [main] WARN  [org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory] - The short-circuit local reads feature cannot be used because UNIX Domain sockets are not available on Windows.
-2018-12-20 10:43:51,492 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:43:51,493 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
+2018-12-20 10:43:51,492 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:43:51,493 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
 2018-12-20 10:43:51,500 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:43:51,501 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:43:51,501 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:43:51,502 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor2 24002
-2018-12-20 10:43:51,516 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:43:51,516 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor2
-2018-12-20 10:43:51,516 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:43:51,518 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50088, server: enjoyor2/192.168.95.42:24002
-2018-12-20 10:43:51,521 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor2/192.168.95.42:24002, sessionid = 0x1c000005859c4540, negotiated timeout = 90000
+2018-12-20 10:43:51,502 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai2 24002
+2018-12-20 10:43:51,516 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:43:51,516 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai2
+2018-12-20 10:43:51,516 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:43:51,518 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50088, server: guoshuai2/192.168.95.42:24002
+2018-12-20 10:43:51,521 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai2/192.168.95.42:24002, sessionid = 0x1c000005859c4540, negotiated timeout = 90000
 2018-12-20 10:43:52,343 [main] INFO  [org.apache.hadoop.hbase.client.HBaseAdmin] - Started disable of TEST:T1
 2018-12-20 10:43:53,755 [main] INFO  [org.apache.hadoop.hbase.client.HBaseAdmin] - Disabled TEST:T1
 2018-12-20 10:43:53,903 [main] INFO  [org.apache.hadoop.hbase.client.HBaseAdmin] - Started enable of TEST:T1
 2018-12-20 10:43:54,114 [main] INFO  [org.apache.hadoop.hbase.client.HBaseAdmin] - Enabled table TEST:T1
-2018-12-20 10:43:54,114 [main] INFO  [com.enjoyor.mtdap.hbase.basic.ModifyTableSample] - Modify table TEST:T1 successfully.
+2018-12-20 10:43:54,114 [main] INFO  [com.guoshuai.mtdap.hbase.basic.ModifyTableSample] - Modify table TEST:T1 successfully.
 2018-12-20 10:43:54,114 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing master protocol: MasterService
 2018-12-20 10:43:54,116 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing zookeeper sessionid=0x1c000005859c4540
 2018-12-20 10:43:54,122 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0x1c000005859c4540 closed
@@ -687,11 +687,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.MultiSplitSample.<init>(MultiSplitSample.java:25)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:29)
-2018-12-20 10:44:28,742 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.MultiSplitSample.<init>(MultiSplitSample.java:25)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:29)
+2018-12-20 10:44:28,742 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:44:28,759 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=V100R002C30, built on 01/05/2017 10:33 GMT
 2018-12-20 10:44:28,759 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:44:28,760 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -710,61 +710,61 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:44:28,763 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.free=114MB
 2018-12-20 10:44:28,764 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.max=1806MB
 2018-12-20 10:44:28,764 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.total=123MB
-2018-12-20 10:44:28,778 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
+2018-12-20 10:44:28,778 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
 2018-12-20 10:44:29,090 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:44:29,090 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:44:29,090 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:44:29,141 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor2 24002
-2018-12-20 10:44:29,153 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:44:29,153 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor2
-2018-12-20 10:44:29,156 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:44:29,164 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50106, server: enjoyor2/192.168.95.42:24002
-2018-12-20 10:44:29,175 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor2/192.168.95.42:24002, sessionid = 0x1c000005859c454c, negotiated timeout = 90000
+2018-12-20 10:44:29,141 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai2 24002
+2018-12-20 10:44:29,153 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:44:29,153 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai2
+2018-12-20 10:44:29,156 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:44:29,164 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50106, server: guoshuai2/192.168.95.42:24002
+2018-12-20 10:44:29,175 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai2/192.168.95.42:24002, sessionid = 0x1c000005859c454c, negotiated timeout = 90000
 2018-12-20 10:44:31,495 [main] WARN  [org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory] - The short-circuit local reads feature cannot be used because UNIX Domain sockets are not available on Windows.
-2018-12-20 10:44:31,668 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:44:31,669 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
+2018-12-20 10:44:31,668 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:44:31,669 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
 2018-12-20 10:44:31,672 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:44:31,672 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:44:31,672 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:44:31,675 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor2 24002
-2018-12-20 10:44:31,684 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:44:31,685 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor2
-2018-12-20 10:44:31,685 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:44:31,687 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50111, server: enjoyor2/192.168.95.42:24002
-2018-12-20 10:44:31,690 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor2/192.168.95.42:24002, sessionid = 0x1c000005859c454d, negotiated timeout = 90000
-2018-12-20 10:44:31,694 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hbase-admin-on-hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:44:31,695 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@1169afe1
+2018-12-20 10:44:31,675 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai2 24002
+2018-12-20 10:44:31,684 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:44:31,685 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai2
+2018-12-20 10:44:31,685 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:44:31,687 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50111, server: guoshuai2/192.168.95.42:24002
+2018-12-20 10:44:31,690 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai2/192.168.95.42:24002, sessionid = 0x1c000005859c454d, negotiated timeout = 90000
+2018-12-20 10:44:31,694 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hbase-admin-on-hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:44:31,695 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@1169afe1
 2018-12-20 10:44:31,794 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:44:31,795 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:44:31,795 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:44:31,902 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor2 24002
-2018-12-20 10:44:31,919 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:44:31,919 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor2
-2018-12-20 10:44:31,919 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:44:31,924 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50117, server: enjoyor2/192.168.95.42:24002
-2018-12-20 10:44:31,928 [main-SendThread(enjoyor2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor2/192.168.95.42:24002, sessionid = 0x1c000005859c454e, negotiated timeout = 90000
+2018-12-20 10:44:31,902 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai2 24002
+2018-12-20 10:44:31,919 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:44:31,919 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai2
+2018-12-20 10:44:31,919 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai2/192.168.95.42:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:44:31,924 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50117, server: guoshuai2/192.168.95.42:24002
+2018-12-20 10:44:31,928 [main-SendThread(guoshuai2:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai2/192.168.95.42:24002, sessionid = 0x1c000005859c454e, negotiated timeout = 90000
 2018-12-20 10:44:32,394 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0x1c000005859c454e closed
 2018-12-20 10:44:32,395 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0x1c000005859c454e
-2018-12-20 10:44:32,396 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hbase-admin-on-hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:44:32,397 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@51c693d
+2018-12-20 10:44:32,396 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hbase-admin-on-hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:44:32,397 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@51c693d
 2018-12-20 10:44:32,399 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:44:32,399 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:44:32,399 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:44:32,400 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor3 24002
-2018-12-20 10:44:32,406 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:44:32,406 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor3
-2018-12-20 10:44:32,406 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:44:32,408 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50124, server: enjoyor3/192.168.95.43:24002
-2018-12-20 10:44:32,411 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4bfe, negotiated timeout = 90000
+2018-12-20 10:44:32,400 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai3 24002
+2018-12-20 10:44:32,406 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:44:32,406 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai3
+2018-12-20 10:44:32,406 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:44:32,408 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50124, server: guoshuai3/192.168.95.43:24002
+2018-12-20 10:44:32,411 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4bfe, negotiated timeout = 90000
 2018-12-20 10:44:32,424 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0xe2000ac3e94c4bfe closed
 2018-12-20 10:44:32,425 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0xe2000ac3e94c4bfe
-2018-12-20 10:44:32,449 [main] ERROR [com.enjoyor.mtdap.hbase.basic.MultiSplitSample] - Failed to multiSplit table TEST:T1.
+2018-12-20 10:44:32,449 [main] ERROR [com.guoshuai.mtdap.hbase.basic.MultiSplitSample] - Failed to multiSplit table TEST:T1.
 java.lang.IllegalArgumentException: Invalid input splitKeys.
 	at org.apache.hadoop.hbase.client.HBaseAdmin.multiSplit(HBaseAdmin.java:2709)
 	at org.apache.hadoop.hbase.client.HBaseAdmin.multiSplitSync(HBaseAdmin.java:2744)
-	at com.enjoyor.mtdap.hbase.basic.MultiSplitSample.process(MultiSplitSample.java:40)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.operate(TableOperationImpl.java:69)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:30)
+	at com.guoshuai.mtdap.hbase.basic.MultiSplitSample.process(MultiSplitSample.java:40)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.operate(TableOperationImpl.java:69)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:30)
 2018-12-20 10:44:32,451 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing zookeeper sessionid=0x1c000005859c454d
 2018-12-20 10:44:32,455 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0x1c000005859c454d closed
 2018-12-20 10:44:32,456 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0x1c000005859c454d
@@ -788,11 +788,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.PutDataSample.<init>(PutDataSample.java:23)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:33)
-2018-12-20 10:46:11,244 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.PutDataSample.<init>(PutDataSample.java:23)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:33)
+2018-12-20 10:46:11,244 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:46:11,263 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=V100R002C30, built on 01/05/2017 10:33 GMT
 2018-12-20 10:46:11,263 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:46:11,263 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -811,29 +811,29 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:46:11,327 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.free=114MB
 2018-12-20 10:46:11,327 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.max=1806MB
 2018-12-20 10:46:11,327 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.total=123MB
-2018-12-20 10:46:11,401 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
+2018-12-20 10:46:11,401 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
 2018-12-20 10:46:12,503 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:46:12,503 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:46:12,504 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:46:12,649 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor1 24002
-2018-12-20 10:46:12,661 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:46:12,662 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor1
-2018-12-20 10:46:12,664 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:46:12,683 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50149, server: enjoyor1/192.168.95.41:24002
-2018-12-20 10:46:12,689 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor1/192.168.95.41:24002, sessionid = 0x1b000006a92d4d17, negotiated timeout = 90000
+2018-12-20 10:46:12,649 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai1 24002
+2018-12-20 10:46:12,661 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:46:12,662 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai1
+2018-12-20 10:46:12,664 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:46:12,683 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50149, server: guoshuai1/192.168.95.41:24002
+2018-12-20 10:46:12,689 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai1/192.168.95.41:24002, sessionid = 0x1b000006a92d4d17, negotiated timeout = 90000
 2018-12-20 10:46:14,549 [main] WARN  [org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory] - The short-circuit local reads feature cannot be used because UNIX Domain sockets are not available on Windows.
-2018-12-20 10:46:14,729 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:46:14,729 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
+2018-12-20 10:46:14,729 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:46:14,729 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
 2018-12-20 10:46:14,740 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:46:14,740 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:46:14,740 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:46:14,743 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor3 24002
-2018-12-20 10:46:14,770 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:46:14,770 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor3
-2018-12-20 10:46:14,770 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:46:14,823 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50153, server: enjoyor3/192.168.95.43:24002
-2018-12-20 10:46:14,832 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4c10, negotiated timeout = 90000
-2018-12-20 10:46:15,572 [main] INFO  [com.enjoyor.mtdap.hbase.basic.PutDataSample] - Successfully put 9 items data into TEST:T1.
+2018-12-20 10:46:14,743 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai3 24002
+2018-12-20 10:46:14,770 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:46:14,770 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai3
+2018-12-20 10:46:14,770 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:46:14,823 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50153, server: guoshuai3/192.168.95.43:24002
+2018-12-20 10:46:14,832 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4c10, negotiated timeout = 90000
+2018-12-20 10:46:15,572 [main] INFO  [com.guoshuai.mtdap.hbase.basic.PutDataSample] - Successfully put 9 items data into TEST:T1.
 2018-12-20 10:46:15,574 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing zookeeper sessionid=0xe2000ac3e94c4c10
 2018-12-20 10:46:15,578 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0xe2000ac3e94c4c10 closed
 2018-12-20 10:46:15,580 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0xe2000ac3e94c4c10
@@ -857,11 +857,11 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 	at org.apache.hadoop.hbase.security.UserProvider.getCurrent(UserProvider.java:88)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:215)
 	at org.apache.hadoop.hbase.client.ConnectionFactory.createConnection(ConnectionFactory.java:119)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
-	at com.enjoyor.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
-	at com.enjoyor.mtdap.hbase.basic.GetDataSample.<init>(GetDataSample.java:25)
-	at com.enjoyor.mtdap.hbase.Main.main(Main.java:33)
-2018-12-20 10:47:03,660 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.init(TableOperationImpl.java:36)
+	at com.guoshuai.mtdap.hbase.impl.TableOperationImpl.<init>(TableOperationImpl.java:25)
+	at com.guoshuai.mtdap.hbase.basic.GetDataSample.<init>(GetDataSample.java:25)
+	at com.guoshuai.mtdap.hbase.Main.main(Main.java:33)
+2018-12-20 10:47:03,660 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3224f60b connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
 2018-12-20 10:47:03,714 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:zookeeper.version=V100R002C30, built on 01/05/2017 10:33 GMT
 2018-12-20 10:47:03,714 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:host.name=wulei-PC
 2018-12-20 10:47:03,714 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:java.version=1.8.0_144
@@ -880,30 +880,30 @@ java.io.IOException: Could not locate executable null\bin\winutils.exe in the Ha
 2018-12-20 10:47:03,717 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.free=114MB
 2018-12-20 10:47:03,717 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.max=1806MB
 2018-12-20 10:47:03,718 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Client environment:os.memory.total=123MB
-2018-12-20 10:47:03,736 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
+2018-12-20 10:47:03,736 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@33c7e1bb
 2018-12-20 10:47:04,059 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:47:04,059 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:47:04,060 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:47:04,175 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor1 24002
-2018-12-20 10:47:04,191 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:47:04,191 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor1
-2018-12-20 10:47:04,193 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:47:04,200 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50185, server: enjoyor1/192.168.95.41:24002
-2018-12-20 10:47:04,207 [main-SendThread(enjoyor1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor1/192.168.95.41:24002, sessionid = 0x1b000006a92d4d24, negotiated timeout = 90000
+2018-12-20 10:47:04,175 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai1 24002
+2018-12-20 10:47:04,191 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:47:04,191 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai1
+2018-12-20 10:47:04,193 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai1/192.168.95.41:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:47:04,200 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50185, server: guoshuai1/192.168.95.41:24002
+2018-12-20 10:47:04,207 [main-SendThread(guoshuai1:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai1/192.168.95.41:24002, sessionid = 0x1b000006a92d4d24, negotiated timeout = 90000
 2018-12-20 10:47:06,438 [main] WARN  [org.apache.hadoop.hdfs.shortcircuit.DomainSocketFactory] - The short-circuit local reads feature cannot be used because UNIX Domain sockets are not available on Windows.
-2018-12-20 10:47:06,601 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002
-2018-12-20 10:47:06,601 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=enjoyor3:24002,enjoyor2:24002,enjoyor1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
+2018-12-20 10:47:06,601 [main] INFO  [org.apache.hadoop.hbase.zookeeper.RecoverableZooKeeper] - Process identifier=hconnection-0x3576ddc2 connecting to ZooKeeper ensemble=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002
+2018-12-20 10:47:06,601 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Initiating client connection, connectString=guoshuai3:24002,guoshuai2:24002,guoshuai1:24002 sessionTimeout=90000 watcher=org.apache.hadoop.hbase.zookeeper.PendingWatcher@2e570ded
 2018-12-20 10:47:06,605 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.request.timeout is not configured. Using default value 120000.
 2018-12-20 10:47:06,605 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.port.range is not configured.
 2018-12-20 10:47:06,610 [main] INFO  [org.apache.zookeeper.ClientCnxn] - zookeeper.client.bind.address is not configured.
-2018-12-20 10:47:06,618 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to enjoyor3 24002
-2018-12-20 10:47:06,630 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
-2018-12-20 10:47:06,630 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/enjoyor3
-2018-12-20 10:47:06,630 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server enjoyor3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
-2018-12-20 10:47:06,632 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50190, server: enjoyor3/192.168.95.43:24002
-2018-12-20 10:47:06,635 [main-SendThread(enjoyor3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server enjoyor3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4c1e, negotiated timeout = 90000
-2018-12-20 10:47:07,351 [main] INFO  [com.enjoyor.mtdap.hbase.basic.GetDataSample] - result: C0001003:basic,address,Zhuzhou, Hunan
-2018-12-20 10:47:07,352 [main] INFO  [com.enjoyor.mtdap.hbase.basic.GetDataSample] - result: C0001003:basic,name,Chen Long
+2018-12-20 10:47:06,618 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.client.FourLetterWordMain] - connecting to guoshuai3 24002
+2018-12-20 10:47:06,630 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Got server principal from the server and it is null
+2018-12-20 10:47:06,630 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Using server principal zookeeper/guoshuai3
+2018-12-20 10:47:06,630 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Opening socket connection to server guoshuai3/192.168.95.43:24002. Will not attempt to authenticate using SASL (unknown error)
+2018-12-20 10:47:06,632 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Socket connection established, initiating session, client: /192.168.56.5:50190, server: guoshuai3/192.168.95.43:24002
+2018-12-20 10:47:06,635 [main-SendThread(guoshuai3:24002)] INFO  [org.apache.zookeeper.ClientCnxn] - Session establishment complete on server guoshuai3/192.168.95.43:24002, sessionid = 0xe2000ac3e94c4c1e, negotiated timeout = 90000
+2018-12-20 10:47:07,351 [main] INFO  [com.guoshuai.mtdap.hbase.basic.GetDataSample] - result: C0001003:basic,address,Zhuzhou, Hunan
+2018-12-20 10:47:07,352 [main] INFO  [com.guoshuai.mtdap.hbase.basic.GetDataSample] - result: C0001003:basic,name,Chen Long
 2018-12-20 10:47:07,353 [main] INFO  [org.apache.hadoop.hbase.client.ConnectionManager$HConnectionImplementation] - Closing zookeeper sessionid=0xe2000ac3e94c4c1e
 2018-12-20 10:47:07,357 [main] INFO  [org.apache.zookeeper.ZooKeeper] - Session: 0xe2000ac3e94c4c1e closed
 2018-12-20 10:47:07,360 [main-EventThread] INFO  [org.apache.zookeeper.ClientCnxn] - EventThread shut down for session: 0xe2000ac3e94c4c1e

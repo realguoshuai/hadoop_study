@@ -117,7 +117,7 @@ nohup bin/yarn-session.sh \
 
 二次识别套牌车
 nohup bin/flink run \
---class com.enjoyor.mtdap3.realtime.SrFakeVehicle \
+--class com.guoshuai.mtdap3.realtime.SrFakeVehicle \
 /opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/mtdap3-rtc-srfakevehicle-1.0.jar >/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/log/mtdap3-rtc-srfakevehicle-1.0 2>&1 &
 
 flink发布命令并没有指定yarn 怎么就在yarn上运行了?

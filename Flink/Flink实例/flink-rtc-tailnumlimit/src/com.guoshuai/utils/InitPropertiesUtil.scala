@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap3.utils
+package com.guoshuai.mtdap3.utils
 
 import java.io.{BufferedInputStream, InputStream}
 import java.util.Properties

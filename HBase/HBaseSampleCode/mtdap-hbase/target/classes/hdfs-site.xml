@@ -65,7 +65,7 @@
 </property>
 <property>
 <name>dfs.namenode.journalnode</name>
-<value>enjoyor3:25012;enjoyor2:25012;enjoyor1:25012</value>
+<value>guoshuai3:25012;guoshuai2:25012;guoshuai1:25012</value>
 </property>
 <property>
 <name>dfs.namenode.audit.log.debug.cmdlist</name>
@@ -73,7 +73,7 @@
 </property>
 <property>
 <name>oi.dfs.colocation.zookeeper.quorum</name>
-<value>enjoyor3:24002,enjoyor2:24002,enjoyor1:24002</value>
+<value>guoshuai3:24002,guoshuai2:24002,guoshuai1:24002</value>
 </property>
 <property>
 <name>backup.meta.zk.parent-znode</name>
@@ -117,7 +117,7 @@
 </property>
 <property>
 <name>dfs.namenode.https-address.hacluster.63</name>
-<value>enjoyor2:25003</value>
+<value>guoshuai2:25003</value>
 </property>
 <property>
 <name>dfs.namenode.datanode.registration.ip-hostname-check</name>
@@ -137,7 +137,7 @@
 </property>
 <property>
 <name>ha.zookeeper.quorum</name>
-<value>enjoyor3:24002,enjoyor2:24002,enjoyor1:24002</value>
+<value>guoshuai3:24002,guoshuai2:24002,guoshuai1:24002</value>
 </property>
 <property>
 <name>dfs.rackgroup.nextpolicy</name>
@@ -165,7 +165,7 @@
 </property>
 <property>
 <name>dfs.namenode.lifeline.rpc-address.hacluster.229</name>
-<value>enjoyor3:25005</value>
+<value>guoshuai3:25005</value>
 </property>
 <property>
 <name>backup.worker.implement.multi-thread.num</name>
@@ -341,7 +341,7 @@
 </property>
 <property>
 <name>dfs.namenode.lifeline.rpc-address.hacluster.63</name>
-<value>enjoyor2:25005</value>
+<value>guoshuai2:25005</value>
 </property>
 <property>
 <name>dfs.namenode.replication.max-streams</name>
@@ -381,7 +381,7 @@
 </property>
 <property>
 <name>backup.meta.zk.quorum</name>
-<value>enjoyor3:24002,enjoyor2:24002,enjoyor1:24002</value>
+<value>guoshuai3:24002,guoshuai2:24002,guoshuai1:24002</value>
 </property>
 <property>
 <name>backup.split.size</name>
@@ -409,7 +409,7 @@
 </property>
 <property>
 <name>dfs.namenode.https-address.hacluster.229</name>
-<value>enjoyor3:25003</value>
+<value>guoshuai3:25003</value>
 </property>
 <property>
 <name>dfs.namenode.retrycache.heap.percent</name>
@@ -453,7 +453,7 @@
 </property>
 <property>
 <name>dfs.namenode.lifeline.rpc-bind-host</name>
-<value>enjoyor2</value>
+<value>guoshuai2</value>
 </property>
 <property>
 <name>dfs.image.transfer.timeout</name>
@@ -485,7 +485,7 @@
 </property>
 <property>
 <name>dfs.federation.datanode</name>
-<value>enjoyor5:25008,enjoyor4:25008,enjoyor3:25008,enjoyor6:25008,enjoyor2:25008,enjoyor1:25008</value>
+<value>guoshuai5:25008,guoshuai4:25008,guoshuai3:25008,guoshuai6:25008,guoshuai2:25008,guoshuai1:25008</value>
 </property>
 <property>
 <name>dfs.namenode.retrycache.expirytime.millis</name>
@@ -557,7 +557,7 @@
 </property>
 <property>
 <name>dfs.namenode.rpc-address.hacluster.63</name>
-<value>enjoyor2:25000</value>
+<value>guoshuai2:25000</value>
 </property>
 <property>
 <name>dfs.ha.namenodes.hacluster</name>
@@ -565,7 +565,7 @@
 </property>
 <property>
 <name>dfs.namenode.http-address.hacluster.229</name>
-<value>enjoyor3:25002</value>
+<value>guoshuai3:25002</value>
 </property>
 <property>
 <name>dfs.namenode.replication.considerLoad.io-load</name>
@@ -677,7 +677,7 @@
 </property>
 <property>
 <name>dfs.namenode.http-address.hacluster.63</name>
-<value>enjoyor2:25002</value>
+<value>guoshuai2:25002</value>
 </property>
 <property>
 <name>dfs.datanode.lifeline.interval.seconds</name>
@@ -705,7 +705,7 @@
 </property>
 <property>
 <name>dfs.namenode.rpc-address.hacluster.229</name>
-<value>enjoyor3:25000</value>
+<value>guoshuai3:25000</value>
 </property>
 <property>
 <name>audit.service.name</name>

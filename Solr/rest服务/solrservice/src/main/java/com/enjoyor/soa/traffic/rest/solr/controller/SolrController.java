@@ -1,9 +1,9 @@
-package com.enjoyor.soa.traffic.rest.solr.controller;
+package com.guoshuai.soa.traffic.rest.solr.controller;
 
-import com.enjoyor.soa.traffic.rest.solr.query.SolrQueryTest;
-import com.enjoyor.soa.traffic.rest.solr.service.impl.SolrVehSearService;
-import com.enjoyor.soa.traffic.util.pojo.Page;
-import com.enjoyor.soa.traffic.util.pojo.ResultPojo;
+import com.guoshuai.soa.traffic.rest.solr.query.SolrQueryTest;
+import com.guoshuai.soa.traffic.rest.solr.service.impl.SolrVehSearService;
+import com.guoshuai.soa.traffic.util.pojo.Page;
+import com.guoshuai.soa.traffic.util.pojo.ResultPojo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

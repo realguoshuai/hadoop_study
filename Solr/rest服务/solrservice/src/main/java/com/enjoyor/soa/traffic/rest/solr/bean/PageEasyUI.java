@@ -1,4 +1,4 @@
-package com.enjoyor.soa.traffic.rest.solr.bean;
+package com.guoshuai.soa.traffic.rest.solr.bean;
 
 import oracle.sql.CLOB;
 

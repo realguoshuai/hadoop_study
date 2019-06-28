@@ -1,10 +1,10 @@
-package com.enjoyor.soa.traffic.rest.solr.service.impl;
+package com.guoshuai.soa.traffic.rest.solr.service.impl;
 
 
-import com.enjoyor.soa.traffic.rest.solr.dao.impl.SolrVehSearDao;
-import com.enjoyor.soa.traffic.rest.solr.service.ISolrVehSearService;
-import com.enjoyor.soa.traffic.util.pojo.Page;
-import com.enjoyor.soa.traffic.util.pojo.ResultPojo;
+import com.guoshuai.soa.traffic.rest.solr.dao.impl.SolrVehSearDao;
+import com.guoshuai.soa.traffic.rest.solr.service.ISolrVehSearService;
+import com.guoshuai.soa.traffic.util.pojo.Page;
+import com.guoshuai.soa.traffic.util.pojo.ResultPojo;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;

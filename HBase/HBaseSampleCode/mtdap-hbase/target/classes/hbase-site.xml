@@ -29,7 +29,7 @@
     </property>
     <property>
         <name>hbase.hmaster.ip.lists</name>
-        <value>enjoyor3,enjoyor2</value>
+        <value>guoshuai3,guoshuai2</value>
     </property>
     <property>
         <name>hbase.master.executor.openregion.threads</name>
@@ -57,7 +57,7 @@
     </property>
     <property>
         <name>hbase.zookeeper.quorum</name>
-        <value>enjoyor3,enjoyor2,enjoyor1</value>
+        <value>guoshuai3,guoshuai2,guoshuai1</value>
     </property>
     <property>
         <name>hbase.client.write.buffer</name>
@@ -173,7 +173,7 @@
     </property>
     <property>
         <name>hbase.master.ipc.address</name>
-        <value>enjoyor2</value>
+        <value>guoshuai2</value>
     </property>
     <property>
         <name>hbase.crypto.keyprovider.parameters</name>
@@ -333,7 +333,7 @@
     </property>
     <property>
         <name>hbase.master.info.bindAddress</name>
-        <value>enjoyor2</value>
+        <value>guoshuai2</value>
     </property>
     <property>
         <name>master.rmi.registry.port</name>

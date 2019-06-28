@@ -1,6 +1,6 @@
-package com.enjoyor.soa.traffic;
+package com.guoshuai.soa.traffic;
 
-import com.enjoyor.soa.traffic.frame.configure.*;
+import com.guoshuai.soa.traffic.frame.configure.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@ComponentScan("com.enjoyor.soa.traffic.rest.solr")
+@ComponentScan("com.guoshuai.soa.traffic.rest.solr")
 @Import({Swagger2Config.class})
 public class SolrservicveApplication  extends SpringBootServletInitializer {
 

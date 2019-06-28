@@ -1,14 +1,14 @@
-package com.enjoyor.soa.traffic.rest.solr.query;
+package com.guoshuai.soa.traffic.rest.solr.query;
 
 
-import com.enjoyor.soa.traffic.rest.solr.bean.SolrPassInfoPojo;
-import com.enjoyor.soa.traffic.rest.solr.util.CommonUtils;
-import com.enjoyor.soa.traffic.rest.solr.util.SolrClientHelper;
-import com.enjoyor.soa.traffic.util.enums.EnumAppCode;
-import com.enjoyor.soa.traffic.util.helper.ResultHelper;
-import com.enjoyor.soa.traffic.util.helper.TimeHelper;
-import com.enjoyor.soa.traffic.util.pojo.Page;
-import com.enjoyor.soa.traffic.util.pojo.ResultPojo;
+import com.guoshuai.soa.traffic.rest.solr.bean.SolrPassInfoPojo;
+import com.guoshuai.soa.traffic.rest.solr.util.CommonUtils;
+import com.guoshuai.soa.traffic.rest.solr.util.SolrClientHelper;
+import com.guoshuai.soa.traffic.util.enums.EnumAppCode;
+import com.guoshuai.soa.traffic.util.helper.ResultHelper;
+import com.guoshuai.soa.traffic.util.helper.TimeHelper;
+import com.guoshuai.soa.traffic.util.pojo.Page;
+import com.guoshuai.soa.traffic.util.pojo.ResultPojo;
 import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import com.enjoyor.soa.traffic.rest.solr.util.SolrConnectionPool;
+//import com.guoshuai.soa.traffic.rest.solr.util.SolrConnectionPool;
 
 @Service
 public class SolrQueryTest {

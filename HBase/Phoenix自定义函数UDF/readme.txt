@@ -9,7 +9,7 @@ phoenix 自定义函数UDF-测试(用于轨迹反查)
 实现步骤
 1:继承ScalarFunction类 实现自定义函数 打包
 2:上传到hdfs上
-3:CREATE FUNCTION judgeTrackTime(varchar) returns varchar as 'com.enjoyor.mtdap.UDFS.PhoenixUdfDemo' using jar 'hdfs://hacluster/MTDAP/UDF/PhoenixUDF.jar'
+3:CREATE FUNCTION judgeTrackTime(varchar) returns varchar as 'com.guoshuai.mtdap.UDFS.PhoenixUdfDemo' using jar 'hdfs://hacluster/MTDAP/UDF/PhoenixUDF.jar'
 
 hdfs上传:hdfs dfs -put file:/opt/PhoenixUDF.jar hdfs://hacluster/MTDAP/UDF/
 查看文件:hadoop fs -ls hdfs://hacluster/MTDAP/UDF

@@ -1,8 +1,8 @@
-package com.enjoyor.soa.traffic.rest.solr.dao;
+package com.guoshuai.soa.traffic.rest.solr.dao;
 
 
-import com.enjoyor.soa.traffic.util.pojo.Page;
-import com.enjoyor.soa.traffic.util.pojo.ResultPojo;
+import com.guoshuai.soa.traffic.util.pojo.Page;
+import com.guoshuai.soa.traffic.util.pojo.ResultPojo;
 
 import java.util.ArrayList;
 import java.util.List;

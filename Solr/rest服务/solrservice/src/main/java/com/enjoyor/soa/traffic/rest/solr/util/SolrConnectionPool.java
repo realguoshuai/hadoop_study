@@ -1,5 +1,5 @@
 /*
-package com.enjoyor.soa.traffic.rest.solr.util;
+package com.guoshuai.soa.traffic.rest.solr.util;
 
 import org.apache.solr.client.solrj.impl.CloudSolrClient;
 import org.apache.solr.common.cloud.ClusterState;

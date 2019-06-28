@@ -1,7 +1,7 @@
 ﻿package com.mtdap.keyveh;
 
-import com.enjoyor.mtdap.common.HiveJdbc;
-import com.enjoyor.mtdap.common.InitPropertiesUtil;
+import com.guoshuai.mtdap.common.HiveJdbc;
+import com.guoshuai.mtdap.common.InitPropertiesUtil;
 import com.mtdap.common.PhoenixJdbc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +42,7 @@ public class ODPathinfoJdbc {
         try {
             statement = connection.prepareStatement(sql);
             if ("true".equals(InitPropertiesUtil.initHiveProp().getProperty("queenTrigger"))) {
-                statement.execute("set mapreduce.job.queuename = enjoyor");
+                statement.execute("set mapreduce.job.queuename = guoshuai");
             }
             resultSet = statement.executeQuery();
             //phoenix
