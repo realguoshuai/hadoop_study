@@ -26,7 +26,7 @@
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/blob/master/%E8%AF%BE%E7%A8%8B%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.md)
 *  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E5%AE%9E%E4%BE%8B/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
-*  Flink开发满半年了 从无到有 现在日常开发没问题 业务函数+简单算子  深点的东西还是不懂 继续努力 
+*  Flink开发满半年了 从无到有 现在日常使用flink进行简单的ETL开发没问题 业务函数+简单算子  深点的东西还是没应用过(比如cep) 继续努力 
 ## Spark
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
