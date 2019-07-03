@@ -55,6 +55,7 @@
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 ## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
+*  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
 ## MongoDB
 ## kerberos
 *  这个真恶心 人机/机机 
@@ -63,4 +64,4 @@
 *  用空还是要学一下 最近做了个springboot实现solr rest服务 套的公司应用层模板
 #### 持续更新..
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
-* 今年计划重心是在实时计算上Flink,下半年会尝试学习es,将公司现有的solr业务转到es,solr升级迫在眉睫
+* 今年计划重心是在实时计算上Flink,下半年会抽时间学下es mongoDB sparksql
