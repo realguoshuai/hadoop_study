@@ -44,17 +44,18 @@
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
 *  开源的消息队列,流计算架构一定要有的一个组件
-## Eleasticsearch
-*  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
+## redis
+*  [Redis命令参考](//http://doc.redisfans.com/)
+*  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
 *  solr 实时创建索引延迟问题 (增量3000w/天)
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
-## redis
-*  [Redis命令参考](//http://doc.redisfans.com/)
-*  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
+## Eleasticsearch
+*  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
+## MongoDB
 ## kerberos
 *  这个真恶心 人机/机机 
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
