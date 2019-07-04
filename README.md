@@ -21,13 +21,13 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  scala 工作中spark代码一般都是使用 Scala 实现 优先学!  
 ## Flink
-*  [阅读官方文档](https://ci.apache.org/projects/flink/flink-docs-release-1.3/)
-*  流计算利器,但是资料比较少,建议直接看官方文档 我会将自己的翻译的文档不定期上传到Flink的目录下
+*  [官方文档](https://ci.apache.org/projects/flink/flink-docs-release-1.3/)
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/blob/master/%E8%AF%BE%E7%A8%8B%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.md)
-*  [Flink在IoT落地]很不错的博客-转(https://yq.aliyun.com/articles/652529)
 *  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E5%AE%9E%E4%BE%8B/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
-*  Flink开发满半年了 从无到有 现在日常使用flink进行简单的ETL和实时计算开发没问题 业务函数+简单算子  深点的东西还是没应用过(比如cep) 继续努力 
+*  [Flink介绍博客](https://yq.aliyun.com/articles/652529)
+*  真.流计算利器,但是资料比较少,建议直接看官方文档 我会将自己的翻译的文档和bug的解决方式不定期上传到Flink的对应目录下
+*  Flink开发满半年了 从无到有 现在日常使用flink进行简单的ETL和实时计算开发ok 写业务函数+简单算子  深点的东西还是没应用过(比如cep) 继续努力 
 ## Spark
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
