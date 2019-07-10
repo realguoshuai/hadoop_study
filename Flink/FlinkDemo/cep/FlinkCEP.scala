@@ -16,7 +16,8 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
 
 
 /**
-  * Description  测试cep
+  * Description  测试cep 基于公司环境flink 1.4开发 比较啰嗦,需要自己实现规则   推荐使用Flink1.5及以上(网上示例都是1.5+)
+  *              目的是为了测试cep流程,了解原理,没必要纠结算子,demo通过fromElements接入collection 模拟输入流DataStream
   * Created with guoshuai 
   * date 2019/7/4 13:37
   **/
@@ -39,9 +40,8 @@ object FlinkCEP {
             new Event("VEHPLATETYPE99", "浙A12345", 21.2),
             new Event("VEHPLATETYPE02", "浙A12345", 252.2)
         )
+     
         //设置匹配规则
-
-
         val pattern: Pattern[Event, Event] = Pattern.begin[Event]("start")
           .subtype(classOf[Event])
           .where(new SimpleCondition[Event] {
@@ -66,14 +66,13 @@ object FlinkCEP {
                         println(key + ":" + pattern.get(key).get(1)) //start:Event(VEHPLATETYPE02,浙A12345,122.2)
                         event
                     }
-                    //event._3.toString()
+                    //event._3.toString() 
                     event.toString() //(VEHPLATETYPE02,VEHPLATETYPE02,252.2)
                 } catch {
                     case e: Exception => "1"
                 }
             }
         })
-
 
         result.print()
         env.execute()
