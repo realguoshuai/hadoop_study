@@ -1,0 +1,112 @@
+Elasticsearch,全文检索引擎,可用作分布式的实时文件存储,分布式实时分析搜索引擎,扩展上百台服务器处理PB级别的结构化和非结构化数据
+
+########mysql跟es区别########
+MySql数据库可以分为:数据库(database) ->表(table) -> 行(row)->列(column)
+Elasticsearch分为:索引(index)->类型(type)->文档(document)->字段(field)
+
+创建映射,类似于建表
+添加document,即插入数据
+数据更新:指定相同id   1:PUT 更新所有 2:POST  更新局部
+删除文档:DELETE index/type/id
+
+
+
+#########查询命令###########
+地址 --> index  -->  type --> id
+查看所有index:http://192.168.94.41:9200/_cat/indices?v
+查看表中数据:http://192.168.94.41:9200/huawei_index/type1/2
+查看某个index的映射:http://192.168.94.41:9200/huawei_index/_mapping
+
+删除某条数据:http://192.168.94.41:9200/huawei_index/_mapping
+
+查看全部索引 GET /_cat/indices?v
+
+
+
+############查询优化#############
+
+尽量保证索引数据放的下内存,减少索引
+数据预热,让热点数据加载到filesystem cache中 过车数据查一天,将这一天数据后台执行加载到内存
+冷热分离,放在不同的index上
+document模型设计:将结果数据算好再入库,查询中少用关联查询
+分页优化:es分页性能差 
+	10个分片shard的index,查询第100页的10条数据,不可能是每个shard就查一条数据
+	必须每个shard都查1000条到一个协调节点,然后协调节点对着一万条数据进行合并,处理再获取100页的10条数据
+使用下拉刷新代替分页scroll
+
+
+Hadoop 的底层存储是基于无索引的 HDFS ,核心应用场景是对海量结构化、非结构化数据的永久存储和离线分析，例如客户肖像、流失度分析、日志分析、商业智能等。而 MongoDB 和 Elasticsearch 的核心场景是实时交互，通常用于人机交互场景，例如电商移动应用，其特征是响应时间一般是毫秒级到秒级
+
+es的一个分片就是一个lucene索引,能存储21亿条文档
+#########################
+
+
+
+##############   QA   ###############
+1:es 删除 名称为'的索引  使用"" 引起来 
+2:在kibana上创建一个type 提示创建成功,索引中找不到 
+原因是没有插入数据
+3:_source 字段作用
+es将数据保存在倒排索引中,另外还有一份原始文档保存到_source中(元数据) 
+es中搜索文档,结果内容就是_source的内容
+可以关闭 在设置mapping中将source字段设为开启或关闭
+_source:{"enable":"true"}  
+开启/关闭影响:开启后,在检索过程中,只需要解析存储的source json串,不需要走倒排索引表去检索
+仅需要一次IO,就可以返回整个文档的结果
+默认是开启,只有在某个字段非常多,业务根据该字段进行搜索,只返回文档id,再通过二次索引去hbase中查询是,可以将enable设为false
+#注: 把大字段的内存存在es中只会增大索引,文档越大结果越明显,如果一条文档节省几KB,亿万条的量结果也是很客观的
+
+4:文档元数据metadata
+_index,_type,_id 
+数据库,表,主键
+eg:PUT /website/blog/123{k:v,k:v,k:v}
+返回结果:_index,_type,_id ,_version(版本号)
+eg:使用自增id 22个字符的UUIDs
+POST /website/blog/{k:v,k:v,k:v}
+
+5:检索文档 HTTP方法改为 GET
+GET /website/blog/123?pretty
+
+#pretty参数 美化输出json
+除了输出_index,_type,_id,_version
+#还会输出found和_source字段
+found   返回 查询状态 true or false
+_source 返回 发送给es的原始文档
+
+#HTTP响应状态码
+正常 200 OK  异常 404 Not Found
+
+#获取响应头: curl 加 -i参数
+curl -i -XGET http://localhost:9200/website/blog/124?pretty
+HTTP/1.1 404 Not Found
+Content-Type: application/json; charset=UTF-8
+Content-Length: 83
+{k:v,k:v,k:v}
+
+6:检索文档一部分  
+##GET默认返回整条document,都存储在_source中,使用_source=字段1,字段2
+GET /website/blog/123?_source=title,text
+#### 只要_source字段,而不要元数据
+GET /website/blog/123/_source
+
+
+
+
+#实现ES工具类,使用RestHighLevelClient 
+批量读取数据 mget
+批量写入     bulk  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
