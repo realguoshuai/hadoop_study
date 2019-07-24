@@ -1,11 +1,8 @@
 checkpoint
 kafka-flink-kafka 
-readFile
-===TODO===
-checkpoint检查点HDFS未发布测试
-flink多数据源 
 
-从文件中读数据
+flink多数据源 join 
+
 Window:
 数据流是无限的,无界限. 但是可以通过一个有界的范围来处理无界的数据流.
 滚动窗口:每个界限计算结果互不影响(不重合) 比如几分钟统一一次
@@ -35,9 +32,20 @@ coGroup+innerjoin
 
 
 
-状态status和检查点checkpoint
+######   状态state和检查点checkpoint   ######
+How:最简单的wordcount,给一些word计算他们的count,count输出不断累加的结果,count就是状态
+批处理对state要求不高:之前的批处理都是将数据分片计算,分片完成后做一个聚合,state要求较少
+流处理程序,输入的是一个无限制的数据流,会运行很大一段时间,要求运行几天,几个月都不会宕机,
+需要对中间的状态数据好好管理.storm采用的将状态数据存储到Hbase(计算时从hbase读,完了在更新到hbase,还需要保证数据一致性)
 
-status:
+state可能会很大,阿里的几T都有
+
+##flink的state 管理##
+按照数据划分和扩张方式:
+Keyed States   Operator States 
+
+
+
 
 
 checkpoint:程序指定时间定期生成 ,保留当前时间的算子的状态
@@ -117,7 +125,7 @@ nohup bin/yarn-session.sh \
 
 二次识别套牌车
 nohup bin/flink run \
---class com.guoshuai.mtdap3.realtime.SrFakeVehicle \
+--class com.enjoyor.mtdap3.realtime.SrFakeVehicle \
 /opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/mtdap3-rtc-srfakevehicle-1.0.jar >/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/log/mtdap3-rtc-srfakevehicle-1.0 2>&1 &
 
 flink发布命令并没有指定yarn 怎么就在yarn上运行了?
@@ -254,8 +262,6 @@ Flink JobManagerHA ?
 
 
 
-监控报警
-
 
 ==flink学习==
 flink人大视频 
@@ -264,23 +270,20 @@ https://www.bilibili.com/video/av42427050/
 
 
 
-0.27896551724137930164268727705113
-0.02821177996580390307175284476151
-
-9.8882636111411375865446581108976
-
 ===Blink===
 2019.2开源的Blink版本,主要是基于flink 1.5.1
 看看就行 还是用Apache flink 
+
 
 ==========钉钉============
 1.先对flink有宏观视野上理解，看阿里大会整理的文档资料，其中也有可运行的demo。
 2.看各个flink 大V的博客，对架构和原理逐步深入理解（可以微信和google搜索关键词）
 3.英文好，最好是看Apache flink官网文档，既全面又权威(先看前面后看官网，国人帮整理，理解速度会快些)
 4.基于以上3方面理解基础上，自己有相当的技术基础及理解能力 + 毅力恒心 + 热爱程度，可以去啃下源代码  基本问题不大(往下又分2种情况 1.有基础曾经研究并扩展过开源代码  2.无基础 无经验  花费时间就要长些，需要毅力  有人指点会快些)
- ###从现象到本质再到解决方案  比如这个:追踪flink上传的jar放到那个目录 : http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
-===告警===
+###从现象到本质再到解决方案  
+比如这个:追踪flink上传的jar放到那个目录 : http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
 
+===告警===
 Apache Committer 2017.7月 ali 5个   
 参考:http://wuchong.me/blog/2019/02/12/how-to-become-apache-committer/ 
 
@@ -382,6 +385,199 @@ keyBy 用于指定数据流是否进行分组
 在非分组的数据流中,你的原始数据并不会拆分成多个逻辑流并且所有的window逻辑都在一个任务中执行,并发度为1
 
 
+#################################################################################################
+由问题引入  window   time  watermark 
+
+主要包括为什么要有 Window ?
+Window 中的三个核心组件：WindowAssigner、Trigger 和 Evictor ?
+Window 中怎么处理乱序数据, 乱序数据是否允许延迟, 以及怎么处理迟到的数据  ?
+最后我们梳理了整个 Window 的数据流程, 以及 Window 中怎么保证 Exactly Once 语义  ?
+
+----------------------------------------------window------------------------------
+Flink 天然支持无限流数据处理的分布式计算框架,使用window将无限流切分成有限流,是处理有限流的核心组件
+
+窗口分类: 
+	时间驱动timewindow,数据驱动countwindow
+相关Api:[] 不强制使用,有默认值
+keyed windows
+stream
+	.keyBy(...)
+	.window(...)
+	[.trigger(...)]
+	[.evictor(...)]
+	[.allowedLateness(...)]
+	[.sideOutPutLateData(...)]
+	.reduce/aggregate/fold/apply()
+	[.getSideOutput(...)]
+
+non-keyed windows
+stream 
+	.windowAll(...)
+	[.trigger(...)]
+	[.evictor(...)]
+	[.allowedLateness(...)]
+	[.sideOutPutLateData(...)]
+	.reduce/aggregate/fold/apply()
+	[.getSideOutput(...)]
+
+ 
+dataStream :
+对于非KeyedStream，有timeWindowAll、countWindowAll、windowAll操作，其中最主要的是windowAll操作，它的parallelism为1，它需要一个WindowAssigner参数，返回的是AllWindowedStream
+TimeWindowAll  不是并行的 所以slot只能用1 个,滚动窗口
+
+KeyedStream:	对于KeyedStream除了继承了DataStream的window相关操作，它主要用的是timeWindow、countWindow、window操作，其中最主要的是window操作，它也需要一个WindowAssigner参数，返回的是WindowedStream
 
 
+## Window API使用
+WindowAssigner(窗口指定器)  Evictor(清除)   Trigger(触发) 
+
+1:Window方法接收的输入是一个WindowAssigner,WindowAssigner负责将每条数据分发到正确的Window中(一条数据有可能会分发到多个窗口中)
+几种通用的WindowAssigner:(tumbing window 滚动窗口 无重复 ,sliding window 滑动窗口 有重复,
+							session window 事件窗口,global window 全局窗口)
+## 自定义数据分发策略:新建一个class 继承WindowAssigner
+
+2:Evictor 主要用于做一些数据的自定义操作,可选操作
+CountEvictor 保留指定数量的元素
+DeltaEvictor 通过执行用户给定的 DeltaFunction 以及预设的 threshold,判断是否删除一个元素
+TimeEvictor 设定一个阈值 interval,删除所有不再 max_ts - interval 范围内的元素,其中 max_ts 是窗口内时间戳的最大值
+
+3:Trigger 用来判断一个窗口是否需要被触发,每个 WindowAssigner 都自带一个默认的 Trigger
+	允许自定义,继承 Trigger
+	onElement() 每次往 window 增加一个元素的时候都会触发
+	onEventTime() 当 event-time timer 被触发的时候会调用
+	onProcessingTime() 当 processing-time timer 被触发的时候会调用
+	onMerge() 对两个 trigger 的 state 进行 merge 操作
+	clear() window 销毁的时候被调用
+上面的接口中前三个会返回一个 TriggerResult
+	CONTINUE 不做任何事情
+	FIRE 触发 window
+	PURGE 清空整个 window 的元素并销毁窗口
+	FIRE_AND_PURGE 触发窗口，然后销毁窗口
+
+flink window:
+http://www.aboutyun.com/thread-26483-1-1.html
+https://www.infoq.cn/article/WCOvi-D68Y8ycCiYZ8pX
+
+flink触发当前窗口计算的前提是下一条数据的时间在当前窗口的结束时间之后
+
+----------------------------------------------------------Time && Watermark----------------------------------------------------
+前提:Time 和 Watermark适用于时间驱动类的窗口 
+
+分布式环境中Time,事件时间(Event-Time),摄取时间(Ingestion-Time),处理时间(Processing-Time)
+
+Event-Time:数据产生的时间
+Ingestion-Time:数据进入到flink的时间
+Processing-Time:窗口开始计算的时间
+### env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime); 
+
+Watermark: 解决乱序的问题
+如何保证基于事件时间的窗口销毁时,flink已经处理完所有数据?
+Watermark会携带一个单调递增的时间戳t,watermark(t)表示所有时间戳不大于t的都已经到来
+未来小于t的数据不会到来,因此可以放心触发和销毁窗口
+
+# 迟到的数据 late elements
+问题:
+watermater的时间不好设置 :要么不正确 要么耗费太大 ,所以在设置watermark(t)之后,还有较小概率接收到时间戳(t)
+之前的数据,这部分称为 late elements
+
+解决方式:指定允许延迟的最大时间(默认0) 
+DataStream<T> input = ... ;
+input
+	.keyBy(<key selector>)
+	.window(<window assigner>)
+	.allowedLateness(<time>)
+	.<windowed  transformation>(window function)
+
+设置allowedLateness之后,迟到的数据同样可以触发窗口,进行计算
+利用Flink的side output机制,我们可以获取到这些迟到的数据
+
+final OutputTag<T>  lateOutputTag = new OutputTag[T]("late-data"){};
+DataStream<T> input = ... ;
+
+SingleOutputStreamOperator<T> result = input
+	.keyBy(<key selector>)
+	.window(<window assigner>)
+	.allowedLateness(<time>)
+	.sideOutPutLateData(lateOutputTag)
+	.<windowed  transformation>(window function)
+
+DataStream<T> lateStream = result.getSideOutput(lateOutputTag);
+
+# 设置allowedLateness之后,迟到的数据也可能触发窗口,如果使用的是Session window 
+  可能会对窗口进行合并,产生预期外的行为  
+ 
+3:Window 内部实现
+每条过车数据进来后,会先由WindowAssigner 分配到对应的window(滚动/滑动..)
+当window经过watermark被trigger后,会交给Evictor(如果没有设置 则跳过),
+然后处理UserFunction(用户处理的逻辑代码)
+
+###  Window中状态存储  
+#Flink 是支持 Exactly Once 处理语义的,那么 Window 中的状态存储和普通的状态存储又有什么不一样的地方呢？
+A:从接口上可以认为没有区别,但是每个 Window 会属于不同的 namespace,
+而非 Window 场景下,则都属于 VoidNamespace ,最终由 State/Checkpoint 来保证数据的 Exactly Once 语义
+简单说:Window 中的的元素同样是通过 State 进行维护,然后由 Checkpoint 机制保证 Exactly Once 语义
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+
+-------------------flink精确一次优势-------------------
+Spark Streaming 的端到端 Exactly-once 需要下游支持幂等、上游支持流量重放，
+Spark Streaming 这一层做到了 At-least-once，正常情况下数据不重不少，但在程序重启时可能
+会重发部分数据，为了实现全局的 Exactly-once，在下游做了去重逻辑
+通过快照机制,Flink 获得了端到端数据一致性
+
+
+-------------怎样判断是否是新用户------------
+跟判断是否首次入城车一样,redis 缓存数据库 永不过期  数据流实时对比判断  
+
+Flink 现在开发 简单算子+业务函数+水印+分组+聚合+json格式输出
+
+
+source  transformation  sink
+
+------------------------------------ 怎样确定Flink集群所需资源 --------------------------------------
+
+#吞吐量:
+估算预期进入流计算系统每秒的记录数(吞吐量),以及每条记录数的大小
+#不同key的数量以及每个key存储的state大小
+key的数量和key所需state的大小,都将会影响Flink应用程序所需的资源.可以通过查看反压状态
+#状态的更新频率和状态后端的访问模式:
+不同的状态后端(RocksDB,java Heap)的访问模式差距很大.RocksDB每次读取和更新会进行序列化
+反序列化以及JNI操作,Java Heap不支持增量checkpoint,会导致状态大的场景每次持久化的数据量很大
+都会影响Flink作业所需的资源
+#网络容量
+网络容量不仅会受flink内部,也会受到Flink跟正在交互的kafka,hdfs等外部服务
+比如启动kafka的replication会增加额外的网络容量
+#磁盘带宽
+如果应用程序依赖 RocksDB Kafka  HDFS
+#机器数量以及可用的CPU和内存
+
+另外需要提供额外的资源来保证:
+当你的 Flink 发生故障时,系统会需要额外的资源来做恢复工作以及从 Kafka topic 或其他消息客户端追上最新的数据
+ 
+-------------------------------------Flink指定 集群 发布---------------------------------
+-yid + 目标applicationId
+
+nohup bin/flink run \
+-yid application_1559210378247_2887 \
+-p 18 \
+--class com.enjoyor.mtdap3.realtime.VehicleTrack \
+/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-vehicletrack-1.0/mtdap3-rtc-vehicletrack-1.0.jar \
+>/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-vehicletrack-1.0/log/mtdap3-rtc-vehicletrack.log 2>&1 &
+
+--------------实时计算的趋势---------
+实时任务SQL化
 
