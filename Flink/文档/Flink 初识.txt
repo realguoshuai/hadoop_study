@@ -1,7 +1,29 @@
-checkpoint
-kafka-flink-kafka 
+Apache Flink 是一个分布式的大数据处理引擎,可对有限数据流和无线数据流
+进行有状态或无状态的的计算.
 
-flink多数据源 join 
+Flink Application Flink应用开发
+
+Stream 流
+分为有界数据流(bounded stream) && 无界数据流(unbounded stream)
+两者区别:无界数据流的数据会随着时间的推演而持续增加,计算持续进行且不存在结束的状态
+		 有界数据流数据大小固定,计算最终会完成并处于结束的状态
+
+State  状态
+是计算过程中的数据信息,在容错恢复和checkpoint中有重要作用
+流计算在本质上是增量处理 (Incremental Processing),因此需要不断查询保持状态
+同时,为了保持精确一次(Exactly- once)语义,需要数据能写入到状态中
+同时持久化存储,能够保证在整个分布式系统运行失败或挂掉的情况下做到Exactly- once
+
+
+Time   时间
+事件时间,摄取时间,处理时间
+Flink的无限数据流是一个持续的过程,时间是我们判断业务状态是否滞后,数据处理是否及时的依据
+
+Flink具备7X24小时高可用的SOA(面向服务架构),原因是在实现上 Flink 提供了一致性的 Checkpoint
+Checkpoint 是 Flink 实现容错机制的核心,它周期性的记录计算过程中 Operator 的状态,并生成快照持久化存储
+当 Flink 作业发生故障崩溃时,可以有选择的从 Checkpoint 中恢复,保证了计算的一致性
+
+
 
 Window:
 数据流是无限的,无界限. 但是可以通过一个有界的范围来处理无界的数据流.
@@ -357,13 +379,22 @@ stream1.join(stream2)
     .print()
 --------------------------------
 
-==========背压/反压============
+=============================================背压/反压======================================
 参照:https://yq.aliyun.com/articles/64821
 https://www.cnblogs.com/lanyun0520/p/5676617.html
 
 背压
 一个任务的back pressure警告(high),则意味着该任务产生数据的速度要高于下游Operator消化的速度
 数据沿着job的数据流图向下游流动(如从source到sink),而背压则是沿着相反的方向传播,逆流而上,可以理解为 水流漫上去
+
+Flink 如何处理背压?
+Flink与持久化的source(例如kafka),能够为你提供即时的背压处理.而无需担心数据丢失.
+Flink不需要一个特殊的机制来处理背压.因为Flink中的数据传输相当于已经提供了应对背压的机制.
+因此,Flink所获得的最大吞吐量由其pipeline中最慢的部件决定
+
+
+
+
 ===parallelism  && slot====
 parallelism 并行度 默认1 
 程序中设置 env.setParallelism(3); 这里设置的是全局的,包含下面执行的每一个算子
