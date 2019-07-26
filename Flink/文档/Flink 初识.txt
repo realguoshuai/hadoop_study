@@ -91,6 +91,70 @@ RockDBStateBackend
 Flink是通过检查点的方式来实现 exactly-once 只执行一次,当遇到故障时将系统重置为初始状态
 
 
+
+
+
+
+
+############流处理系统###############
+包括 Flink 在内的分布式流处理引擎一般采用 DAG 图来表示整个计算逻辑,
+DAG的每个点都代表一个基本的逻辑单元,即算子
+Source接入-->网络传输/本地传输在算子间进行发送和处理-->sink发送到外部系统或数据库
+
+逻辑模型  && 物理模型(运行时)
+
+逻辑模型可能有多个并发,实际的分布式流处理引擎更复杂
+,每个算子都可能有多个实例
+
+假设: A B C三个算子,A source 有两个实例,C有两个实例,B 一个
+在逻辑模型中,A和B是C的上游节点
+而在对应的物理模型中,C的所有实例和A,B的所有实例之间可能都存在数据交换
+
+# 注: 在物理模型中,我们会根据计算逻辑,采用系统自动优化或认为指定的方式将计算工作分布到不同的实例中,
+只有当算子实例分布到不同进程时,才需要通过网络进行数据传输
+,而同一进程中的 多个实例之间的数据传输通常不需要经过网络的
+
+Storm&& Flink 构建DAG计算逻辑图区别?
+Storm需要在图中添加Spout或Bolt这种算子,并指定算子之前的连接方式
+Flink的Api定义更加面向数据本身的处理逻辑:
+	将数据抽象成一个无限集,然后定义一组集合上的操作,最后在底层自动构建相应的DAG图
+区别:Storm更底层,自由度高 Flink的Api更上层,也更简单
+
+################### Flink DataStream API ################ 
+//1、设置运行环境
+StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+	
+//2、配置数据源读取数据	
+DataStream<String> text = env.readTextFile ("input");
+	
+//3、进行一系列转换
+DataStream<Tuple2<String, Integer>> counts = text.flatMap(new Tokenizer()).keyBy(0).sum(1);
+	
+//4、配置数据汇写出数据
+counts.writeAsText("output");
+	
+//5、提交执行
+env.execute("Streaming WordCount");
+
+上面实现一个流式的wordcount,首先需要获得一个StreamExecutionEnvironment对象(构建DAG图的上下文对象)
+,基于这个对象,我们可以添加一些算子
+1:使用了 Environment 对象中内置的读取文件算子readTextFile获取数据源,获取到DataStream对象,它可以看做是一个无限的数据集
+2:调用flatMap将每一条数据记录(文件中的每一行)分解成单词,同时会在底层的DAG图中添加一个flatMap算子
+3:得到的是处理过的单词的流,调用keyBy算子将流中的单词分组/分流,然后调用sum算子进行累计
+4:计算出的结果形成一个新的流,调用writeAsText算子将结果写到文件中 
+# 整个代码实现过程就是一个构建DAG 图的过程,将算子加到DAG 中 输入 处理 输出 
+
+
+
+
+
+
+
+
+
+
+
+
 ---------------------------------------------------
 
 ## Flink Blob:
