@@ -1,0 +1,4 @@
+由于公司是用华为fusioninsight安全模式 不能本地idea 直连,又不想在本地搭建环境,故使用 socket模拟kafka数据,使用flink的standalone模式测试程序,测试后再发布服务器运行
+使用:
+新建项目 引入pom jar 包 
+复制目录代码 直接运行   flink读取socket实现 wordcount 运行成功 ,不会因为搞环境时被劝退   
