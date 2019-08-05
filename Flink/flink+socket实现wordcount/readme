@@ -3,3 +3,8 @@
 新建项目 引入pom jar 包 
 复制目录代码 直接运行   先运行socket服务端  再运行 flink类  
 flink读取socket实现的流式wordcount 运行成功 , 不会因为搞环境时被劝退   
+
+
+
+
+不需要安装集群 不需要安装flink 不需要安装kafka  代码拷下来 就能模拟真实的数据流 进行开发
