@@ -1,0 +1,184 @@
+ 一、Hadoop
+
+    HDFS架构
+
+    Yarn架构
+
+    MapReduce过程
+
+    Yarn 调度MapReduce
+
+    hdfs写流程
+
+    hdfs读流程
+
+    hdfs创建一个文件的流程
+
+    hadoop1.x 和hadoop 2.x 的区别
+
+    hadoop1.x的缺点
+
+    hadoop HA介绍
+
+    hadoop的常用配置文件有哪些,自己实际改过哪些?
+
+    小文件过多会有什么危害,如何避免?
+
+    启动hadoop集群会分别启动哪些进程,各自的作用
+
+二、Hive
+
+    hive 内部表和外部表的区别
+
+    hive中 sort by / order by / cluster by / distribute by 的区别
+
+    hive的metastore的三种模式
+
+    hive 中 join都有哪些
+
+    Impala 和 hive 的查询有哪些区别
+
+    Hive中大表join小表的优化方法
+
+    Hive Sql 是怎样解析成MR job的?
+
+    Hive UDF
+
+三、Spark
+
+    讲一下spark 的运行架构
+	
+    一个spark程序的执行流程
+	
+    spark的shuffle介绍
+	
+    Spark的 partitioner 都有哪些?
+	
+    spark 有哪几种join
+	
+    DAGschedular/Taskscheduler/Schedulerbankend的实现原理
+	
+    RDD有哪些特点
+	
+    讲一下宽依赖和窄依赖
+	
+    Spark中的算子都有哪些
+	
+    RDD的缓存级别都有哪些
+	
+    RDD 懒加载是什么意思
+	
+    讲一下spark的几种部署方式
+	
+    spark on yarn 模式下的 cluster模式和 client模式有什么区别
+	
+    spark运行原理,从提交一个jar到最后返回结果,整个过程
+	
+    spark的stage是如何划分的
+	
+    spark的rpc: spark2.0为什么放弃了akka 而用netty?
+	
+    spark的各种HA, master/worker/executor/driver/task的ha
+	
+    spark的内存管理机制,spark 1.6前后分析对比, spark2.0 做出来哪些优化
+	
+    tungsten引擎: cpu和内存两方面分别说明
+	
+    讲一下spark 中的广播变量
+	
+    什么是数据倾斜,怎样去处理数据倾斜
+	
+    如何使用普通的算子实现SparkSQL中的groupBy功能
+	
+    分析一下一段spark代码中哪些部分在Driver端执行,哪些部分在Worker端执行
+
+四、Flink
+
+    讲一下flink的运行架构
+
+    flink具体是如何实现exactly one 语义
+
+    flink 的 window 实现机制
+
+    flink的window分类
+
+    flink 的 checkpoint 实现机制
+
+    flink 的 state 是存储在哪里的
+
+    flink是如何实现反压的
+
+    flink中的时间概念 , eventTime 和 processTime的区别
+
+    flink中的session Window是怎样实现的
+
+    flink中使用eventTime时是否必须指定watermark
+
+五、HBase
+
+    讲一下 Hbase 架构
+	
+    hbase 如何设计 rowkey
+	
+    讲一下hbase的存储结构,这样的存储结构有什么优点
+	
+    hbase 如何利用 phoniex 实现二级索引
+	
+    hbase 设计的优缺点,对比 nosql 和 关系型数据库
+	
+    hbase的HA实现,zookeeper在其中的作用
+	
+    master宕机的时候,哪些操作还能正常工作
+	
+    hbase的读写流程
+	
+
+六、Kafka
+
+    讲一下 kafka 的架构
+
+    kafka 相比其他消息组件有什么好处?
+
+    kafka 实现高吞吐的原理
+
+    kafka 的消息传递语义 / kafka怎样保证数据的一致性
+
+    kafka 与 spark streaming 集成,如何保证 exactly once 语义
+
+    ack 有哪几种, 生产中怎样选择?
+
+    如何通过 offset 寻找数据
+
+    生产者/消费者 各如何监控数据及时消费
+
+    kafk 的 ISR 机制
+
+    如何清理过期数据
+
+    1条message中包含哪些信息
+
+    讲一下zookeeper在kafka中的作用
+
+    kafka 可以脱离 zookeeper 单独使用吗
+
+    kafka有几种数据保留策略
+
+    kafka同时设置了7天和10G清除数据,到第5天的时候消息到达了10G,这个时候kafka如何处理?
+
+七、Zookeeper
+
+    zookeeper是什么
+	
+    zk都有哪些功能
+	
+    zk 有几种部署模式
+	
+    zk 是怎样保证主从节点的状态同步
+	
+    说一下 zk 的通知机制
+	
+    zk 的分布式锁实现方式
+	
+    zk 采用的哪种 选举协议? 大数据生态圈还有哪些选举协议
+	
+    讲一下leader 选举过程
