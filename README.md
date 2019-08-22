@@ -54,7 +54,7 @@
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
-*  solr 实时创建索引延迟问题 (增量3000w/天)
+*  solr 实时创建索引延迟问题 (增量3000-4000w/天)
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 ## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
