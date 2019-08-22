@@ -1,0 +1,303 @@
+﻿Elasticsearch,全文检索引擎,可用作分布式的实时文件存储,分布式实时分析搜索引擎,扩展上百台服务器处理PB级别的结构化和非结构化数据
+Elasticsearch 是一个兼有搜索引擎和NoSQL数据库功能的开源系统,基于java/lucene构建,开源,分布式,支持restful请求
+
+ES服务支持结构化,非结构化文本的多条件检索, 统计和报表生成.多用于日志搜索和分析,时空检索,时序检索,报表,搜索等场景
+
+
+### ES集群系统架构 ###
+Client   EsMaster   EsNode1-N   Zookeeper集群
+
+Client:使用HTTP或HTTPS协议 同ES集群中的EsMaster以及各EsNode实例进程进行通信,进行分布式索引和分布式搜索
+EsMaster:负责存放Elasticsearch的元数据
+EsNode1-N:负责存放Elasticsearch的索引数据
+Zookeeper集群:为Elasticsearch集群中各进程提供心跳感应机制
+
+
+###    基本概念    ###
+Index:即索引,是Elasticsearch中一个逻辑命名空间,指向一个或多个分片,内部Apache Lucene实现索引中数据的读写.
+	  相当于Database.一个Elasticsearch实例可以包含多个索引.
+	  
+Type:文档类型,文档类型使得同一个索引中在存储结构不同的文档时,只需要依据文档类型就可以找到对应的参数映射信息,方便文档的存储.     相当于数据库中的Table.一个索引对应一个文档类型.
+
+Document:文档,是可以被索引的基本单位,特指最顶层结构或根对象序列化成的JSON数据.
+         相当于数据库中的Row.一个类型包含多个文档.
+		 
+Mapping:映射,用来约束字段的类型,可以根据数据自动创建.
+        相当于数据库中的Shema
+		
+Field:字段,组成文档的最小单位.
+      相当于数据库中的Column列.每个文档包含多个字段.
+	  
+EsMaster:主节点,可以临时管理集群级别的一些变更,例如新建或删除索引、增加或移除节点等.
+         主节点不参与文档级别的变更或搜索,在流量增长时,该主节点不会成为集群的瓶颈.
+		 
+EsNode:Elasticsearch节点,一个节点就是一个Elasticsearch实例
+
+primary shard:主分片,索引中的每个文档属于一个单独的主分片,主分片的数量决定了索引最多能存储多少数据.
+	
+Shard:分片,Elasticsearch中最小级别的工作单元,文档存储在分片中,并且在分片中被索引.
+
+replica shard:即副本,可以防止硬件故障导致的数据丢失,同时可以提供读请求,比如搜索或者从别的shard取回文档
+
+recovery:代表数据恢复或叫数据重新分布,Elasticsearch在有节点加入或退出时会根据机器的负载对索引分片进行重新分配,
+         挂掉的节点重新启动时也会进行数据恢复.
+		 
+gateway:代表Elasticsearch索引快照的存储方式,默认是先把索引存放到内存中,当内存满了时再持久化到本地硬盘.
+        gateway对索引快照进行存储,当这个Elasticsearch集群关闭再重新启动时就会从gateway中读取索引备份数据.
+        eg:本地文件系统(默认),分布式文件系统-->Hadoop的HDFS和amazon的s3云存储服务.
+		
+transport:代表Elasticsearch内部节点或集群与客户端的交互方式.
+	      内部默认使用tcp协议进行交互,同时它支持http协议(json格式)
+		  其他thrift、servlet、memcached、zeroMQ等的传输协议(需要插件集成)
+		  
+discovery.zen :代表Elasticsearch的自动发现节点机制,Elasticsearch是一个基于p2p的系统,
+               它先通过广播寻找存在的节点,再通过多播协议来进行节点之间的通信,同时也支持点对点的交互.
+
+river: 代表Elasticsearch的一个数据源,也是其它存储方式(DB)同步数据到Elasticsearch的一个方法.
+	   它是以插件方式存在的一个Elasticsearch服务.通过读取river中的数据并把它索引到Elasticsearch中.
+
+ZooKeeper:它在Elasticsearch是必须的，提供安全认证信息的存储等功能.
+
+cluster:代表一个集群,集群中有多个节点,其中有一个为主节点,这个主节点是可以通过选举产生的,主从节点是对于集群内部来说的.
+		Elasticsearch的一个概念就是去中心化,字面上理解就是无中心节点,这是对于集群外部来说的.
+		因为从外部来看Elasticsearch集群,在逻辑上是个整体,你与任何一个节点的通信和与整个Elasticsearch集群通信是等价的.
+
+
+
+
+
+
+########    mysql跟es区别    ########
+
+MySql数据库可以分为:数据库(database) ->表(table) -> 行(row)->列(column)
+Elasticsearch分为:索引(index)->类型(type)->文档(document)->字段(field)
+
+创建映射,类似于建表 PUT /kkrecords   (不需要指定字段,动态映射)
+添加document,即插入数据
+数据更新:指定相同id   1:PUT 更新所有 2:POST  更新局部
+删除文档:DELETE index/type/id
+
+
+
+#########   查询命令    ###########
+地址 --> index  -->  type --> id
+查看所有index:http://192.168.94.41:9200/_cat/indices?v
+查看表中数据:http://192.168.94.41:9200/huawei_index/type1/2
+查看某个index的映射:http://192.168.94.41:9200/huawei_index/_mapping
+
+删除某条数据:http://192.168.94.41:9200/huawei_index/_mapping
+
+查看全部索引 GET /_cat/indices?v
+
+
+
+############查询优化#############
+
+尽量保证索引数据放的下内存,减少索引
+数据预热,让热点数据加载到filesystem cache中 过车数据查一天,将这一天数据后台执行加载到内存
+冷热分离,放在不同的index上
+document模型设计:将结果数据算好再入库,查询中少用关联查询
+分页优化:es分页性能差 
+	10个分片shard的index,查询第100页的10条数据,不可能是每个shard就查一条数据
+	必须每个shard都查1000条到一个协调节点,然后协调节点对着一万条数据进行合并,处理再获取100页的10条数据
+使用下拉刷新代替分页scroll
+
+
+Hadoop 的底层存储是基于无索引的 HDFS ,核心应用场景是对海量结构化、非结构化数据的永久存储和离线分析，例如客户肖像、流失度分析、日志分析、商业智能等。而 MongoDB 和 Elasticsearch 的核心场景是实时交互，通常用于人机交互场景，例如电商移动应用，其特征是响应时间一般是毫秒级到秒级
+
+es的一个分片就是一个lucene索引,能存储21亿条文档
+#########################
+
+
+
+##############   QA   ###############
+1:es 删除 名称为'的索引  使用"" 引起来 
+2:在kibana上创建一个type 提示创建成功,索引中找不到 
+原因是没有插入数据
+3:_source 字段作用
+es将数据保存在倒排索引中,另外还有一份原始文档保存到_source中(元数据) 
+es中搜索文档,结果内容就是_source的内容
+可以关闭 在设置mapping中将source字段设为开启或关闭
+_source:{"enable":"true"}  
+开启/关闭影响:开启后,在检索过程中,只需要解析存储的source json串,不需要走倒排索引表去检索
+仅需要一次IO,就可以返回整个文档的结果
+默认是开启,只有在某个字段非常多,业务根据该字段进行搜索,只返回文档id,再通过二次索引去hbase中查询是,可以将enable设为false
+#注: 把大字段的内存存在es中只会增大索引,文档越大结果越明显,如果一条文档节省几KB,亿万条的量结果也是很客观的
+
+4:文档元数据metadata
+_index,_type,_id 
+数据库,表,主键
+eg:PUT /website/blog/123{k:v,k:v,k:v}
+返回结果:_index,_type,_id ,_version(版本号)
+eg:使用自增id 22个字符的UUIDs
+POST /website/blog/{k:v,k:v,k:v}
+
+5:检索文档 HTTP方法改为 GET
+GET /website/blog/123?pretty
+
+#pretty参数 美化输出json
+除了输出_index,_type,_id,_version
+#还会输出found和_source字段
+found   返回 查询状态 true or false
+_source 返回 发送给es的原始文档
+
+# HTTP响应状态码 #
+正常 200 OK  
+异常 404 Not Found  
+新创建 201 Created  
+已存在 409 Conflict
+
+
+#获取响应头: curl 加 -i参数
+curl -i -XGET http://localhost:9200/website/blog/124?pretty
+HTTP/1.1 404 Not Found
+Content-Type: application/json; charset=UTF-8
+Content-Length: 83
+{k:v,k:v,k:v}
+
+
+6:检索文档一部分  
+##GET默认返回整条document,都存储在_source中,使用_source=字段1,字段2
+GET /website/blog/123?_source=title,text
+#### 只要_source字段,而不要元数据
+GET /website/blog/123/_source
+
+7:检索多个文档 mget
+
+8:创建index 不指定type mapping 动态映射 
+
+9:es分页
+#浅分页  from&size
+	缺点:默认是1w条数据,越翻页越慢
+	
+## scroll分页 ##
+
+10:es,solr越翻页越慢的原因:
+假如给了5个shard分片,当查询第一页数据(结果从1到10)
+每个分片会产生前十的数据,将结果返回给协调节点,协调节点对50条数据排序取前十.
+假如查询10000页->10001页,每个节点需要产生前10010个结果给协调节点,
+协调节点对这50050条数据排序取前十并丢掉其余50040条数据.
+###分布式系统中,对结果排序的成本随分页的深度成指数上升
+
+es给出的解决方式:scroll深分页
+每次只获取一页内容,返回一个scrollid,根据这个scrollid获取下一页的内容
+## 常见于APP的下拉刷新
+
+
+
+
+##  实现ES工具类,使用RestHighLevelClient  ## 
+单条写入数据 ok
+批量读取数据 mget   
+批量写入     bulk     ok
+
+
+######     ES查询性能优化     ######
+
+ES 在数据量很大的情况下(数十亿级别) 如何提高查询效率？
+第一次 5-10秒,第二次几十毫秒? 
+
+性能优化杀手锏:Filesystem Cache
+
+写入到es的数据,实际上是写到磁盘上.查询时,操作系统会将磁盘里的文件
+自动缓存到Filesystem Cache 里面
+
+ES搜索引擎严重依赖于底层的 Filesystem Cache  
+如果给Filesystem Cache更多的内存,尽量让内存可以容纳所有的
+IDX Segment File索引文件,那么你搜索的时候基本上都是走内存的,性能非常高
+
+压力测试,如果走磁盘响应时间一般是秒级别
+		 如果走Filesystem Cache,存走内存,那么性能要比走磁盘高一个数量级,基本上是毫秒级
+
+eg:3台64G的机器,总内存192G
+	每台机器给ES JVM Heap 是 32G,生下来给Filesystem Cache也是32G,
+	集群总共给Filesystem Cache 就是96G
+	
+3台机器一共占用1T的磁盘,ES数据1T,相当于每台机器300G+,这样性能??? 
+Filesystem Cache 的内存才100G,十分之一的数据可以放内存,其他的都在磁盘
+,现在执行搜索操作,大部分操作都是走磁盘,性能肯定差
+
+结论:给定ES的机器内存,至少可以容纳你的数据总量的一半
+
+最佳情况:es中存放少量索引数据,如果内存给定Filesystem Cache 的是100G
+		,索引数据最好控制在100G以内,性能非常高,1秒以内
+
+		
+## ES+HBase架构 ##
+es存储索引,hbase存储数据
+
+通过es查到doc id,再根据doc id 到HBase 里查询每个doc id 对应的完整数据
+
+存入es的数据最好小于等于或者略大于es的FileSystem Cache 的内存
+	满足上面要求,查询es20ms,再根据es返回的id去HBase简单查询20条数据,再耗费30s
+
+
+	
+##  数据预热  ##
+对于经常有人访问的数据,每隔一段时间 就去访问一下,让数据提前刷入到 Filesystem Cache 中
+
+
+## 冷热分离 ##
+
+类似于mysql的水平拆分,将大量访问少,频率低的数据 单独写一个索引,将那些访问很频繁的数据
+单独写一个索引
+
+eg:过车数据冷热分离成一个 最近三个月 和 历史数据 两个索引 
+
+## Document 模型设计 ##
+复杂的关联查询 在es中怎么处理 ?
+
+es中复杂的关联查询  支持,但是性能不好
+Document 模型设计是非常重要的,关联查询最好能在创建索引之前 完成
+
+
+## 分页性能优化 ##
+
+es分页类似于solr,都是越往后翻页越慢  
+
+你翻页的时候,翻的越深,每个 Shard 返回的数据就越多,而且协调节点处理的时间越长,非常坑爹
+前几页几十毫秒,10页以后,需要5-10秒,默认翻的越深,性能就越差
+
+Scroll:
+Scroll 会一次性给你生成所有数据的一个快照,然后每次滑动向后翻页就是通过游标 scroll_id 移动,获取下一页、下一页这样子,性能会比上面说的那种分页性能要高很多很多,基本上都是毫秒级的
+
+缺点:不能随意翻页!!!!  鸡肋,不适合分页展示,只适合知乎,微博APP 下拉刷新那种场景
+
+
+
+## ES布尔查询 ##
+
+
+
+  
+
+
+
+
+
+
+
+
+
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
