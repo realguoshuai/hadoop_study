@@ -59,6 +59,7 @@
 ## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
+*  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 ## MongoDB
 ## kerberos
 *  这个真恶心 人机/机机 
