@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 一行kafka 对应一行es的field -->
+<propertys>
+    <property name="kafka_recordId">
+        <value>kafka_field1</value>
+    </property>
+    <property name="es_id">
+        <value>es_field1</value>
+     </property>
+     <property name="kafka_recordId">
+        <value>kafka_field2</value>
+    </property>
+    <property name="es_id">
+        <value>es_field2</value>
+     </property>
+     <!-- ... -->
+</propertys>
