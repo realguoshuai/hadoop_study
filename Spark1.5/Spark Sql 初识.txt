@@ -1,0 +1,35 @@
+SparkSql开发的目的是为用户提供 关系查询和机器学习算法混合应用的灵活性,运行在内存中
+
+## DataFrame ##
+由列组成的数据集合,在概念上等同于关系型数据库的表
+DataFrame 数据源包括 结构化数据文件,hive中的表,外部数据库或RDD
+一行一行的 row[]
+
+## DataSet ##
+是分布式的数据集合,spark1.6+ 是dataFrame的更高一层抽象
+具有rdd的优点(强类型化,强大的lambda函数),以及sparksql优化后执行的优点
+可以使用函数或相关操作并行进行transformation操作  
+
+DataSet DataFrame RDD 相互转换
+伪代码:
+case class model =(pointId:String,passingTime:String)
+
+import spark.implicits._  //隐式转换 DataFrame
+import spark.sql          //使用sql
+val sqls:String="""select * from XXX ... """
+
+val df:DataFrame =  sql.(sqls)
+val ds:DataSet[model] = sql.(sqls).as[model] //隐式转换 转成dataSet
+# 注:如果调用官方的api,sql.(sqls)直接转dataFrame
+	 如果调用的是jdbc,需要自己手动转
+val rdd:RDD[model] = ds.rdd    //DataSet转RDD
+val df2:DataFrame = ds.toDF()  //DataSet转DataFrame
+val rdd2:RDD[Row] = df.rdd     //DataFrame转RDD
+
+
+spark:
+建测试表 开发一个完整的功能
+
+
+
+
