@@ -1,0 +1,7 @@
+mtdap-elastic 程序分为 入库程序 + 查询程序
+
+入库程序: 数据从kafka接入 字段使用xml可配置的方式
+         数据批量入库(N条 或N秒)
+         使用rest client
+查询程序: 时间范围 + 多条件 + 排序
+         使用RestHighLevelClient
