@@ -23,7 +23,7 @@
 ## Flink
 *  [总结文档](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
-*  [Flink介绍博客](https://yq.aliyun.com/articles/652529)
+*  [Flink开发者资料](https://ververica.cn/developers-resources/)
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/blob/master/%E8%AF%BE%E7%A8%8B%E8%A1%A8%EF%BC%88%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%EF%BC%89.md)
 *  [不搭建环境,socket代码模拟kafka数据源 开发flink](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/flink%2Bsocket%E5%AE%9E%E7%8E%B0wordcount/)
 *  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E5%AE%9E%E4%BE%8B/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
