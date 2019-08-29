@@ -98,9 +98,9 @@ Keyed States   Operator States
 checkpoint:程序指定时间定期生成 ,保留当前时间的算子的状态
 
 
-savepoint:用户通过命令行触发,
-	存储格式跟checkpoint不相同的 ,savepoint会按照一个标准的格式存储,不管配置什么样
-	flink都会从这个checkpoint恢复,常用于版本升级
+savepoint:Savepoint是指允许用户在持久化存储中保存某个checkpoint，以便用户可以暂停自
+	己的任务进行升级。升级完后将任务状态设置为savepoint存储的状态开始恢复运行，保证数据处理的延续性。
+	不管配置什么样flink都会从这个checkpoint恢复,常用于版本升级,保证了数据的延续性
 External Checkpoint:(外部checkpoint)做完一次checkpoint后在制定的目录中 
 	多存储一份checkpoint 保留meta数据 双备份
 	作业失败或取消状态结束时,外部存储的meta数据将保留下来
@@ -743,6 +743,81 @@ key的数量和key所需state的大小,都将会影响Flink应用程序所需的
 
 另外需要提供额外的资源来保证:
 当你的 Flink 发生故障时,系统会需要额外的资源来做恢复工作以及从 Kafka topic 或其他消息客户端追上最新的数据
+
+--------------   flink程序优化   --------------
+DataStream性能调优
+
+A:配置内存
+	Flink是依赖内存计算，计算过程中内存不够对Flink的执行效率影响很大.可以通过监控GC
+B:设置并行度
+	并行度控制任务的数量，影响操作后数据被切分成的块数。调整并行度让任务的数量
+	和每个任务处理的数据与机器的处理能力达到最优
+	slot
+C:配置进程参数
+	Flink on YARN模式下,有JobManager和TaskManager两种进程
+	JobManager负责任务的调度,以及TaskManager、 RM之间的消息通信
+	TaskManager的内存主要用于任务执行、通信
+	每个TaskManager每个核同时能跑一个task，所以增加了TaskManager的个数相当于增大了任务的并发度
+		--container 12 \    12个taskmanager
+		--jobManagerMemory 10240 \  
+		--taskManagerMemory 20480 \ 每个taskmanager有20G 内存
+		--slots 10 \    每个taskmanager10核
+		这样的一个公共的yarn-session,可以发布多个flink 任务
+D:设计分区方法 (#####)
+	设置分区是为了优化task的切分,在程序编写尽量分区均匀,避免数据倾斜,
+	防止某个task的执行时间过长导致整个job执行缓慢
+	1:随机分区 ,将元素随机地进行分区
+	dataStream.shuffle()
+	2:Rebalancing数据重分区
+     基于round-robin对元素进行分区,使得每个分区负载均衡,十分有用
+	 dataStream.rebalance();
+	3: Rescaling   以round-robin的形式将元素分区到下游操作的子集中
+	 dataStream.rescale();
+	4:广播  广播每个元素到所有的分区
+	 dataStream.broadcast();
+	5:自定义分区
+	  可以按照某个特征进行分区,从而优化任务执行
+	  DataStream<Tuple2<String, Integer>> dataStream = env.fromElements(Tuple2.of("hello",1),
+			Tuple2.of("test",2), Tuple2.of("world",100));
+	// 定义用于分区的key值，返回即属于哪个partition的，该值加1就是对应的子任务的id号
+	Partitioner<Tuple2<String, Integer>> strPartitioner = new Partitioner<Tuple2<String,Integer>>() {
+		@Override
+		public int partition(Tuple2<String, Integer> key, int numPartitions) {
+		return (key.f0.length() + key.f1) % numPartitions;
+		}
+	};
+	// 使用Tuple2进行分区的key值
+	dataStream.partitionCustom(strPartitioner, new KeySelector<Tuple2<String, Integer>,Tuple2<String, Integer>>() {
+		@Override
+		public Tuple2<String, Integer> getKey(Tuple2<String, Integer> value) throws Exception {
+		return value;
+		}
+	}).print();
+
+配置netty网络
+     慎调
+
+总结:
+	数据倾斜时:某一部分数据特别大,虽然没有GC,但是task执行时间严重不一致
+				需要重新设计key,以更小的粒度的key使得task大小合理化
+			    修改并行度
+				调用rebalance操作,使数据分区均匀
+	缓冲区超时设置:
+	   task在执行过程中存在数据通过网络进行交换
+	   数据在不同服务器之间传递的缓冲区超时时间可以通过setBufferTimeout进行设置
+	设置:
+	env.setBufferTimeout(timeoutMillis);
+	env.generateSequence(1,10).map(new MyMapper()).setBufferTimeout(timeoutMillis);
+
+
+
+
+
+
+
+
+
+
 
 
 
