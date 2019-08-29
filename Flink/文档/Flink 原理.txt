@@ -1,0 +1,69 @@
+--------------Flink 原理 -----------------
+1.flink是怎样保证exact-once的保证；
+为甚是要插入barrier来做checkpoint，而不是在不同算子的定时器来做checkpoint？
+2.flink的checkpoint机制与恢复？
+3.flink与storm对比怎么样？为什么要从storm迁移到flink上？
+4.你在使用中怎样使用flink的？
+5.源码是否已经阅读？
+6.flink中其中一个节点宕机之后，怎样恢复的？？
+7.flink中流和批是怎样统一的？改动量是否很大？？
+8:flink怎样解决乱序问题?
+9:流批系统的区别和各自优缺点?
+10:Flink JobManager的HA原理分析
+
+--------------A-----------------
+8:
+通过watermark对数据重排序,来保证整体数据流的有序性
+每当我们每接收到一份数据到buffer中时,我们选定其中最新的watermark值,对buffer里数据的时间小于此watermark值的数据在buffer中做一个排序.然后将此排序好的数据发向下游
+
+
+9:流系统的一大优势就是低延迟,批处理优势是错误恢复容易
+批处理任务在每次的批处理操作中都会保存住全部的输入数据,如果出现算错的情况,重新执行一次处理过程即可
+而流式计算中连续不断的数据处理,使得错误恢复变得复杂,Flink的错误恢复机制-CheckPoint.可以实现
+
+某一刻任务执行失败,下一刻怎样完全恢复,重新回到失败的的时间点,任务接着跑?
+
+A:Source的偏移量位置 offset
+B:当时已经进入flink的数据
+C:操作状态的数据
+
+#flink会通过定期做checkpoint来实现A B
+
+how checkpoint ?
+在流数据中增加一个标记数据记录,barrier栅栏
+barrier数据将流数据分割成多份,每份对应一次checkpoint操作,checkpoint会保留每一次的offset信息
+	三分钟2个barrier,生成三个checkpoint
+
+流:
+当barrier标记从source上游流向sink下游,在接到sink端的确认消息后,此checkpoint完成
+如果涉及到多个input的输入时,处理快的barrier流会等待其他流,直到它们的barrier信息到达,然后在一起往下游传输数据
+
+#flink 使用state来实现 中间状态数据
+用户可以自定义状态持久化操作,然后在应用在重新启动时,从外部存储中重新恢复状态数据
+
+一般情况下,为了保证状态数据的一致性,checkpoint 状态数据 就是同步的过程
+flink实现异步状态同步方式,实现方式:拷贝原状态的数据,然后用异步线程去持久化拷贝的那份状态
+为了防止每次copy重复的状态数据,flink实现了增量的checkpoint
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
