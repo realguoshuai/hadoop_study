@@ -760,7 +760,7 @@ C:配置进程参数
 	每个TaskManager每个核同时能跑一个task，所以增加了TaskManager的个数相当于增大了任务的并发度
 		--container 12 \    12个taskmanager
 		--jobManagerMemory 10240 \  
-		--taskManagerMemory 20480 \ 每个taskmanager有20G 内存
+		--taskManagerMemory 20480 \ 每个taskmanager有20G 内存  一共占用20G *12  
 		--slots 10 \    每个taskmanager10核
 		这样的一个公共的yarn-session,可以发布多个flink 任务
 D:设计分区方法 (#####)
@@ -809,8 +809,16 @@ D:设计分区方法 (#####)
 	env.setBufferTimeout(timeoutMillis);
 	env.generateSequence(1,10).map(new MyMapper()).setBufferTimeout(timeoutMillis);
 
-
-
+------------------    程序优化  --------------------
+南昌 全流量计算优化:早晚高峰,数据延迟
+算子timeWindowAll 不是并行的,执行时是1个slot导致?   业务逻辑计算指标较多?
+现在有两种思路:
+1	创建yarn-session时,将slot 由10-->1  container12->6(12)   总的由120->6   240G 120G
+	单个slot的算力  由 1/10的taskmanager的资源=2G   -->  taskmanager=20G  
+	总量 taskmanager 240G + jobmanager 10G   注: 总量需要预留一部分用作恢复  
+2   保存现有的yarn-session 
+	现在增加到12个,会有6个闲置,数据倾斜
+    增加到12slot ,使用重分区 将数据打散 运用好资源
 
 
 

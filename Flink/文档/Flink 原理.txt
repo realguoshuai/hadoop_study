@@ -9,8 +9,8 @@
 7.flink中流和批是怎样统一的？改动量是否很大？？
 8:flink怎样解决乱序问题?
 9:流批系统的区别和各自优缺点?
-10:Flink JobManager的HA原理分析
-
+10:Flink JobManager的HA(高可用)原理分析
+11:flink的 状态
 --------------A-----------------
 8:
 通过watermark对数据重排序,来保证整体数据流的有序性
@@ -45,6 +45,59 @@ barrier数据将流数据分割成多份,每份对应一次checkpoint操作,chec
 flink实现异步状态同步方式,实现方式:拷贝原状态的数据,然后用异步线程去持久化拷贝的那份状态
 为了防止每次copy重复的状态数据,flink实现了增量的checkpoint
 
+
+10:Flink的JobManager的HA 跟HDFS的HA相比 不太一样,并不仅仅是主从切换
+
+HDFS的HA切换,主要是为了保证数据请求处理的正常服务
+Flink要让所有的失败任务能够快速回复
+即:一个是存储系统的HA实现  一个是计算框架的HA实现
+
+Flink的JobManager在服务发生切换时(出现故障)要及时的通知外界事物:
+	JobManager管理的多个TaskManager
+	在运行的所有Job
+	在请求的JobClient客户端
+	
+这些TaskManager,Job,JobClient收到新的leader信息,能够主动重连新的JobManager地址
+
+源码调用过程:
+Flink内部定义2类服务做HA时的领导选举和消息通知:
+	LeaderElectionService  
+	LeaderRetrievalService 监听端口
+		LeaderRetrievalListener监听接口
+在LeaderElectionService服务的实现中,是采用Apache Curator框架中的LeaderLatch来做领导选举的
+新的leader选出来以后,LeaderRetrievalService服务会第一时间得到通知,然后提取出新的leader地址
+然后通知监听接口LeaderRetrievalListener,通知jobclient job taskmanager
+
+
+11:Flink一个任务是否是有状态的?
+指的是flink内部的State的概念,不单单是指Event->State这样比较固定的概念
+而是指任务运行间的数据信息,这些状态数据在容错恢复及checkpoint时将起到很关键作用
+
+State的类型是怎样划分的? State的序列化内容? 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
 
 
 
