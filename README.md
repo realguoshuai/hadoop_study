@@ -56,6 +56,7 @@
 *  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
 *  solr 实时创建索引延迟问题 (增量3000-4000w/天)
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
+*  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
 ## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
