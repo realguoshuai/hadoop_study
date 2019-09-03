@@ -63,6 +63,7 @@
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 ## MongoDB
 ## kerberos
+*  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
 *  这个真恶心 人机/机机 
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
 ### springboot 
