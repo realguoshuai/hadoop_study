@@ -76,9 +76,12 @@ su - es
 查看es进程:
 	ps -ef|grep elasticsearch
 
+	
+-------------------------------------------------------------
 bug:
 	could not find java; set JAVA_HOME or ensure java is in PATH
 	解决:source /opt/hadoopclientC70/bigdata_env
+		或者安装jdk
 
 bug:
 	logs生成日志文件是root ,es用户没有权限查看 导致启动错误
@@ -92,26 +95,24 @@ bug:分别是步骤5和步骤6 导致的
 	memory locking requested for elasticsearch process but memory is not locked
 原因：锁定内存失败
 	this can cause resize pauses and prevents mlockall 
-	vim /etc/security/limits.conf
+	vim /etc/security/limits.conf   
 原因：-Xms 和 -Xmx需要配置的相等
 	vim /opt/elk/elasticsearch/config/jvm.options 
 
 
 bug: 需要三台都搭上才行 
 	三台启动,出现:master_not_discovered_exception
-	删除三个节点的data目录,重新启动
+	A:删除三个节点的data目录,重新启动
 	ps -ef | grep elastic
 	kill -9 端口
 	
 bug:Failed to bind to [9300]  一般是elasticsearch.yml配置文件出现异常
-	network.host: 192.168.94.45 没改成当前节点的ip
+	A:network.host: 192.168.94.45 没改成当前节点的ip
 
 bug:blocked by: [SERVICE_UNAVAILABLE/1/state not recovered / initialized
 	指向错误的主机
-	节点一上配置文件错误
-	
-	
-	
+	A:节点一上配置文件错误
+
 	
 	
 	
