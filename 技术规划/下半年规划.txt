@@ -1,0 +1,39 @@
+上半年 将fink kerberos弄起来 flink日常开发没问题,理解solr原理,百亿数据优化
+下半年: 大数据理论基础补牢(面试题) 
+实时  离线   搜索 (面试题+简单示例程序)
+
+
+实时计算 : kafka + flink + redis + phoenix
+离线计算 : hdfs + hive + spark + mysql
+全文检索 : lucene + solr + es
+数据同步 : jdbc + logstash + datax  + spark
+任务调度 : oozie + azkaban
+
+
+到年后规划,多看原理 多练 多说
+1 流 flink,kafka,redis 熟练  侧重于原理
+2 搜索 solr熟练 es熟悉       环境搭建 ok ,入库,rest查询
+3 批 sql,spark熟悉
+4 其他 调度,新组件了解 
+
+
+-------------------------------   flink   -------------------------------
+flink cep  demo起码能跑起来      ok
+违法安全驾驶行为 (可以重做,使用flink实时ETL)     
+flink sql  demo起码能跑起来   
+连接器封装 mysql  es  hive 
+flink程序优化
+flink state管理 
+zhisheng知识星球对flink源码的解读
+
+-------------------------------   spark   -------------------------------
+spark 简单离线分析
+spark 数据同步
+
+-------------------------------    es     -------------------------------
+es 集群搭建   ok
+es 接入kafka 入库  ok
+es rest接口查询,代替可视化插件
+
+
+下的学习视频
