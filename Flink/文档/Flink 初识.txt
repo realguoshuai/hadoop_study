@@ -5,8 +5,9 @@
 数据是指由数千个数据源持续生成的数据,流数据通常也以数据记录的形式发送,
 但相较于离线数据,流数据普遍的规模较小.
 
+
 # Flink #
-Apache Flink 是一个分布式的大数据处理引擎,可对有限数据流和无线数据流
+Apache Flink 是一个分布式的大数据处理引擎,可对有限数据流和无限数据流
 进行有状态或无状态的的计算.
 优势:
 Flink具备7X24小时高可用的SOA(面向服务架构),原因是在实现上 Flink 提供了一致性的 Checkpoint
@@ -17,21 +18,24 @@ Checkpoint 是 Flink 实现容错机制的核心,它周期性的记录计算过�
 # 实时ETL
 实时ETL&数据流的目的是实时的把数据从A点投递到B点.
 中间可能会加上一些数据清洗和集成的工作,比如实时构建搜索系统的索引,实时数仓中的ETL过程等
-eg:尾号限行  (对违反限行车辆进行初步筛选 )
+eg:尾号限行(对违反限行车辆进行初步筛选)   车辆轨迹(将一辆车一天轨迹拼接成一条,时间 点位 过车间隔)
 
-# 实时数据分析(实时汇总)
+# 实时数据分析(实时指标汇总)
 数据分析指的是根据业务目标从原始数据中抽取对应信息并整合的过程.
 比如查看每天卖的最好的十种商品,仓库平均周转时间,文章平均点击率,推送打开率等等.
 实时数据分析则是上述过程的实时化,一般最终体现为实时报表或实时大屏
-eg:30s流量统计 高频车 重点路段/区域  流量/拥堵
+eg:30s流量统计 高频车 重点路段/区域  流量/拥堵   在途车辆归属地分析
 
 # 事件驱动应用  (实时预警)
 事件驱动应用是对一系列订阅事件进行处理或作出响应的系统.
 事件驱动应用往往还会依赖内部状态,比如点击欺诈检测,风控系统,运维异常检测系统等
 当用户的行为触发某些风险控制点时,系统会捕获这个事件,并根据当前行为和用户之前的行为进行分析,
 决定是否对用户进行风险控制
-eg: 套牌车  流量突发预警   突发拥堵
+eg: 套牌车  流量突发预警   突发拥堵路段预警  
 
+注:排行类的数据现在是在查询层phoenix做的
+   没有热点数据top10的功能 
+	做的是基础数据,5分钟算一次,接口拿去做趋势图
 ### Flink Application Flink应用开发 相关概念 ####
 
 Stream 流
@@ -81,16 +85,44 @@ join:双流转换成单流
 coGroup+innerjoin
 
 
+#############   水印   ###########
+水位线是衡量Event Time进展的机制,属于数据本身的隐藏属性
+基于事件时间的数据本身除了事件发生时的时间戳A,还包含一个水位线时间戳B
+,这条水位线用来表示在B时间戳之前的数据都已经到达!!
+作用:水印是为了解决乱序问题的,解决乱序问题通常是水印+窗口来实现
+watermark如何分配:
+	通常是在接收到source数据后,应该立刻生成水印 或者数据经过简单的map和filter之后 立刻生成watermark
+两种生成方式:
+	1:AssignerWithPeriodicWatermarks,定时抽取更新(允许定义一个最大延迟,比较常用)
+	2:AssignerWithPunctuatedWatermarks,每一次数据进来都会抽取timetamp并生成watermar,
+	    AssignerWithPunctuatedWatermarks更精确,但是频繁的更新wartermark会比较影响性能
+注:所以不要经常生成时间戳和水印,这样会加大系统的计算负担
+   水印必须跟窗口一起使用才有效 
 
-#############   状态state和检查点checkpoint   ###########
-How:最简单的wordcount,给一些word计算他们的count,count输出不断累加的结果,count就是状态
-批处理对state要求不高:之前的批处理都是将数据分片计算,分片完成后做一个聚合,state要求较少
-流处理程序,输入的是一个无限制的数据流,会运行很大一段时间,要求运行几天,几个月都不会宕机,
-需要对中间的状态数据好好管理.storm采用的将状态数据存储到Hbase(计算时从hbase读,完了在更新到hbase,还需要保证数据一致性)
+source数据接入,map进入到自定义水印类,从EvenTime中抽取出水印时间
+当水印+允许的最大延迟的数据到达时,窗口被触发计算
 
-state可能会很大,阿里的几T都有
+上下游顺序: source-->map-->filter-->水印-->keyBy-->window
 
-#########   flink的state   管理###########
+window的触发机制?
+  先按照自然时间将window划分,30s窗口,1分钟分两个0-30,31-60
+window的设定跟数据无关,是系统定义好的
+1:input的数据,根据自身的Event Time将数据划分到不同的window中
+2:如果窗口中有数据,且水印时间>=window_end_time时 触发窗口计算
+  #最终决定触发的规则是数据本身的Event Time所在的window中的window_end_time决定
+
+Flink如何处理乱序？
+	watermark + window机制
+	window中可以对input进行按照Event Time排序,使得完全按照Event Time发生的顺序去处理数据,以达到处理乱序数据的目的
+Flink何时触发window？
+	1:Event Time < watermark时间 （对于延迟太久的数据而言）
+	2:watermark >=window_end_time（对于无序及正常到达的数据而言）
+	  在[window_start_time,window_end_time]中有数据存在
+Flink应该如何设置最大延迟时间?
+	根据业务决定,如果延迟时间设置的太小,而数据因为网络传输的造成延迟太久
+	就会出现很多单条数据在窗口中被触发,对数据准确性影响很大
+	
+#########   flink的state管理  ###########
 按照数据划分和扩张方式:
 Keyed States   Operator States 
 
@@ -112,16 +144,21 @@ RockDBStateBackend
 数据量小存储在 MemoryStateBackend 和 FsStateBackend中
 数据量大  存储在RockDBStateBackend 中
 
+
+#############   状态state和检查点checkpoint   ###########
+How:最简单的wordcount,给一些word计算他们的count,count输出不断累加的结果,count就是状态
+批处理对state要求不高:之前的批处理都是将数据分片计算,分片完成后做一个聚合,state要求较少
+流处理程序,输入的是一个无限制的数据流,会运行很大一段时间,要求运行几天,几个月都不会宕机,
+需要对中间的状态数据好好管理.storm采用的将状态数据存储到Hbase(计算时从hbase读,完了在更新到hbase,还需要保证数据一致性)
+
+state可能会很大,阿里的几T都有
 ------------------
 Flink是通过检查点的方式来实现 exactly-once 只执行一次,当遇到故障时将系统重置为初始状态
 
 
 
-
-
-
-
 ############流处理系统###############
+
 包括 Flink 在内的分布式流处理引擎一般采用 DAG 图来表示整个计算逻辑,
 DAG的每个点都代表一个基本的逻辑单元,即算子
 Source接入-->网络传输/本地传输在算子间进行发送和处理-->sink发送到外部系统或数据库
@@ -199,13 +236,8 @@ Flink DataStream API的核心就是代表流数据的DataStream对象,开发就�
 
 
 
-
----------------------------------------------------
-
-## Flink Blob:
-JobManager-blob服务 ,也是在flink-conf.yaml文件中配置 
-	接收jar包/发送jar包到Taskmanager,传输log文件
-## Flink 通信模型(via Akka)
+	
+######################## Flink通信模型(Akka)  ########################
 Flink客户端(JobClient)  JobManager(1)  TaskManager(N) 之间通信都是基于Akka actor模型
 
 JobClient 从用户处获取到Flink job,提交给JobManager
@@ -219,13 +251,27 @@ JobClient 从用户处获取到Flink job,提交给JobManager
 ## JobManager和TaskManager
 JobManager是核心控制单元,负责整个Flink Job,负责资源分配,任务调度和状态汇报
 //TODO
+TaskManager
+## Flink Blob:
+JobManager-blob服务 ,也是在flink-conf.yaml文件中配置 
+	接收jar包/发送jar包到Taskmanager,传输log文件
+	
+######################  反压/背压  ########################
+backpressure 背压概念:
+	当数据流启动时,数据源把一行行/条条数据填到一个类似桶的缓存中(buffer)
+	一旦缓存(buffer)满了,桶就顺着流水线流到下游组件(component)中,流处理引擎
+	会拿来一个新的空缓存(空桶),源数据不知道这一切,只会不停填桶...
+	如果transformation和driver来不及处理这些数据,流处理引擎会启动反压机制,让数据源睡眠/等待
+	当流水线又有空余的桶(缓存)后,源数据被唤醒继续往桶里填数据.
 
-
+背压传播的趋势:
+一个任务的back pressure警告(high),则意味着该任务产生数据的速度要高于下游Operator消化的速度
+数据沿着job的数据流图向下游流动(如从source到sink),而背压则是沿着相反的方向传播,逆流而上,可以理解为 水流漫上去
 
 flink  反压机制(backpressure)
 产生原因:短时负载高峰导致系统接收数据的速率远高于它处理数据的速率
-flink利用自身作为纯数据流引擎的优势来优雅地响应反压问题
-Flink 是如何在 Task 之间传输数据的，以及数据流如何实现自然降速?
+        flink利用自身作为纯数据流引擎的优势来优雅地响应反压问题
+Q:Flink 是如何在 Task 之间传输数据的，以及数据流如何实现自然降速?
 运行时: 
 	operators组件  
 		每个operator会消费中间态的流,并在流上进行转换,然后生成新的流
@@ -239,58 +285,13 @@ Flink中的反压:
 每个生产和被消费的流都会被分配一个缓冲池.
 缓冲池管理着一组缓冲(Buffer),缓冲在被消费后可以被回收循环利用.
 
-网络传输中的内存管理:
 
-###################### Flink程序发布  ###################################
+Flink 如何处理背压?
+Flink与持久化的source(例如kafka),能够为你提供即时的背压处理.而无需担心数据丢失.
+Flink不需要一个特殊的机制来处理背压.因为Flink中的数据传输相当于已经提供了应对背压的机制.
+因此,Flink所获得的最大吞吐量由其pipeline中最慢的部件决定
 
-程序发布出问题: 
-	1:程序发布找不到容器地址 Failed to retrieve JobManager address  2: 找不到日志路径 程序发布需要先创建log目录
-1原因是在flink创建cluster后的的一定范围
-nohup bin/yarn-session.sh \
---container 5 \
---jobManagerMemory 4024 \
---taskManagerMemory 4048 \
---slots 10 \
---jar $FLINK_HOME/lib/flink-connector-kafka-0.10_2.11-1.3.0.jar,$FLINK_HOME/lib/flink-dist_2.11-1.3.0.jar,$FLINK_HOME/lib/kafka-clients-0.10.0.0.jar,$FLINK_HOME/lib/jedis-2.9.0.jar,$FLINK_HOME/lib/commons-pool2-2.4.2.jar \
->/opt/MtdapProgram/mtdap3/flink-cluster/log/yarn-session.log 2>&1 &
-
-二次识别套牌车
-nohup bin/flink run \
---class com.enjoyor.mtdap3.realtime.SrFakeVehicle \
-/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/mtdap3-rtc-srfakevehicle-1.0.jar >/opt/MtdapProgram/mtdap3/mtdap3-rtc-sr-vehicletrack-1.0/log/mtdap3-rtc-srfakevehicle-1.0 2>&1 &
-
-flink发布命令并没有指定yarn 怎么就在yarn上运行了?
-配置一个容器,再发布一个flink程序  会自动找到 JobManager address (如果创建容器的时间和程序发布的时间间隔太久 会抛找不到jobManager address的异常) 使用 -yid 可以指定flink程序发布到 yarn cluster 集群上运行
-
-flink  on yarn  两种运行方式 yarn session  single yarn job
-=================AM RM==========================
-Flink log中的 RM AM 指的是yarn上的一个ResourceManager 和若干个ApplicationMaster  指的是yarn的AM RM 通信
-ApplicationMaster管理在yarn上运行的应用程序的每个实例
-	同时负责协调来自 ResourceManager 的资源,并通过NodeManager监视容器的执行和资源使用（CPU、内存等的资源分配）
-
--------------
-雅虎15年测试:
-Storm 能够承受每秒 40 万事件,但受限于 CPU； 
-Flink 则可以达到每秒 300万事件(7.5 倍)但受限于 Kafka 集群和 Flink 集群之间的网络
-
-Flink 的执行过程是基于流的，这意味着各个处理阶段有更多的重叠,并且混洗操作是流水线式的,因此磁盘访问操作
-更少.相反, MapReduce、Tez和Spark是基于批的,这意味着数据在通过
-网络传输之前必须先被写入磁盘.该测试说明,在使用 Flink 时,系统空闲时间和磁盘访问操作更少。
-
-接收器  数据源 
-
-Kafka position也是由Flink自己维护的
-
-理想下  无边际数据流 源源不断来  按照时间窗口 计算  输出
-
-现实情况是: 数据不是按时来的 有延迟
-
-所以划分为事件时间  摄取时间  处理时间
-
-公司测试环境下的flink程序,运行26d了也没出现问题,原因在于flink使用的是自己的内存管理体系
-
-
-===flink内存管理===
+###############################  flink内存管理  ###############################
 主流实时计算框架都是基于jvm语言开发的(Java Scala)
 为了加快计算,通常都是将数据加载在内存中,由于数据量巨大,对内存造成很大压力
 ==数据存储==
@@ -323,7 +324,60 @@ Flink的主动内存管理避免了令人讨厌的OutOfMemoryErrors杀死JVM并�
 Flink具有高效的数据去/序列化堆栈，有助于对二进制数据进行操作，并使更多数据适合内存。
 Flink的DBMS风格的运算符本身在二进制数据上运行，在必要时可以在内存中高性能地转移到磁盘。
 
-===Lambda架构===
+###############################  Flink程序发布  ###############################
+
+flink发布命令并没有指定yarn 怎么就在yarn上运行了?
+配置一个容器yarn-session,再发布一个flink程序  会自动找到 JobManager address (如果创建容器的时间和程序发布的时间间隔太久 会抛找不到jobManager address的异常) 使用 -yid 可以指定flink程序发布到 yarn cluster 集群上运行
+
+flink  on yarn  两种运行方式 1:yarn-session  2:single yarn job
+
+nohup bin/yarn-session.sh \
+--queue enjoyor \
+--container 12 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 20480 \
+--slots 10 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+nohup bin/flink run \
+-yid application_1563070919166_1815 \
+-p 6 \
+--class com.enjoyor.mtdap3.realtime.FakeVehicle \
+/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-fakevehicle-1.0/mtdap3-rtc-fakevehicle-1.0.jar \
+>/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-fakevehicle-1.0/log/mtdap3-rtc-fakevehicle.log 2>&1 &
+
+
+############################### Flink 测试 ###############################
+雅虎15年测试:
+Storm 能够承受每秒 40 万事件,但受限于 CPU； 
+Flink 则可以达到每秒 300万事件(7.5 倍)但受限于 Kafka 集群和 Flink 集群之间的网络
+
+Flink 的执行过程是基于流的，这意味着各个处理阶段有更多的重叠,并且混洗操作是流水线式的,因此磁盘访问操作
+更少.相反, MapReduce、Tez和Spark是基于批的,这意味着数据在通过
+网络传输之前必须先被写入磁盘.该测试说明,在使用 Flink 时,系统空闲时间和磁盘访问操作更少。
+
+接收器  数据源 
+
+Kafka position也是由Flink自己维护的
+
+理想下  无边际数据流 源源不断来  按照时间窗口 计算  输出
+
+现实情况是: 数据不是按时来的 有延迟
+
+所以划分为事件时间  摄取时间  处理时间
+
+现场的flink程序,运行90d了也没出现问题,原因在于flink使用的是自己的内存管理体系
+中间出错挂掉,会自动重连并通过checkpoint检查点机制 重新计算
+
+
+################### AM RM #################
+
+Flink log中的 RM AM 指的是yarn上的一个ResourceManager 和若干个ApplicationMaster  指的是yarn的AM RM 通信
+ApplicationMaster管理在yarn上运行的应用程序的每个实例
+	同时负责协调来自 ResourceManager 的资源,并通过NodeManager监视容器的执行和资源使用 (CPU、内存等的资源分配)
+
+################# Lambda架构 ###############
 Lambda 架构用定期运行的批处理作业来实现应用程序的持续性，并通过流
 处理器获得预警。流处理器实时提供近似结果；批处理层最终会对近似结果予以纠正
 
@@ -332,9 +386,8 @@ Lambda 架构用定期运行的批处理作业来实现应用程序的持续性�
 聚合结果，而不是简单地以小时为单位分割数据
 
 
-=flink流表对偶性=
+############################################# flink SQL #############################################
 流和动态表(Dynamic Table)的对偶(duality)性。
-
 
 ======流式SQL=====
 SQL 声明式语言
@@ -352,7 +405,7 @@ SELECT a.id FROM A a,B b WHERE a.id=b.id;
 区别:哈希连接算法中,只需要将较小的一张表加载到内存
 	  归并连接算法,需要将两张表都加在到内存中
 	  
-	  
+
 流式场景下的持续查询:
 持续查询:没有外界干预的情况下,查询会一直输出结果,不会停止
 由于数据流本身无穷,所以在上面的查询都是持续查询,每当有新数据的到来,可能都会有新的查询结果产生
@@ -361,7 +414,7 @@ SELECT a.id FROM A a,B b WHERE a.id=b.id;
 原因:1:我们无法确定下一条数据属于表A还是表B 2:流数据具有无尽性,找不到表的边界
 所以传统的归并连接跟哈希连接算法不适用于流式SQL
 
--------------------Flink 流式SQL 提供多种Join
+
 
  
 
@@ -370,50 +423,13 @@ SELECT a.id FROM A a,B b WHERE a.id=b.id;
 堆外内存(off-heap),堆内存(on-heap)
 https://blog.csdn.net/u010722938/article/details/51558315
 
-flink on yarn
-Client提交App到RM上面去运行，然后RM分配第一个container去运行AM，然后由AM去负责资源的监督和管理。
-需要说明的是，Flink的yarn模式更加类似spark on yarn的cluster模式，在cluster模式中，dirver将作为AM中的一个线程去运行，
-在Flink on yarn模式也是会将JobManager启动在container里面，去做个driver类似的task调度和分配，
-YARN AM与Flink JobManager在同一个Container中，这样AM可以知道Flink JobManager的地址，
-从而AM可以申请Container去启动Flink TaskManager。待Flink成功运行在YARN集群上，
-Flink YARN Client就可以提交Flink Job到Flink JobManager，并进行后续的映射、调度和计算处理。
-
-
-批流是怎样统一的?
-Batch和streaming会有两个不同的ExecutionEnvironment,不同的ExecutionEnvironment会将不同的API翻译成不同的JobGgrah,
-JobGraph 之上除了 StreamGraph 还有 OptimizedPlan.OptimizedPlan 是由 Batch API 转换而来的.
-StreamGraph 是由 Stream API 转换而来的,JobGraph 的责任就是统一 Batch 和 Stream 的图.
-
-Flink JobManagerHA ?
-与Storm不同的是，知道Storm在遇到异常的时候是非常简单粗暴的，
-比如说有发生了异常，可能用户没有在代码中进行比较规范的异常处(至少执行一次)的语义，
-比如说一个网络超时的异常对他而言影响可能并没有那么大，
-但是Flink不同的是他对异常的容忍度是非常的苛刻的，那时候就考虑的是比如说会发生节点或者是网络的故障，
-那JobManager单点问题可能就是一个瓶颈，JobManager那个如果挂掉的话，
-那么可能对整个作业的影响就是不可恢复的，所以考虑了做HA
-
-
-
 
 ==flink学习==
 flink人大视频 
 https://www.bilibili.com/video/av42427050/
 
-
-
-
 ===Blink===
 2019.2开源的Blink版本,主要是基于flink 1.5.1
-看看就行 还是用Apache flink 
-
-
-==========钉钉============
-1.先对flink有宏观视野上理解，看阿里大会整理的文档资料，其中也有可运行的demo。
-2.看各个flink 大V的博客，对架构和原理逐步深入理解（可以微信和google搜索关键词）
-3.英文好，最好是看Apache flink官网文档，既全面又权威(先看前面后看官网，国人帮整理，理解速度会快些)
-4.基于以上3方面理解基础上，自己有相当的技术基础及理解能力 + 毅力恒心 + 热爱程度，可以去啃下源代码  基本问题不大(往下又分2种情况 1.有基础曾经研究并扩展过开源代码  2.无基础 无经验  花费时间就要长些，需要毅力  有人指点会快些)
-###从现象到本质再到解决方案  
-比如这个:追踪flink上传的jar放到那个目录 : http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
 
 ===告警===
 Apache Committer 2017.7月 ali 5个   
@@ -441,9 +457,14 @@ val outputStream = dataStream
 第五步:数据分组
 .keyBy(0)
 第六步:指定时间窗口+聚合计算+输出格式
-.timeWindow(Time.seconds(basicProp.getProperty("max.lagged.time").toInt))
-.reduce((v1,v2)=>(v1._1,v1._2,v1._3+v2._3,v1._4+v2._4))
-.map(x=>toJson(x))
+横向汇总: 通过打标签,在累加计算多个不同指标
+	.timeWindow(Time.seconds(basicProp.getProperty("max.lagged.time").toInt))
+	.reduce((v1,v2)=>(v1._1,v1._2,v1._3+v2._3,v1._4+v2._4))  
+	.map(x=>toJson(x))
+纵向汇总: 类似于单词计数和groupBy 
+	.timeWindow(Time.minutes(5))
+	.sum(1)
+	.map(x=>toJson(x))
 第七步:输出
 outputStream.addSink(producer010)
 第八步:执行flink
@@ -487,23 +508,6 @@ stream1.join(stream2)
       out.collect(...) // 捕获到匹配的数据t1和t2，在这里可以进行组装等操作
     })
     .print()
---------------------------------
-
-=============================================背压/反压======================================
-参照:https://yq.aliyun.com/articles/64821
-https://www.cnblogs.com/lanyun0520/p/5676617.html
-
-背压
-一个任务的back pressure警告(high),则意味着该任务产生数据的速度要高于下游Operator消化的速度
-数据沿着job的数据流图向下游流动(如从source到sink),而背压则是沿着相反的方向传播,逆流而上,可以理解为 水流漫上去
-
-Flink 如何处理背压?
-Flink与持久化的source(例如kafka),能够为你提供即时的背压处理.而无需担心数据丢失.
-Flink不需要一个特殊的机制来处理背压.因为Flink中的数据传输相当于已经提供了应对背压的机制.
-因此,Flink所获得的最大吞吐量由其pipeline中最慢的部件决定
-
-
-
 
 ===parallelism  && slot====
 parallelism 并行度 默认1 
@@ -512,11 +516,7 @@ parallelism 并行度 默认1
 优先级:算子设置并行度 > env 设置并行度 > 配置文件默认并行度	
 	eg:如果在代码中设置的是env.setParallelism(5),flink-conf.yaml文件中默认为1(1.4) 发布上flink-cluster 上会使用5个slot 
 
-
 slot:作用,是指taskmanager的并发执行能力,简单理解是将CPU和内存分成一个个逻辑单位,即slot
-
-
-================Flink算子====================
 
 ----------------------------数据流分组-----------------------------
 keyBy 用于指定数据流是否进行分组
@@ -526,7 +526,18 @@ keyBy 用于指定数据流是否进行分组
 在非分组的数据流中,你的原始数据并不会拆分成多个逻辑流并且所有的window逻辑都在一个任务中执行,并发度为1
 
 
-#################################################################################################
+==========怎样学习flink============
+1.先对flink有宏观视野上理解，看阿里大会整理的文档资料，其中也有可运行的demo。
+2.看各个flink 大V的博客，对架构和原理逐步深入理解（可以微信和google搜索关键词）
+3.英文好，最好是看Apache flink官网文档，既全面又权威(先看前面后看官网，国人帮整理，理解速度会快些)
+4.基于以上3方面理解基础上，自己有相当的技术基础及理解能力 + 毅力恒心 + 热爱程度，可以去啃下源代码  基本问题不大(往下又分2种情况 1.有基础曾经研究并扩展过开源代码  2.无基础 无经验  花费时间就要长些，需要毅力  有人指点会快些)
+现象 --> 本质 --> 解决方案 
+比如这个:追踪flink上传的jar放到那个目录 : http://www.54tianzhisheng.cn/2019/03/13/flink-job-jars/
+
+
+
+
+######################################## Flink Window Time WaterMark 基础 ###############################################
 由问题引入  window   time  watermark 
 
 主要包括为什么要有 Window ?
@@ -566,7 +577,7 @@ dataStream :
 对于非KeyedStream，有timeWindowAll、countWindowAll、windowAll操作，其中最主要的是windowAll操作，它的parallelism为1，它需要一个WindowAssigner参数，返回的是AllWindowedStream
 TimeWindowAll  不是并行的 所以slot只能用1 个,滚动窗口
 
-KeyedStream:	对于KeyedStream除了继承了DataStream的window相关操作，它主要用的是timeWindow、countWindow、window操作，其中最主要的是window操作，它也需要一个WindowAssigner参数，返回的是WindowedStream
+KeyedStream: 通过keyBy将DataStream 转换成KeyedStream	对于KeyedStream除了继承了DataStream的window相关操作，它主要用的是timeWindow、countWindow、window操作，其中最主要的是window操作，它也需要一个WindowAssigner参数，返回的是WindowedStream
 
 
 ## Window API使用
@@ -601,7 +612,7 @@ https://www.infoq.cn/article/WCOvi-D68Y8ycCiYZ8pX
 
 flink触发当前窗口计算的前提是下一条数据的时间在当前窗口的结束时间之后
 
-----------------------------------------------------------Time && Watermark----------------------------------------------------
+----------------------------Time && Watermark------------------------------
 前提:Time 和 Watermark适用于时间驱动类的窗口 
 
 分布式环境中Time,事件时间(Event-Time),摄取时间(Ingestion-Time),处理时间(Processing-Time)
@@ -609,7 +620,7 @@ flink触发当前窗口计算的前提是下一条数据的时间在当前窗口
 Event-Time:数据产生的时间
 Ingestion-Time:数据进入到flink的时间
 Processing-Time:窗口开始计算的时间
-### env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime); 
+	### env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime); 
 
 Watermark: 解决乱序的问题
 如何保证基于事件时间的窗口销毁时,flink已经处理完所有数据?
@@ -676,7 +687,7 @@ Flink 现在大部分开发属于实时汇总 :  简单算子+业务函数+水�
 
 source  transformation  sink
 
------------------------------------- 怎样确定Flink集群所需资源 --------------------------------------
+-------------------------- 怎样确定Flink集群所需资源 ---------------
 
 #吞吐量:
 估算预期进入流计算系统每秒的记录数(吞吐量),以及每条记录数的大小
@@ -702,15 +713,6 @@ key的数量和key所需state的大小,都将会影响Flink应用程序所需的
 当你的 Flink 发生故障时,系统会需要额外的资源来做恢复工作以及从 Kafka topic 或其他消息客户端追上最新的数据
 
 
--------------------------------------Flink指定 集群 发布---------------------------------
--yid + 目标applicationId
-
-nohup bin/flink run \
--yid application_1559210378247_2887 \
--p 18 \
---class com.enjoyor.mtdap3.realtime.VehicleTrack \
-/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-vehicletrack-1.0/mtdap3-rtc-vehicletrack-1.0.jar \
->/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-vehicletrack-1.0/log/mtdap3-rtc-vehicletrack.log 2>&1 &
 
 --------------实时计算的趋势---------
 实时任务SQL化
@@ -725,24 +727,6 @@ nohup bin/flink run \
 
 结果表: 数据统计后的结果        dws层
 
---------------   怎样确定集群所需资源? --------------
-#吞吐量:
-估算预期进入流计算系统每秒的记录数(吞吐量),以及每条记录数的大小
-#不同key的数量以及每个key存储的state大小
-key的数量和key所需state的大小,都将会影响Flink应用程序所需的资源.可以通过查看反压状态
-#状态的更新频率和状态后端的访问模式:
-不同的状态后端(RocksDB,java Heap)的访问模式差距很大.RocksDB每次读取和更新会进行序列化
-反序列化以及JNI操作,Java Heap不支持增量checkpoint,会导致状态大的场景每次持久化的数据量很大
-都会影响Flink作业所需的资源
-#网络容量
-网络容量不仅会受flink内部,也会受到Flink跟正在交互的kafka,hdfs等外部服务
-比如启动kafka的replication会增加额外的网络容量
-#磁盘带宽
-如果应用程序依赖 RocksDB Kafka  HDFS
-#机器数量以及可用的CPU和内存
-
-另外需要提供额外的资源来保证:
-当你的 Flink 发生故障时,系统会需要额外的资源来做恢复工作以及从 Kafka topic 或其他消息客户端追上最新的数据
 
 --------------   flink程序优化   --------------
 DataStream性能调优
@@ -809,6 +793,7 @@ D:设计分区方法 (#####)
 	env.setBufferTimeout(timeoutMillis);
 	env.generateSequence(1,10).map(new MyMapper()).setBufferTimeout(timeoutMillis);
 
+
 ------------------    程序优化  --------------------
 南昌 全流量计算优化:早晚高峰,数据延迟
 算子timeWindowAll 不是并行的,执行时是1个slot导致?   业务逻辑计算指标较多?
@@ -818,11 +803,8 @@ D:设计分区方法 (#####)
 	总量 taskmanager 240G + jobmanager 10G   注: 总量需要预留一部分用作恢复  
 2   保存现有的yarn-session 
 	现在增加到12个,会有6个闲置,数据倾斜
-    增加到12slot ,使用重分区 将数据打散 运用好资源
-
-
-
-
+    增加到12slot ,使用重分区(难点) 将数据打散 解决数据倾斜后,仍然会出现反压的现象
+	
 
 
 
@@ -830,5 +812,14 @@ D:设计分区方法 (#####)
 
 
 ------------------------华为大数据平台flink安全模式部署----------------
+kerberos + flink
+3个月证书过期 需要重新生成认证证书  同时替换掉原有的文件,flink-conf.yaml文件需要修改配置
+旧的yarn-session已经连不上,原有任务还能在上面跑 ,需要使用新的证书发布yarn-session 继而发布任务
 
+
+
+
+
+
+  
 

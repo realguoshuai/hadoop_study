@@ -10,14 +10,42 @@
 8:flink怎样解决乱序问题?
 9:流批系统的区别和各自优缺点?
 10:Flink JobManager的HA(高可用)原理分析
-11:flink的 状态
---------------A-----------------
-8:
+11:flink的 状态介绍一下
+12:flink程序常见异常,怎样解决的?
+13:现有开发的程序有什么不足?
+14:flink 事件时间+水印+窗口 关系?什么时候会触发计算?
+15:flink on yarn 原理
+16:批流是怎样统一的?
+17:Flink JobManagerHA ?
+
+
+------------- 疑惑--------
+增加水印时间(数据允许延迟的最大时间 maxLaggedTime) ,缓解计算压力?
+
+水印5->120 算过来了  5->180算不过来
+	AssignerWithPeriodicWatermarks,定时抽取更新
+	使用的是AssignerWithPunctuatedWatermarks,每一次数据局来都会抽取更新,更精确一点,但是频繁的更新wartermark会比较影响性能
+
+说明触发窗口计算的单个slot算子没问题,问题出在前面的打标签(是否外地车,省内外地,省外,外地长期)
+
+
+
+数据被丢弃的问题:
+     给的资源不足时,统计的数值被偏少 比如,1分钟流量 正常早晚高峰3w5+ 白天平常2w7左右
+
+
+
+
+8:flink怎样解决乱序问题?
+使用事件时间+水位线+窗口 详见14
 通过watermark对数据重排序,来保证整体数据流的有序性
-每当我们每接收到一份数据到buffer中时,我们选定其中最新的watermark值,对buffer里数据的时间小于此watermark值的数据在buffer中做一个排序.然后将此排序好的数据发向下游
+每当我们每接收到一份数据到buffer中时,我们选定其中最新的watermark值,对buffer里数据的时间小于此watermark值的数据在buffer中做一个排序.然后将此排序好的数据发向下游,因为是排好序的,所以窗口收到15:00的数据时,就知道不会有之前的数据在进来,所以水印可以作为触发计算的标识.
+参考:https://blog.csdn.net/Androidlushangderen/article/details/85058701
 
 
-9:流系统的一大优势就是低延迟,批处理优势是错误恢复容易
+
+9:流批系统的区别和各自优缺点?
+流系统的一大优势就是低延迟,批处理优势是错误恢复容易
 批处理任务在每次的批处理操作中都会保存住全部的输入数据,如果出现算错的情况,重新执行一次处理过程即可
 而流式计算中连续不断的数据处理,使得错误恢复变得复杂,Flink的错误恢复机制-CheckPoint.可以实现
 
@@ -46,8 +74,9 @@ flink实现异步状态同步方式,实现方式:拷贝原状态的数据,然后
 为了防止每次copy重复的状态数据,flink实现了增量的checkpoint
 
 
-10:Flink的JobManager的HA 跟HDFS的HA相比 不太一样,并不仅仅是主从切换
+10:Flink JobManager的HA(高可用)原理分析
 
+Flink的JobManager的HA 跟HDFS的HA相比 不太一样,并不仅仅是主从切换
 HDFS的HA切换,主要是为了保证数据请求处理的正常服务
 Flink要让所有的失败任务能够快速回复
 即:一个是存储系统的HA实现  一个是计算框架的HA实现
@@ -74,23 +103,62 @@ Flink内部定义2类服务做HA时的领导选举和消息通知:
 而是指任务运行间的数据信息,这些状态数据在容错恢复及checkpoint时将起到很关键作用
 
 State的类型是怎样划分的? State的序列化内容? 
+flink提供状态api 最底层
+
+
+12:12:flink程序常见异常,怎样解决的?
+
+出现最多的问题就是反压,交通业务卡口数据,早晚高峰时产生,下游的处理速度跟不上上游消费kafka的速度
+
+产生的原因:大量的计算指标 13个指标  算不过来  流控 
+		  窗口算子使用的timeWindowAll 非并行算子  只能一个slot
+	反压产生在source,数据最终都会被积压在发生反压上游的算子的本地缓冲区(localbuffer)中
+	每一个taskmanager都有一个本地缓冲池,每一个算子数据进来后都会把数据填充到本地缓冲池中,
+	数据从这个算子出去后会回收这块内存,但是当被反压后,数据发不出去,本地缓冲池就无法释放,导致一直请求缓冲区(requestBuffer).
+解决:调大等待时延120s-->180s  12个slot   60s算一次,窗口被触发的时间延迟了 
+	或者是任务拆分,将流量统计跟外地车拆分开 
+	//TODO  专门写一个流量统计 最低资源跑一下 1slot + 30s+5s延迟
+
+
+13:现有程序的不足
+多个任务在一个yarn-cluster上,没有进行任务隔离,一个taskmanager上可能会有多个task,会发生资源争夺?
+	
+
+14:flink 事件时间+水印+窗口 关系?什么时候会触发计算?
+以在途车辆归属地分析这个功能为例.使用事件时间+水印抽取+时间取余规整 5分钟一次 +滚动窗口5分钟
+9:15分就出9:10-9:15的结果  程序刚执行1分钟,就被触发了
+触发的时间,是取余后的水印时间+最大延时5s
+所以窗口触发的时间并不是程序执行5分钟才算第一次,是按照五分钟划分一个窗口 只要水印中出现窗口结束的那个时间,就会触发窗口计算
+
+顺便解决一个疑惑:
+	程序刚发布时,会出现大量历史过车时间的汇总数据? 比如:2019-9-12 09:43:00发布,出现 大批 2019-09-11 XX:XX:XX  甚至更久数据
+	原因就是,数据质量不高 出现的错误过车时间的日志,这些过车时间 被抽取成水印时间 然后再加上等待的5s 就出发窗口的计算规则就输出了
+	处理:这些数据过滤掉
 
 
 
 
+15:flink on yarn
+Client提交App到RM上面去运行，然后RM分配第一个container去运行AM，然后由AM去负责资源的监督和管理。
+需要说明的是，Flink的yarn模式更加类似spark on yarn的cluster模式，在cluster模式中，dirver将作为AM中的一个线程去运行，
+在Flink on yarn模式也是会将JobManager启动在container里面，去做个driver类似的task调度和分配，
+YARN AM与Flink JobManager在同一个Container中，这样AM可以知道Flink JobManager的地址，
+从而AM可以申请Container去启动Flink TaskManager。待Flink成功运行在YARN集群上，
+Flink YARN Client就可以提交Flink Job到Flink JobManager，并进行后续的映射、调度和计算处理。
 
 
+16:批流是怎样统一的?
+Batch和streaming会有两个不同的ExecutionEnvironment,不同的ExecutionEnvironment会将不同的API翻译成不同的JobGgrah,
+JobGraph 之上除了 StreamGraph 还有 OptimizedPlan.OptimizedPlan 是由 Batch API 转换而来的.
+StreamGraph 是由 Stream API 转换而来的,JobGraph 的责任就是统一 Batch 和 Stream 的图.
 
-
-
-
-
-
-
-
-
-
-
+17:Flink JobManagerHA ?
+与Storm不同的是，知道Storm在遇到异常的时候是非常简单粗暴的，
+比如说有发生了异常，可能用户没有在代码中进行比较规范的异常处(至少执行一次)的语义，
+比如说一个网络超时的异常对他而言影响可能并没有那么大，
+但是Flink不同的是他对异常的容忍度是非常的苛刻的，那时候就考虑的是比如说会发生节点或者是网络的故障，
+那JobManager单点问题可能就是一个瓶颈，JobManager那个如果挂掉的话，
+那么可能对整个作业的影响就是不可恢复的，所以考虑了做HA
 
 
 
