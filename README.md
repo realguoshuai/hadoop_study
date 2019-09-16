@@ -76,4 +76,3 @@
 * 今天用到了jieba分词,需要自定词库+solr来获取警情的空间经纬度坐标(已实现,代码测试去敏后上传)
 * es+kerberos https证书卡着了,先将DSL语法熟悉下上传   
 * 这两天调试spark同步hive到es程序,es是kerberos安全认证的,网上的都是http的方式访问,难受,最终使用jdbc的方式在安全模式的集群下从hive读数据到es ok
-* 开发新功能-在途车辆属地 ok 
