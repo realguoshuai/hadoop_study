@@ -1,0 +1,56 @@
+### 实时Flink资源调试
+yige yarn-session 资源分配: 256G
+现在:  单个slot2G   每个flink manager 10G   12个taskmanager(jvm) 
+nohup bin/yarn-session.sh \
+--queue enjoyor \
+--container 12 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 20480 \
+--slots 10 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+修改1: 单个slot4G  每个flink manager 20G  
+nohup bin/yarn-session.sh \
+--queue enjoyor \
+--container 6 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 40960 \
+--slots 10 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+application_1568190279169_6054 
+修改2: slot: 10-->5 单个8G  每个flink manager 20G  
+nohup bin/yarn-session.sh \
+--queue enjoyor \
+--container 6 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 40960 \
+--slots 5 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+
+修改3: slot: 单个8G  每个flink manager jvm 40G (jvm个数减少,堆增加)   可以满足(全点位流量+重点区域流量)
+nohup bin/yarn-session.sh \
+--queue enjoyorFlink \
+--container 3 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 81920 \
+--slots 10 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+
+修改4: slot: 单个16G  每个flink manager jvm 40G (jvm个数减少,堆增加)   资源问题,需要改为 -p 6 
+nohup bin/yarn-session.sh \
+--queue enjoyor \
+--container 3 \
+--jobManagerMemory 10240 \
+--taskManagerMemory 81920 \
+--slots 5 \
+--ship test/ \
+>/opt/MtdapProgram/mtdap3-flink/flink-cluster/log/yarn-session.log 2>&1 &
+
+数据量大,数据滞后  减少jvm(taskmanager)个数 增加jvm内存 避免io 数据拷贝
