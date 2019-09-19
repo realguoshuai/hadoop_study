@@ -1,0 +1,132 @@
+﻿集群Solr服务出现故障,发现SolrAdmin节点CPU95%
+进入服务器---> top 查看占用CPU 
+找到最大的pid
+ps aux | grep pid
+是这个进程-->
+/opt/huawei/Bigdata/common/runtime1/jdk1.8.0_162//bin/java -Dnop -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -DproxyIp= -DproxyPort=20026 -Dproc_SolrServerAdmin -Djava.net.preferIPv4Stack=true -server -Xms4G -Xmx40G -XX:NewSize=128M -XX:MaxNewSize=128M -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=128M -XX:MaxDirectMemorySize=512M -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000 -DzkHost=/solr -Dbootstrap_conf=false -Dsolr.index.stored.disk=false -Dsolr.solr.home=/srv/BigData/solr/solrserveradmin -Dsolr.directoryFactory=HdfsDirectoryFactory -Dsolr.lock.type=none -Dsolr.hdfs.security.kerberos.enabled=true -Dsolr.hdfs.security.kerberos.keytabfile=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/install/FusionInsight-Solr-6.2.0/keytabs/SolrServerAdmin/solr.keytab -Dsolr.hdfs.security.kerberos.principal=solr/hadoop.hadoop.com@HADOOP.COM -Djava.security.auth.login.config=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/2_38_SolrServerAdmin/etc/jaas.conf -Dzookeeper.authProvider.sasl=org.apache.zookeeper.server.auth.SASLAuthenticationProvider -Djava.security.krb5.conf=/opt/huawei/Bigdata/FusionInsight_BASE_V100R002C80SPC200/2_21_KerberosClient/etc/kdc.conf -Dzookeeper.server.principal=zookeeper/hadoop.hadoop.com -Dzookeeper.request.timeout=120000 -Dzookeeper.client.bind.address= -Dserver.default.realm=HADOOP.COM -Dserver.host.name= -DzkACLProvider=org.apache.solr.common.cloud.CustomSaslZkACLProvider -Dssl.enabled.protocols=TLSv1.1,TLSv1.2 -Dsolr.hdfs.confdir=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/2_38_SolrServerAdmin/etc -Dsolr.hdfs.home=hdfs://hacluster//solr/collections -Dsolr.hdfs.backup.dir=hdfs://hacluster//solr/backup -Dsolr.hdfs.datalocation.enabled=true -Dsolr.ip= -Dhost= -Dsolr.log=/var/log/Bigdata/solr/SolrServerAdmin -Dsolr.port=21100 -Dsolr.sec.port=21101 -Dsolr.admin.port=21102 -Dlog4j.configuration=file:/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/2_38_SolrServerAdmin/etc/log4j.properties -Dsolr.install.home=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/install/FusionInsight-Solr-6.2.0 -Dsolr.role.name=SolrServerAdmin -Dsolr.keystore.file=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/install/FusionInsight-Solr-6.2.0/solr-6.2.0/apache-tomcat-8.5.28/certs/child.keystore -Dsolr.ssl.checkPeerName=false -Djdk.tls.ephemeralDHKeySize=2048 -Dsolr.tm.maxThreads=800 -Dsolr.tm.acceptCount=1000 -Dsolr.tm.connectionTimeout=60000 -Dsolr.mem.used.threshold=95 -Dsolr.mem.used.check.enabled=false -Dsolr.overseer.queue.max.numChildren=1000000 -Dsolr.overseer.queue.clear.num=10000 -Dsolr.cores.recover.delay=30000 -DzkClientTimeout=30000 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:/var/log/Bigdata/solr/SolrServerAdmin/solr-20190918111015_gc.log -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=128K -XX:OnOutOfMemoryError=kill -9 %p -Dbeetle.application.home.path=/opt/huawei/Bigdata/common/runtime1/security/config -Dtolerance.check=false -Dtolerance.count=5 -DautoReplicaFailoverWaitAfterExpiration=120000 -DautoReplicaFailoverWorkLoopDelay=15000 -DautoReplicaFailoverBadNodeExpiration=90000 -DleaderConflictResolveWait=900000 -DleaderVoteWait=10800000 -Dexclude.terms.thread.max.num=600 -Dexclude.terms.thread.num=300 -Dexclude.terms.queue.size=300 -Dexclude.terms.queue.keep.alive=5 -Dexclude.terms.default.batch.size=1 -Dsolr.spnego.strip.port=true -Dsolr.confdir=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/2_38_SolrServerAdmin/etc -Djava.library.path=/opt/huawei/Bigdata/FusionInsight_HD_V100R002C80SPC202/install/FusionInsight-Hadoop-2.7.2/hadoop/lib/native -Dsolrclient.token.enabled=false -DfetchRowsLimit=5000000 -Dsolr.overseer.queue-with-collection.enabled=true -Dsolr.defined.tokenfilter.enabled=true -Dsolr.rep
+
+初步判定是频繁GC导致的CPU负载高
+
+查看日志文件 /var/log/Bigdata/solr/SolrServerAdmin
+### solr-ncjj01.log:
+2019-09-18 14:19:59,701 | INFO  | https-jsse-nio-21101-exec-15 | [kkrecords_shard5_replica1]  webapp=/solr path=/select params={df=text&distrib=false&_stateVer_=kkrecords:2275&preferLocalShards=false&shards.purpose=64&start=0&fq=license_number:(赣AMW110+or+赣A755T1+or+赣E8L006+or+赣A85T85+or+赣AQS772+or+赣A3108F+or+赣A75950+or+赣A3Q758+or+赣AN7007+or+赣A201T0+or+赣A9887X+or+赣ANU023+or+赣A20X00+or+赣AG6570+or+赣AHB178+or+赣A9710K+or+粤S9Z3Z2+or+赣AEF568+or+赣A59K60+or+赣A19157+or+赣FB8297+or+赣A79S21+or+赣ACQ800+or+赣E831F1+or+赣FJ8986+or+赣AEN803+or+赣A80K09+or+赣A5162M+or+赣AJ6666+or+赣AUX587+or+赣AEA846+or+赣A56P20+or+赣A57A62+or+赣A9T921+or+赣A5619M+or+赣AFM699+or+赣AYL689+or+赣A368Y9+or+赣ASJ783+or+赣G3R973+or+赣APZ552+or+赣A58F13+or+赣AL7999+or+赣A3Z550+or+赣A9Q778+or+浙J3550L+or+赣AMF075)&fq=point_id:(360113102801+or+360113102301+or+360108001001+or+360113102802+or+360108001002+or+360113100201+or+360113103001+or+360113102302+or+360113004001+or+360113102902+or+360113103002+or+360113100202+or+360113101704+or+360113101504+or+360112100502+or+360113102803+or+360113101803+or+360113101503+or+360113102804+or+360113101701+or+360111000804+or+360113101703)&shard.url=https://solr/kkrecords_shard5_replica1/&rows=1000&version=2&q=passing_time:[2019-09-14T15:22:13Z+TO+2019-09-14T15:37:19Z]&shards.tolerant=true&NOW=1568787592397&ids=5198919414033965,5198950455975529,5198869781558146,5198937882918156,5198942455071988&isShard=true&wt=javabin} status=0 QTime=18 | org.apache.solr.core.SolrCore.execute(SolrCore.java:2253)
+
+
+
+
+### solr-20190918153257_gc.log.0.current
+2019-09-18T14:22:02.779+0800: 1178.762: [GC (Allocation Failure) 2019-09-18T14:22:02.779+0800: 1178.763: [ParNew: 113333K->13010K(118016K), 0.1394274 secs] 2859312K->2760269K(4378764K), 0.1406683 secs] [Times: user=0.16 sys=0.00, real=0.14 secs] 
+2019-09-18T14:22:03.228+0800: 1179.212: [GC (Allocation Failure) 2019-09-18T14:22:03.229+0800: 1179.212: [ParNew: 117970K->8139K(118016K), 0.0964265 secs] 2865229K->2770868K(4378764K), 0.1213184 secs] [Times: user=0.14 sys=0.00, real=0.12 secs] 
+2019-09-18T14:22:03.662+0800: 1179.646: [GC (Allocation Failure) 2019-09-18T14:22:03.663+0800: 1179.646: [ParNew: 113099K->7781K(118016K), 0.0687282 secs] 2875828K->2770510K(4378764K), 0.0701090 secs] [Times: user=0.09 sys=0.00, real=0.07 secs] 
+2019-09-18T14:22:03.976+0800: 1179.959: [GC (Allocation Failure) 2019-09-18T14:22:03.976+0800: 1179.960: [ParNew: 112741K->13056K(118016K), 0.0723770 secs] 2875470K->2783097K(4378764K), 0.0735154 secs] [Times: user=0.14 sys=0.00, real=0.08 secs] 
+每秒都在多次打印日志
+
+#日志详解参考:https://blog.csdn.net/zc19921215/article/details/83029952
+
+GC (Allocation Failure): 没有Full修饰，表明这是一次Minor GC
+	Allocation Failure,表明本次引起GC的原因是因为在年轻代中没有足够的空间能够存储新的数据了
+
+Solr配置:
+-Xms4G -Xmx40G -XX:NewSize=128M -XX:MaxNewSize=128M -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=128M -XX:MaxDirectMemorySize=512M -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+-XX:NewSize=128M  新生代
+
+-XX:MetaspaceSize=256m的含义到底是什么呢？其实，这个JVM参数是指Metaspace扩容时触发FullGC的初始化阈值，也是最小的阈值
+
+
+
+-Xms4G -Xmx40G -XX:NewSize=128M -XX:MaxNewSize=128M -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=128M -XX:MaxDirectMemorySize=512M -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+修改1:
+-Xms4G -Xmx40G -XX:NewSize=4G -XX:MaxNewSize=8G -XX:MetaspaceSize=2G -XX:MaxMetaspaceSize=2G -XX:MaxDirectMemorySize=512M -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+运行正常 
+
+重启:
+GC日志:
+2019-09-18T15:15:37.434+0800: 805.497: [CMS-concurrent-mark-start]
+2019-09-18T15:15:37.585+0800: 805.648: [CMS-concurrent-mark: 0.151/0.151 secs] [Times: user=0.56 sys=0.02, real=0.15 secs] 
+2019-09-18T15:15:37.585+0800: 805.648: [CMS-concurrent-preclean-start]
+2019-09-18T15:15:37.601+0800: 805.664: [CMS-concurrent-preclean: 0.015/0.016 secs] [Times: user=0.04 sys=0.00, real=0.02 secs] 
+2019-09-18T15:15:37.601+0800: 805.664: [CMS-concurrent-abortable-preclean-start]
+ CMS: abort preclean due to time 2019-09-18T15:15:42.698+0800: 810.761: [CMS-concurrent-abortable-preclean: 4.922/5.097 secs] [Times: user=10.49 sys=0.69, real=5.10 secs] 
+2019-09-18T15:15:42.702+0800: 810.765: [GC (CMS Final Remark) [YG occupancy: 1393409 K (3774848 K)]2019-09-18T15:15:42.702+0800: 810.765: [Rescan (parallel) , 0.0990144 secs]2019-09-18T15:15:42.801+0800: 810.864: [weak refs processing, 0.0022771 secs]2019-09-18T15:15:42.803+0800: 810.866: [class unloading, 0.0308944 secs]2019-09-18T15:15:42.834+0800: 810.897: [scrub symbol table, 0.0127273 secs]2019-09-18T15:15:42.847+0800: 810.910: [scrub string table, 0.0016862 secs][1 CMS-remark: 2809484K(4002792K)] 4202893K(7777640K), 0.1470750 secs] [Times: user=0.78 sys=0.00, real=0.15 secs] 
+2019-09-18T15:15:42.849+0800: 810.912: [CMS-concurrent-sweep-start]
+2019-09-18T15:15:42.923+0800: 810.986: [CMS-concurrent-sweep: 0.074/0.074 secs] [Times: user=0.17 sys=0.02, real=0.07 secs] 
+2019-09-18T15:15:42.923+0800: 810.986: [CMS-concurrent-reset-start]
+2019-09-18T15:15:43.159+0800: 811.222: [CMS-concurrent-reset: 0.235/0.235 secs] [Times: user=0.50 sys=0.06, real=0.24 secs] 
+2019-09-18T15:15:53.564+0800: 821.627: [GC (Allocation Failure) 2019-09-18T15:15:53.565+0800: 821.628: [ParNew: 3566227K->386880K(3774848K), 0.1601447 secs] 5873232K->2693885K(7777640K), 0.1609629 secs] [Times: user=0.65 sys=0.00, real=0.16 secs] 
+2019-09-18T15:16:16.563+0800: 844.626: [GC (Allocation Failure) 2019-09-18T15:16:16.564+0800: 844.627: [ParNew: 3742336K->294032K(3774848K), 0.2187502 secs] 6049341K->2784249K(7777640K), 0.2195851 secs] [Times: user=0.69 sys=0.00, real=0.22 secs] 
+2019-09-18T15:16:35.776+0800: 863.839: [GC (Allocation Failure) 2019-09-18T15:16:35.777+0800: 863.840: [ParNew: 3649488K->203673K(3774848K), 0.1484458 secs] 6139705K->2731023K(7777640K), 0.1493388 secs] [Times: user=0.51 sys=0.00, real=0.25 secs] 
+2019-09-18T15:16:53.673+0800: 881.736: [GC (Allocation Failure) 2019-09-18T15:16:53.674+0800: 881.737: [ParNew: 3559129K->383128K(3774848K), 0.1819673 secs] 6086479K->2910477K(7777640K), 0.1828230 secs] [Times: user=0.53 sys=0.00, real=0.18 secs] 
+2019-09-18T15:17:12.310+0800: 900.373: [GC (Allocation Failure) 2019-09-18T15:17:12.311+0800: 900.374: [ParNew: 3738584K->213210K(3774848K), 0.2936497 secs] 6265933K->2751371K(7777640K), 0.2952162 secs] [Times: user=0.29 sys=0.00, real=0.29 secs] 
+
+主节点 GC频率降低
+
+查看100% 的节点9   SolrServer1->4 都有
+/var/log/Bigdata/solr/SolrServer1
+GC频率降低
+
+
+修改2: 
+主节点:
+-Xms20G -Xmx40G -XX:NewSize=20G -XX:MaxNewSize=20G -XX:MetaspaceSize=20G -XX:MaxMetaspaceSize=20G -XX:MaxDirectMemorySize=4G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+数据节点:
+
+-Xms10G -Xmx40G -XX:NewSize=20G -XX:MaxNewSize=20G -XX:MetaspaceSize=10G -XX:MaxMetaspaceSize=10G -XX:MaxDirectMemorySize=4G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+查询变快,GC频率变低,CPU仍红 
+
+修改3:
+
+主节点:
+-Xms40G -Xmx80G -XX:NewSize=40G -XX:MaxNewSize=40G -XX:MetaspaceSize=40G -XX:MaxMetaspaceSize=40G -XX:MaxDirectMemorySize=20G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+数据节点:
+
+-Xms20G -Xmx40G -XX:NewSize=40G -XX:MaxNewSize=40G -XX:MetaspaceSize=40G -XX:MaxMetaspaceSize=40G -XX:MaxDirectMemorySize=20G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+
+GC日志:
+2019-09-18T16:51:47.007+0800: 1526.200: [CMS-concurrent-mark-start]
+2019-09-18T16:51:47.100+0800: 1526.293: [CMS-concurrent-mark: 0.088/0.093 secs] [Times: user=0.38 sys=0.01, real=0.09 secs] 
+2019-09-18T16:51:47.100+0800: 1526.293: [CMS-concurrent-preclean-start]
+2019-09-18T16:51:47.113+0800: 1526.307: [CMS-concurrent-preclean: 0.013/0.013 secs] [Times: user=0.04 sys=0.00, real=0.02 secs] 
+2019-09-18T16:51:47.113+0800: 1526.307: [CMS-concurrent-abortable-preclean-start]
+ CMS: abort preclean due to time 2019-09-18T16:51:52.177+0800: 1531.371: [CMS-concurrent-abortable-preclean: 5.063/5.064 secs] [Times: user=10.48 sys=0.53, real=5.06 secs] 
+2019-09-18T16:51:52.180+0800: 1531.373: [GC (CMS Final Remark) [YG occupancy: 28451988 K (37748736 K)]2019-09-18T16:51:52.180+0800: 1531.373: [Rescan (parallel) , 3.2591089 secs]2019-09-18T16:51:55.439+0800: 1534.633: [weak refs processing, 0.0000616 secs]2019-09-18T16:51:55.439+0800: 1534.633: [class unloading, 0.0368655 secs]2019-09-18T16:51:55.476+0800: 1534.669: [scrub symbol table, 0.0174486 secs]2019-09-18T16:51:55.494+0800: 1534.687: [scrub string table, 0.0024170 secs][1 CMS-remark: 1077361K(1795732K)] 29529350K(39544468K), 3.3183775 secs] [Times: user=16.87 sys=0.00, real=3.32 secs]
+
+
+GC频率变低,时间变长
+主节点CPU降低明显   6 9节点仍高 其他的下降明显   查询变慢,写入滞后
+
+修改4: 参数调小
+
+主节点:
+
+-Xms20G -Xmx40G -XX:NewSize=10G -XX:MaxNewSize=20G -XX:MetaspaceSize=20G -XX:MaxMetaspaceSize=10G -XX:MaxDirectMemorySize=10G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+数据节点:
+
+-Xms20G -Xmx40G -XX:NewSize=10G -XX:MaxNewSize=20G -XX:MetaspaceSize=20G -XX:MaxMetaspaceSize=10G -XX:MaxDirectMemorySize=10G -DIgnoreReplayReqDetect -XX:+UseConcMarkSweepGC -XX:+CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=65 -Dsun.rmi.dgc.server.gcInterval=600000 -Dsun.rmi.dgc.client.gcInterval=600000 -XX:-OmitStackTraceInFastThrow -Djute.maxbuffer=0x400000
+
+
+GC日志:
+2019-09-18T17:31:20.672+0800: 888.027: [GC (Allocation Failure) 2019-09-18T17:31:20.673+0800: 888.027: [ParNew: 8801104K->531202K(9437184K), 0.2553769 secs] 12887071K->4617169K(19922944K), 0.2564151 secs] [Times: user=1.04 sys=0.00, real=0.26 secs] 
+2019-09-18T17:31:48.592+0800: 915.946: [GC (Allocation Failure) 2019-09-18T17:31:48.592+0800: 915.946: [ParNew: 8912252K->776888K(9437184K), 0.4159831 secs] 12998219K->4862855K(19922944K), 0.4170481 secs] [Times: user=1.25 sys=0.01, real=0.42 secs] 
+2019-09-18T17:32:13.943+0800: 941.297: [GC (Allocation Failure) 2019-09-18T17:32:13.944+0800: 941.298: [ParNew: 9165496K->561114K(9437184K), 0.2929081 secs] 13251463K->4651067K(19922944K), 0.2939892 secs] [Times: user=0.72 sys=0.02, real=0.29 secs] 
+2019-09-18T17:32:38.360+0800: 965.715: [GC (Allocation Failure) 2019-09-18T17:32:38.361+0800: 965.715: [ParNew: 8949722K->624189K(9437184K), 0.2985258 secs] 13039675K->4716191K(19922944K), 0.2996884 secs] [Times: user=0.92 sys=0.00, real=0.30 secs] 
+
+查询比上一个快一点  入库暂时没有问题;
+
+
+
+
+//TODO 新的优化方式
+
+另外两种方式 
+1:修改jvm使用的回收器 现在用的复制算法,回收期间其他线程暂停等待
+2:在现有基础上调参数
+
+
