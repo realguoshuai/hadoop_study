@@ -20,6 +20,13 @@
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  scala 工作中flink/spark代码一般都是使用 Scala 实现 优先学!  
+## Spark
+*  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
+*  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
+#### SparkSQL
+*  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
+#### Spark Structured Streaming
+*  后台我已经使用flink替代掉
 ## Flink
 *  [总结文档](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
@@ -30,13 +37,6 @@
 *  [Flink电商Demo-用户行为实时分析](https://github.com/realguoshuai/UserBehaviorAnalysis)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会将自己的翻译的文档和bug的解决方式不定期上传到Flink的对应目录下
 *  Flink开发满半年了 从无到有 现在日常使用flink进行简单的实时ETL和业务实时计算开发ok 不足:主要是写业务函数+简单算子,深点的东西还是没应用过(比如cep) 才刚开始 
-## Spark
-*  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
-*  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-#### SparkSQL
-*  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
-#### Spark Structured Streaming
-*  后台我已经使用flink替代掉
 ### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
 *  [phoenix 自定义UDFs函数](https://github.com/realguoshuai/hadoop_study/tree/master/HBase/Phoenix%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0UDF)
@@ -62,13 +62,15 @@
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 *  [SpringBoot实现ES服务化,提供rest接口]()
 ## MongoDB
+## Kylin
 ## kerberos
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
-*  这个真恶心 人机/机机 
+*  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战 
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
 ### springboot 
-*  [示例模板]()
-*  用空还是要学一下 最近做了个springboot实现solr rest服务 套的公司应用层模板
+*  [示例模板](https://github.com/realguoshuai/hadoop_study/tree/master/SpringBoot/HelloWorld%E6%A8%A1%E6%9D%BF/spring-boot-hello)
+*  大数据开发,用能力的还是要学一下,数据服务化不求人(个人感觉,如果不懂代码,把这个交给应用层开发,性能没有优化,用户体验是真的差) 
+*  已经实现了solr和es对上层提供的rest接口
 #### 持续更新...
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
 * 今年计划重心是在实时计算上Flink,下半年的规划 : sparksql或flinksql  flinksql推荐使用1.7.0+  
@@ -80,4 +82,4 @@
  跑了两天 离线程序白天还在跑导致CPU负载很高 实时计算程序受到影响  
  * 优化实时计算代码(代码开发很简单,数据量一上来就算不过来) 原因:内存隔离 CPU共享  50亿+solr 查询导致集群CPU负载高
  * solr分库后 高CPU的现象解决  
- * 最近任务 开始 es 服务化  替代现有的solr
+ * 最近任务 开始 es 服务化  替代现有的solr 一天搞定
