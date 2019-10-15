@@ -6,7 +6,7 @@
 4.你在使用中怎样使用flink的？
 5.源码是否已经阅读？
 6.flink中其中一个节点宕机之后，怎样恢复的？？
-7.flink中流和批是怎样统一的？改动量是否很大？？
+7.flink 安全认证
 8:flink怎样解决乱序问题?
 9:流批系统的区别和各自优缺点?
 10:Flink JobManager的HA(高可用)原理分析
@@ -38,7 +38,7 @@
 	另一个原因是:采集设备获取的异常数据(过车时间提前几分钟)  这种数据会提前触发窗口计算,
 		后面正常时间的数据还没进来,窗口已经闭合了
 
-		
+
 
 
 1.flink是怎样保证端到端exactly-once(精确一次)?
@@ -102,6 +102,39 @@ kafka --> flink --> hbase(phoenix)  切换到   kafka --> flink --> kafka-->hbas
   原因:通过Kafka对数据落盘进行缓冲,减少直接写存储可能带来的阻塞,让流计算程序更稳定,降低背压的产生概率
 
 
+7:flink安全认证
+
+使用的kerberos+truststore
+Flink证书过期  重新执行下 
+	查看证书过期时间 可以通过/opt/huawei/hadoopclient/Flink/flink/test 查看 flink.keystore && flink.truststore
+	这两个文件生成的时间(有效期3个月)
+------------------------------------flink证书问题过期-------------------------------
+如何生成truststore:  生成在conf下
+	进入flink客户端的bin目录下
+	sh generate_keystore.sh XXXXXX
+	出现几个警告,然后提示:generate keystore/truststore success. 
+
+#生成到/opt/huawei/hadoopclient/Flink/flink/conf目录下,同时flink-conf.yaml文件会自动填充上对应参数
+	将这两个文件添加到/opt/huawei/hadoopclient/Flink/flink/test中
+
+下载kerberos秘钥 放到服务器,在flink-conf.yaml 文件中把路径添加上 用户加上
+security.kerberos.login.keytab: /opt/MtdapProgram/keytab_enjoyor/user.keytab
+security.kerberos.login.principal: enjoyor
+
+注意:文件需要分配权限 
+[root@host-mn02 keytab_enjoyor]# chmod  777 krb5.conf 
+[root@host-mn02 keytab_enjoyor]# chmod  777 user.keytab 
+
+修改flink-conf.yaml配置文件中  指定认证文件:
+	security.ssl.truststore: test/flink.truststore
+	security.kerberos.login.keytab: /opt/MtdapProgram/keytab_enjoyor/user.keytab
+	security.kerberos.login.principal: enjoyor
+	security.ssl.key-password: XXXXXX
+	security.ssl.keystore-password: XXXXXX
+	security.ssl.keystore: test/flink.keystore
+
+  
+  
 
 8:flink怎样解决乱序问题?
 
@@ -174,7 +207,7 @@ State的类型是怎样划分的? State的序列化内容?
 flink提供状态api 最底层
 
 
-12:12:flink程序常见异常,怎样解决的?
+12:flink程序常见异常,怎样解决的?
 
 出现最多的问题就是反压,交通业务卡口数据,早晚高峰时产生,下游的处理速度跟不上上游消费kafka的速度
 
@@ -202,18 +235,22 @@ flink提供状态api 最底层
 
 13:现有程序的不足
 多个任务在一个yarn-cluster上,没有进行任务隔离,一个taskmanager上可能会有多个task,会发生资源争夺
+这种情况一般会在CPU负载高的情况下产生
 	
 
 14:flink 事件时间+水印+窗口 关系?什么时候会触发计算?
+
 以在途车辆归属地分析这个功能为例.使用事件时间+水印抽取+时间取余规整 5分钟一次 +滚动窗口5分钟
-9:15分就出9:10-9:15的结果  程序刚执行1分钟,就被触发了
+9:15分就出9:10-9:15的结果  程序刚执行1分钟,就被触发输出结果了 可以得出:设置5分钟计算窗口 并不是程序运行5分钟后第一批数据才会输出
 触发的时间,是取余后的水印时间+最大延时5s
 所以窗口触发的时间并不是程序执行5分钟才算第一次,是按照五分钟划分一个窗口 只要水印中出现窗口结束的那个时间,就会触发窗口计算
 	中间会对数据进行排序! (数据是存放在堆内存中的) 
+	一批数据进来 进到已经划分好的窗口中 进行排序 当期间出现窗口结束时间的那条数据,窗口闭合 后续数据被抛弃 触发计算 输出
 
 顺便解决一个疑惑:
 	程序刚发布时,会出现大量历史过车时间的汇总数据? 比如:2019-9-12 09:43:00发布,出现 大批 2019-09-11 XX:XX:XX  甚至更久数据
-	原因就是,数据质量不高 出现的错误过车时间的日志,这些过车时间 被抽取成水印时间 然后再加上等待的5s 就触发窗口的计算规则就输出了
+	原因就是,数据质量不高 出现的错误过车时间的日志,这些过车时间 被抽取成水印时间 然后再加上等待的5s 后续数据已经到达,
+	触发窗口的计算规则就输出了
 	处理:这些数据过滤掉
 
 
@@ -270,6 +307,9 @@ Lambda 架构用定期运行的批处理作业来实现应用程序的持续性�
 	
 	
 19:集群CPU负载高 会影响Flink 及Solr查询 
+ 产生原因 solr单表数据量太大(50亿/65字段/25索引字段) 并发查询时,垃圾回收不及时
+ 影响: solr查询慢,flink 任务进行CPU争夺 数据滞后
+ 解决方式: 数据分表 分为实时表和历史表 实时表保持在20亿左右,数据定期删除
 
 20:Chandy-Lamport算法
 
