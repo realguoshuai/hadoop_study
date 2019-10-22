@@ -18,6 +18,7 @@ Flink具备7X24小时高可用的SOA(面向服务架构),原因是在实现上 F
 Checkpoint 是 Flink 实现容错机制的核心,它周期性的记录计算过程中 Operator 的状态,并生成快照持久化存储
 当 Flink 作业发生故障崩溃时,可以有选择的从 Checkpoint 中恢复,保证了计算的一致性
 
+##Flink 基石##
 state checkpoint time window 
 
 
@@ -27,7 +28,7 @@ state checkpoint time window
 
 实时ETL&数据流的目的是实时的把数据从A点投递到B点.
 中间可能会加上一些数据清洗和集成的工作,比如实时构建搜索系统的索引,实时数仓中的ETL过程等
-eg:尾号限行(对违反限行车辆进行初步筛选)   车辆轨迹(将一辆车一天轨迹拼接成一条,时间 点位 过车间隔)
+eg:尾号限行(对违反限行车辆进行初步筛选, 再进行汇总)   车辆轨迹(将一辆车一天轨迹拼接成一条,时间 点位 过车间隔)
 
 
 # 实时数据分析(实时指标汇总)
@@ -58,12 +59,14 @@ Flink应用场景;
 	排行类的数据现在是在查询层phoenix做的
     没有热点数据top10的功能 
 	做的是基础数据,5分钟算一次,接口拿去做趋势图
- 改进:在状态中进行排序输出 
-	
-	
-	
-	
-	
+改进:在状态中进行排序输出   ListState
+eg: ...
+	.timeWindow(Time.minutes(1), Time.seconds(5))
+	.aggregate(new CountAgg(), new WinResultFunction())
+	.keyBy("windowEnd")
+	.process(new TopNHotItems(3)) 
+
+
 ---- Flink Application Flink应用开发 相关概念 ----
 
 Stream 流
@@ -84,10 +87,11 @@ Time   时间
 Flink的无限数据流是一个持续的过程,时间是我们判断业务状态是否滞后,数据处理是否及时的依据
 
 
-Window: 窗口
+Window  窗口
 数据流是无限的,无界限. 但是可以通过一个有界的范围来处理无界的数据流.
 滚动窗口:每个界限计算结果互不影响(不重合) 比如几分钟统计一次
 滑动窗口:每个计算窗口统计数据是有重复的  每30s统计过去一分钟的过车数量
+简写: .timeWindow(Time.minutes(1), Time.seconds(5)) //一个参数是滚动,两个是滑动+滑动频率
 
 
 
@@ -119,13 +123,14 @@ join:双流转换成单流
 -----------   水印   -----------
 
 水位线是衡量Event Time进展的机制,属于数据本身的隐藏属性
-基于事件时间的数据本身除了事件发生时的时间戳A,还包含一个水位线时间戳B
+即 基于事件时间的数据本身除了事件发生时的时间戳A,还包含一个水位线时间戳B
 ,这条水位线用来表示在B时间戳之前的数据都已经到达!!
+
 作用:水印是为了解决乱序问题的,解决乱序问题通常是水印+窗口来实现
 watermark如何分配:
 	通常是在接收到source数据后,应该立刻生成水印 或者数据经过简单的map和filter之后 立刻生成watermark
 两种生成方式:
-	1:AssignerWithPeriodicWatermarks,定时抽取更新(允许定义一个最大延迟,比较常用)
+	1:AssignerWithPeriodicWatermarks,定时抽取更新(允许定义一个最大延迟,比较常用 在用)
 	2:AssignerWithPunctuatedWatermarks,每一次数据进来都会抽取timetamp并生成watermar,
 	    AssignerWithPunctuatedWatermarks更精确,但是频繁的更新wartermark会比较影响性能
 注:所以不要经常生成时间戳和水印,这样会加大系统的计算负担
