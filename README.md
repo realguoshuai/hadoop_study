@@ -32,6 +32,7 @@
 *  [不搭建环境,socket代码模拟kafka数据源 开发flink](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/flink%2Bsocket%E5%AE%9E%E7%8E%B0wordcount/)
 *  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E5%AE%9E%E4%BE%8B/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
 *  [Flink电商Demo-用户行为实时分析](https://github.com/realguoshuai/UserBehaviorAnalysis)
+*  [Flink接入socket实时数据源实现热门商品topN写入es](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会将自己的翻译的文档和bug的解决方式不定期上传到Flink的对应目录下
 *  Flink开发满半年了 从无到有 现在日常使用flink进行简单的实时ETL和业务实时计算开发ok 不足:主要是写业务函数+简单算子,深点的东西还是没应用过(比如cep) 才刚开始 
 ### HBase(phoenix)
