@@ -1,3 +1,4 @@
 flink+kerberos安全验证
 kafka-->flink-->kafka
-依赖redis配置限行时段和限行号码  实时计算违反尾号限行车辆
+依赖redis配置限行时段和限行号码  
+实时ETL --> 实时计算违反尾号限行车辆
