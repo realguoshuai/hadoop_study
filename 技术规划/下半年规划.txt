@@ -12,7 +12,7 @@
 
 到年后规划,多看原理 多练 多说
 1 流 flink,kafka,redis 熟练  侧重于原理
-2 搜索 solr熟练 es熟悉       环境搭建 ok ,入库,rest查询
+2 搜索 solr熟练 es熟悉       环境搭建 ok ,es入库/rest数据服务化  ok
 3 批 sql,spark熟悉
 4 其他 调度,新组件了解 
 
@@ -20,7 +20,7 @@
 -------------------------------   flink   -------------------------------
 flink cep  demo起码能跑起来      ok
 违法安全驾驶行为 (可以重做,使用flink实时ETL)     
-flink sql  demo起码能跑起来   
+flink sql  demo起码能跑起来   ok  
 连接器封装 mysql  es  hive 
 flink程序优化
 flink state管理 
