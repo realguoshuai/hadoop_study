@@ -118,7 +118,7 @@ class TableAPIOverviewITCase {
     }
 
 
-    def getEventTimeTables():  (Table, Table, Table, Table) = {
+    def getEventTimeTables(): (Table, Table, Table, Table) = {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
         // 将item_tab, pageAccess_tab 注册到catalog
         val item =
@@ -164,27 +164,54 @@ class TableAPIOverviewITCase {
     def testProc(): Unit = {
         val (customer, order) = getProcTimeTables()
         //TODO  使用Table  API 实现下列功能
-        /*从customer_tab 选择用户姓名,并用内置的CONCAT函数拼接用户信息 */
-        //val result = customer.select('c_name,concat_ws('c_name," come ",'c_desc))
-        /*在订单表查询 所有的客户id , 需要去重*/
-        //val result = order.groupBy('c_id).select('c_id)
-        /*在customer_tab查询客户id为c_001和c_003的客户信息*/
-       /* val result = customer.where("c_id='c_001' || c_id = 'c_003'")
-                            .select('c_id,'c_name,'c_desc)*/
-                            //.select("c_id","c_name","c_desc") // 使用双引号 会原样输出
-        //TODO in/not in 在Table API 中对应 intersect 和 minus
-        val distinct_cids=order.groupBy('c_id)
-          .select('c_id as 'o_c_id)
 
-        //Stream 模式下可以使用双流Join 实现 in
+        //SELECT 从customer_tab     选择用户姓名,并用内置的CONCAT函数拼接用户信息
+        /*val result = customer
+                        .select('c_name,concat_ws('c_name," come ",'c_desc))*/
+        //DISTINCT 使用分组+查询实现   在订单表查询 所有的客户id , 需要去重
+        /*val result = order.groupBy('c_id).select('c_id)*/
+        //WHERE   在customer_tab查询客户id为c_001和c_003的客户信息
+        /*val result = customer.where("c_id='c_001' || c_id = 'c_003'")
+                            .select('c_id,'c_name,'c_desc)*/
+        //.select("c_id","c_name","c_desc") // 使用双引号 会原样输出
+        //IN/NOT IN 在Table API 中对应 intersect 和 minus
+        /*val distinct_cids=order.groupBy('c_id)
+          .select('c_id as 'o_c_id)*/
+
+        //IN Stream 模式下可以使用双流Join实现
         /*val result = customer
           .join(distinct_cids,'c_id === 'o_c_id)
           .select('c_id,'c_name,'c_desc)*/
-        //使用双流关联实现 not in
-        val result = customer
+        //NOT IN 使用双流Join实现
+        /*val result = customer
           .leftOuterJoin(distinct_cids,'c_id === 'o_c_id)
           .where('o_c_id isNull)
-          .select('c_id,'c_name,'c_desc)
+          .select('c_id,'c_name,'c_desc)*/
+
+        //groupBy   将order_tab信息按c_id分组统计订单数量
+        /*val result = order.groupBy('c_id).select('c_id,'o_id.count)*/
+        //按时间进行分组，查询每分钟的订单数量
+        /*val result = order.select('o_id, 'c_id, 'o_time.substring(1, 16) as 'o_time_min)
+          .groupBy("o_time_min")
+          .select('o_time_min, 'o_id.count)*/
+
+        //UNION ALL 将两个表合并起来,要求两个表的字段完全一致(字段类型 字段顺序)   不进行去重
+        /*val result = customer.unionAll(customer)*/
+
+        //UNION  将两个流给合并起来 对数据去重 1.7.2不支持
+        /*val result = customer.union(customer)*/
+        //JOIN 用于把来自两个表的行联合起来形成一个宽表
+        //INNER JOIN 只选择满足ON条件的记录
+        /*val result = customer
+            .join(order.select('o_id,'c_id as 'o_c_id,'o_time,'o_desc)
+                    ,'c_id==='o_c_id)*/
+        //LEFT JOIN  区别是当右表没有与左边相JOIN的数据时候
+                    //右边对应的字段补NULL输出
+        /*SELECT ColA, ColB, T2.ColC, ColE FROM TI LEFT JOIN T2 ON T1.ColC = T2.ColC ;*/
+        val result = customer.leftOuterJoin(order.select(
+                        'o_id, 'c_id as 'o_c_id, 'o_time, 'o_desc
+                    ),'c_id === 'o_c_id)
+
 
         //打印输出
         procTimePrint(result)
@@ -197,6 +224,7 @@ class TableAPIOverviewITCase {
         procTimePrint(result)
     }
 */
+
 }
 
 // 自定义Sink
