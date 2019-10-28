@@ -1,0 +1,140 @@
+---------------------------ES使用url测试------------------------
+# _cat:查询集群状态 #
+查看 es当前index
+http://192.168.94.41:9200/_cat/indices?v
+
+# _search #
+返回所有数据 /type/index/_search 
+http://192.168.94.41:9200/kkrecords/kkrecords/_search?_source=false?pretty
+
+# _source 返回指定字段 #
+
+查询 车辆 
+http://192.168.94.41:9200/kkrecords/_search?pretty&q=license_number:赣GT0502
+
+
+多条件查询
+http://192.168.94.41:9200/kkrecords/_search?pretty&q=license_number:%E8%B5%A3GT0502&license_type:VEHPLATETYPE02  不支持
+
+## 统计 ##
+http://192.168.94.41:9200/kkrecords/_cat/count  不支持
+
+结论:跟solr不同,上面的url查询不如solr,es支持很差
+
+---------------------------ES使用curl查询------------------------
+
+curl "http://192.168.94.41:9200/kkrecords/_search" -d "{"query":{"and":[{"match":{"license_number":赣GT0502}},{"match":{"license_type":VEHPLATETYPE02}}]}}"
+
+$ curl 'localhost:9200/accounts/person/_search'  -d '{"query" : { "match" : { "desc" : "管理" }},"from": 1,size": 1}'
+
+curl -H "Content-Type: application/json"  -XGET 'http://192.168.94.41:9200/kkrecords/_search'  -d '{"query" : { "match" : { "desc" : "passing_time" }},"from": 1,size": 1}'
+
+
+这些{}嵌套是es的DSL语法
+
+##################    DSL 语法    #################
+
+terms:多term过滤器 
+{
+	"terms":{
+		"speed":[12,13]
+	}
+}
+
+
+查询 时间范围 +  多条件过滤  + 字段排序
+GET /kkrecords/_search
+
+{
+  "from": 0,
+  "size": 10,
+  "timeout": "60s",
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "passing_time": {
+              "from": "2019-08-23T00:00:00Z",
+              "to": "2019-08-24T23:59:59Z",
+              "include_lower": true,
+              "include_upper": true,
+              "boost": 1
+            }
+          }
+        },
+        {
+          "match": {
+            "point_id": {
+              "query": "3604003003360303",
+              "operator": "OR",
+              "prefix_length": 0,
+              "max_expansions": 50,
+              "fuzzy_transpositions": true,
+              "lenient": false,
+              "zero_terms_query": "NONE",
+              "auto_generate_synonyms_phrase_query": true,
+              "boost": 1
+            }
+          }
+        },
+        {
+          "match_phrase": {
+            "license_number": {
+              "query": "赣G83A84",
+              "slop": 0,
+              "boost": 1
+            }
+          }
+        },
+        {
+          "match": {
+            "license_type": {
+              "query": "VEHPLATETYPE02",
+              "operator": "OR",
+              "prefix_length": 0,
+              "max_expansions": 50,
+              "fuzzy_transpositions": true,
+              "lenient": false,
+              "zero_terms_query": "NONE",
+              "auto_generate_synonyms_phrase_query": true,
+              "boost": 1
+            }
+          }
+        }
+      ],
+      "adjust_pure_negative": true,
+      "boost": 1
+    }
+  },
+  "_source": {
+    "includes": [
+      "license_number",
+      "passing_time",
+      "license_type",
+      "point_id"
+    ],
+    "excludes": [
+      "veh_pic"
+    ]
+  },
+  "sort": [
+    {
+      "passing_time": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+
+简写:
+
+
+
+
+
+
+
+
+
