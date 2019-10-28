@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static com.enjoyor.mtdap.common.helper.TimeHelper.ChangeRecordTime2DocTime;
+import static com.guoshuai.mtdap.common.helper.TimeHelper.ChangeRecordTime2DocTime;
 
 
 /**

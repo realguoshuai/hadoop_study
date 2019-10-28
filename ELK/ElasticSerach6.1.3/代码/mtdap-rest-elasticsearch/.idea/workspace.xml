@@ -22,7 +22,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file leaf-file-name="EsController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/controller/EsController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/controller/EsController.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="420">
               <caret line="51" column="6" lean-forward="false" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
@@ -32,7 +32,7 @@
         </entry>
       </file>
       <file leaf-file-name="SwaggerConfig.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/config/SwaggerConfig.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/config/SwaggerConfig.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
               <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="17" />
@@ -44,7 +44,7 @@
         </entry>
       </file>
       <file leaf-file-name="EsVehSearService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/impl/EsVehSearService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/impl/EsVehSearService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="518">
               <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
@@ -56,7 +56,7 @@
         </entry>
       </file>
       <file leaf-file-name="IEsVehSearService.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/IEsVehSearService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/IEsVehSearService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1068">
               <caret line="49" column="7" lean-forward="false" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
@@ -66,7 +66,7 @@
         </entry>
       </file>
       <file leaf-file-name="EsVehSearDao.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/EsVehSearDao.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/EsVehSearDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="468">
               <caret line="533" column="33" lean-forward="false" selection-start-line="533" selection-start-column="33" selection-end-line="533" selection-end-column="33" />
@@ -80,7 +80,7 @@
         </entry>
       </file>
       <file leaf-file-name="IEsVehSearDao.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/IEsVehSearDao.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/IEsVehSearDao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="186">
               <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
@@ -109,7 +109,7 @@
       <find>exception</find>
       <find>PageEasyUI</find>
       <find>ResultPojo</find>
-      <find>com.enjoyor.mtdap</find>
+      <find>com.guoshuai.mtdap</find>
       <find>point_id</find>
       <find>from</find>
     </findStrings>
@@ -117,7 +117,7 @@
       <replace />
     </replaceStrings>
     <dirStrings>
-      <dir>E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\enjoyor\mtdap\es\exception</dir>
+      <dir>E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\guoshuai\mtdap\es\exception</dir>
     </dirStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -128,57 +128,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/config/Swagger2Config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/ResultPojo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/EnumAppCode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/DError.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/exception/NoServiceException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/exception/SignificantRestException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/exception/RestException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/ResultPojo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/ISolrVehSearDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/impl/SolrVehSearService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/ISolrVehSearService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/SolrVehSearDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/SolrPassInfoPojo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/Swagger2Config.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/PageEasyUI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/controller/SolrController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/config/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/ResultPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/EnumAppCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/DError.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/exception/NoServiceException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/exception/SignificantRestException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/exception/RestException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/ResultPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/ISolrVehSearDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/impl/SolrVehSearService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/ISolrVehSearService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/SolrVehSearDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/SolrPassInfoPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/Swagger2Config.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/PageEasyUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/controller/SolrController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/es.properties" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/SolrservicveApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/RestClientQuery.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/EsHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/TimeHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/ResultHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/Page.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/page/PageEasyUI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/page/PageEasyUI.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/exception/DError.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/helper/EsHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/config/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/helper/TimeHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/helper/InitPropertiesUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/helper/ResultPojo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/exception/NoServiceException.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/exception/EnumAppCode.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/exception/ResultPojo.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/exception/ResultHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/helper/ResultHelper.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/page/Page.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/rest/service/IEsVehSearService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/SolrservicveApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/RestClientQuery.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/EsHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/TimeHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/ResultHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/SwaggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/Page.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/page/PageEasyUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/page/PageEasyUI.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/exception/DError.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/helper/EsHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/config/SwaggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/helper/TimeHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/helper/InitPropertiesUtil.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/helper/ResultPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/exception/NoServiceException.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/exception/EnumAppCode.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/exception/ResultPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/exception/ResultHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/helper/ResultHelper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/page/Page.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/rest/service/IEsVehSearService.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application-dev.properties" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/ResultPojo.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/ResultPojo.java" />
         <option value="$PROJECT_DIR$/src/main/java/common/page/Page.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/page/Page.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/config/SwaggerConfig.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/EsServiceApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/IEsVehSearService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/IEsVehSearDao.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/controller/EsController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/impl/EsVehSearService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/EsVehSearDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/page/Page.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/config/SwaggerConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/EsServiceApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/IEsVehSearService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/IEsVehSearDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/controller/EsController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/impl/EsVehSearService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/EsVehSearDao.java" />
       </list>
     </option>
   </component>
@@ -373,14 +373,14 @@
       <recent name="" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.enjoyor.mtdap.es.util" />
-      <recent name="com.enjoyor.mtdap.es.bean" />
-      <recent name="com.enjoyor.mtdap.es.config" />
+      <recent name="com.guoshuai.mtdap.es.util" />
+      <recent name="com.guoshuai.mtdap.es.bean" />
+      <recent name="com.guoshuai.mtdap.es.config" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\enjoyor\mtdap\es\util" />
+      <recent name="E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\guoshuai\mtdap\es\util" />
       <recent name="E:\development\test\mtdap-rest-elasticsearch\lib" />
-      <recent name="E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\enjoyor\mtdap\es" />
+      <recent name="E:\development\test\mtdap-rest-elasticsearch\src\main\java\com\guoshuai\mtdap\es" />
       <recent name="E:\development\test\mtdap-rest-elasticsearch" />
       <recent name="E:\development\test\mtdap-rest-elasticsearch\src\main\java" />
     </key>
@@ -448,7 +448,7 @@
     </configuration>
     <configuration name="SolrservicveApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.enjoyor.mtdap.es.EsServiceApplication" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.guoshuai.mtdap.es.EsServiceApplication" />
       <module name="mtdap-rest-elasticsearch" />
       <envs />
     </configuration>
@@ -600,7 +600,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/controller/EsController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/controller/EsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -608,15 +608,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/EsPassInfoPojo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/EsPassInfoPojo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1900">
           <caret line="76" column="40" lean-forward="false" selection-start-line="76" selection-start-column="40" selection-end-line="76" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/Swagger2Config.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/impl/EsVehSearService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/Swagger2Config.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/impl/EsVehSearService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="500">
           <caret line="20" column="50" lean-forward="false" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
@@ -626,7 +626,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/IEsVehSearService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/IEsVehSearService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="750">
           <caret line="30" column="7" lean-forward="false" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
@@ -634,7 +634,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/EsVehSearDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/EsVehSearDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1000">
           <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
@@ -646,7 +646,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/IEsVehSearDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/IEsVehSearDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="475">
           <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
@@ -654,7 +654,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/SignificantRestException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/SignificantRestException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="43" />
@@ -662,39 +662,39 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/solr.properties" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/SolrVehSearDaoSubMeter.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/SolrPassInfoPojo_nanchang.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/SolrClientHelper0515.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/SolrPassInfoPojoBak0425.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/RestException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/SolrVehSearDaoSubMeter.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/SolrPassInfoPojo_nanchang.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/SolrClientHelper0515.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/SolrPassInfoPojoBak0425.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/RestException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="43" lean-forward="false" selection-start-line="2" selection-start-column="43" selection-end-line="2" selection-end-column="43" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/RepetException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/RepetException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/ParameterException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/ParameterException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/ManagerException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/ManagerException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/SignificantRestException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/SignificantRestException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
           <caret line="2" column="0" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="43" />
@@ -709,10 +709,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/PassInfoPojo.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/SolrClientHelper.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/CommonUtils.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/query/SolrQueryTest.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/PassInfoPojo.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/SolrClientHelper.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/CommonUtils.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/query/SolrQueryTest.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="125">
@@ -728,7 +728,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/bean/EsPassInfoPojo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/bean/EsPassInfoPojo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="312">
           <caret line="30" column="19" lean-forward="false" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
@@ -742,29 +742,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/util/Swagger2Config.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/ControllerException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/util/Swagger2Config.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/ControllerException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="175">
           <caret line="7" column="53" lean-forward="true" selection-start-line="7" selection-start-column="53" selection-end-line="7" selection-end-column="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/page/PageEasyUI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/page/PageEasyUI.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
           <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/DError.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/DError.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/EsHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/EsHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="145">
           <caret line="38" column="13" lean-forward="false" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
@@ -772,7 +772,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/TimeHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/TimeHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="14" column="13" lean-forward="false" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
@@ -780,7 +780,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/InitPropertiesUtil.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/InitPropertiesUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="15" column="13" lean-forward="false" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
@@ -788,14 +788,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/EnumAppCode.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/EnumAppCode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="25">
           <caret line="11" column="12" lean-forward="false" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/ResultHelper.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/ResultHelper.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="21" column="25" lean-forward="false" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
@@ -803,7 +803,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/exception/NoServiceException.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/exception/NoServiceException.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="4" column="7" lean-forward="false" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
@@ -831,7 +831,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/helper/ResultPojo.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/helper/ResultPojo.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="625">
           <caret line="35" column="20" lean-forward="false" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
@@ -839,7 +839,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/page/Page.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/page/Page.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3650">
           <caret line="180" column="24" lean-forward="false" selection-start-line="180" selection-start-column="24" selection-end-line="180" selection-end-column="24" />
@@ -999,7 +999,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/EsServiceApplication.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/EsServiceApplication.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="14" column="30" lean-forward="true" selection-start-line="14" selection-start-column="30" selection-end-line="14" selection-end-column="30" />
@@ -1009,7 +1009,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/common/config/SwaggerConfig.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/common/config/SwaggerConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="29" column="17" lean-forward="false" selection-start-line="29" selection-start-column="5" selection-end-line="29" selection-end-column="17" />
@@ -1019,7 +1019,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/controller/EsController.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/controller/EsController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="51" column="6" lean-forward="false" selection-start-line="51" selection-start-column="6" selection-end-line="51" selection-end-column="6" />
@@ -1027,7 +1027,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/IEsVehSearDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/IEsVehSearDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="186">
           <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
@@ -1035,7 +1035,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/impl/EsVehSearService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/impl/EsVehSearService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="518">
           <caret line="62" column="0" lean-forward="false" selection-start-line="62" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
@@ -1045,7 +1045,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/service/IEsVehSearService.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/service/IEsVehSearService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1068">
           <caret line="49" column="7" lean-forward="false" selection-start-line="49" selection-start-column="7" selection-end-line="49" selection-end-column="7" />
@@ -1053,7 +1053,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/enjoyor/mtdap/es/dao/impl/EsVehSearDao.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/guoshuai/mtdap/es/dao/impl/EsVehSearDao.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="468">
           <caret line="533" column="33" lean-forward="false" selection-start-line="533" selection-start-column="33" selection-end-line="533" selection-end-column="33" />
