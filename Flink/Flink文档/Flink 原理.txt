@@ -122,17 +122,17 @@ Flink证书过期  重新执行下
 	将这两个文件添加到/opt/huawei/hadoopclient/Flink/flink/test中
 
 下载kerberos秘钥 放到服务器,在flink-conf.yaml 文件中把路径添加上 用户加上
-security.kerberos.login.keytab: /opt/MtdapProgram/keytab_enjoyor/user.keytab
-security.kerberos.login.principal: enjoyor
+security.kerberos.login.keytab: /opt/MtdapProgram/keytab_gs/user.keytab
+security.kerberos.login.principal: gs
 
 注意:文件需要分配权限 
-[root@host-mn02 keytab_enjoyor]# chmod  777 krb5.conf 
-[root@host-mn02 keytab_enjoyor]# chmod  777 user.keytab 
+[root@host-mn02 keytab_gs]# chmod  777 krb5.conf 
+[root@host-mn02 keytab_gs]# chmod  777 user.keytab 
 
 修改flink-conf.yaml配置文件中  指定认证文件:
 	security.ssl.truststore: test/flink.truststore
-	security.kerberos.login.keytab: /opt/MtdapProgram/keytab_enjoyor/user.keytab
-	security.kerberos.login.principal: enjoyor
+	security.kerberos.login.keytab: /opt/MtdapProgram/keytab_gs/user.keytab
+	security.kerberos.login.principal: gs
 	security.ssl.key-password: XXXXXX
 	security.ssl.keystore-password: XXXXXX
 	security.ssl.keystore: test/flink.keystore

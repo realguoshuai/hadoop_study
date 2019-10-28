@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap3.flink.streamJoin
+package com.guoshuai.mtdap3.flink.streamJoin
 
 import java.lang
 import java.text.SimpleDateFormat
@@ -29,8 +29,8 @@ object FlinkStreamJoinDemo {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
 
         //接收数据
-        val dataStreamA = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\enjoyor\\mtdap3\\flink\\streamJoin\\conf\\socketA.txt")
-        val dataStreamB = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\enjoyor\\mtdap3\\flink\\streamJoin\\conf\\socketB.txt")
+        val dataStreamA = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\guoshuai\\mtdap3\\flink\\streamJoin\\conf\\socketA.txt")
+        val dataStreamB = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\guoshuai\\mtdap3\\flink\\streamJoin\\conf\\socketB.txt")
 
 
         val simpleDataFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")

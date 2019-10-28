@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap3.flink.sql
+package com.guoshuai.mtdap3.flink.sql
 
 object FlinkSqlCalKafkaToMysql {
 

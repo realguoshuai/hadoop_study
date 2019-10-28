@@ -26,7 +26,7 @@ import org.apache.spark.sql.hive.HiveContext;
 public class SparkHivetoHbase {
 
   public static void main(String[] args) throws Exception {
-    String userPrincipal = "enjoyor";
+    String userPrincipal = "guoshuai";
     String userKeytabPath = "/opt/sh/all_data/user.keytab";
     String krb5ConfPath = "/opt/sh/all_data/krb5.conf";
     Configuration hadoopConf = new Configuration();

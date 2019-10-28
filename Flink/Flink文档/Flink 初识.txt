@@ -383,7 +383,7 @@ flink发布命令并没有指定yarn 怎么就在yarn上运行了?
 flink  on yarn  两种运行方式 1:yarn-session  2:single yarn job
 
 nohup bin/yarn-session.sh \
---queue enjoyor \
+--queue guoshuai \
 --container 12 \
 --jobManagerMemory 10240 \
 --taskManagerMemory 20480 \
@@ -394,7 +394,7 @@ nohup bin/yarn-session.sh \
 nohup bin/flink run \
 -yid application_1563070919166_1815 \
 -p 6 \
---class com.enjoyor.mtdap3.realtime.FakeVehicle \
+--class com.guoshuai.mtdap3.realtime.FakeVehicle \
 /opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-fakevehicle-1.0/mtdap3-rtc-fakevehicle-1.0.jar \
 >/opt/MtdapProgram/mtdap3-flink/mtdap3-rtc-fakevehicle-1.0/log/mtdap3-rtc-fakevehicle.log 2>&1 &
 

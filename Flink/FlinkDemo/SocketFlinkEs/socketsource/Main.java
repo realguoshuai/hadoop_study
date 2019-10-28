@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap3.socketsource;
+package com.guoshuai.mtdap3.socketsource;
 
 /**
  * Description 使用socket模拟 实时流数据

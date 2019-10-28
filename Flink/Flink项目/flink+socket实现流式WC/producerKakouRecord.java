@@ -1,8 +1,8 @@
-package com.enjoyor.mtdap3.socketSendMessage;
+package com.guoshuai.mtdap3.socketSendMessage;
 
 
-import com.enjoyor.mtdap3.socketSendMessage.*;
-import com.enjoyor.mtdap3.utils.TimeHelper;
+import com.guoshuai.mtdap3.socketSendMessage.*;
+import com.guoshuai.mtdap3.utils.TimeHelper;
 
 import java.util.Timer;
 import java.util.TimerTask;

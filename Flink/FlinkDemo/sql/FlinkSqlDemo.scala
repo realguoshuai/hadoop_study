@@ -1,4 +1,4 @@
-package com.enjoyor.mtdap3.flink.sql
+package com.guoshuai.mtdap3.flink.sql
 
 import org.apache.flink.api.scala._
 import org.apache.flink.streaming.api.scala.StreamExecutionEnvironment
@@ -26,7 +26,7 @@ object FlinkSqlDemo {
         val tableEnv = TableEnvironment.getTableEnvironment(env)
 
         //获取数据源
-        val sourceA = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\enjoyor\\mtdap3\\flink\\sql\\conf\\person.txt")
+        val sourceA = env.readTextFile("E:\\development\\test\\mtdap-flink\\src\\com\\guoshuai\\mtdap3\\flink\\sql\\conf\\person.txt")
         //etl source
         val sourceB = sourceA.map(x=>{
             val split = x.split("\\s+")
