@@ -30,7 +30,7 @@
 *  [Flink开发者资料](https://ververica.cn/developers-resources/)
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
 *  [不搭建环境,socket代码模拟kafka数据源 开发flink](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/flink%2Bsocket%E5%AE%9E%E7%8E%B0wordcount/)
-*  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E5%AE%9E%E4%BE%8B/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
+*  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
 *  [Flink电商Demo-用户行为实时分析](https://github.com/realguoshuai/UserBehaviorAnalysis)
 *  [Flink接入socket实时数据源实现热门商品topN写入es](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
 *  [Flink Table Demo 基于1.7.0+](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/FlinkDemo/table)
