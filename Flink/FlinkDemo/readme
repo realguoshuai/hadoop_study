@@ -1,1 +1,17 @@
 flink 主要功能测试demo
+AutoCreateData:
+	使用java 内置socket 模拟数据,临时替代消息中间件kafka实时发送数据
+CEP:
+	scala测试Flink-CEP 复杂事件处理
+Checkpoint:
+	简单测试checkpoint
+KafkaFlinkKafka:
+	单独测试source sink功能,sink到kaf用于降低系统耦合度,当时写入阻塞导致的反压现象
+ReadFile:
+	source数据源读取文件测试,用socket自动生成数据,该demo可以忽略
+SocketFlinkES:
+	集成Socket source数据到实时系统,经过实时处理后sink到ES
+StreamJoin:
+	测试双流关联
+Table && SQL:
+	测试Flink-SQL 和 Flink Table 进行实时分析,开发难度降低,SQL化是趋势...
