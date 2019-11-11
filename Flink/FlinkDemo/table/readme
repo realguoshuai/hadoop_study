@@ -1,1 +1,3 @@
 上述Table api 测试程序 需要基于flink1.7.0
+第一个是使用flink sql 开发简单的wordcount  
+第二个是参考金竹大神的 flink sql教程调试 学习的
