@@ -83,5 +83,6 @@
  * 优化实时计算代码(代码开发很简单,数据量一上来就算不过来) 原因:内存隔离 CPU共享  50亿+solr 查询导致集群CPU负载高
  * solr分库后 高CPU的现象解决 遗留问题:程序定时删除出bug  
  * 最近任务 开始 es 服务化  替代现有的solr 一天搞定
- * flink table api ok,公司使用flink state api 功能很方便 但是开发复杂,测试demo代码后面上传
+ * 测试flink table api ok,公司使用Flink DataStream/Process Function API开发 开发稍微有点复杂,
+   有时间会尝试使用table/sql api进行替换 简化开发难度
  * 出差 停更一周
