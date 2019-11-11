@@ -25,7 +25,7 @@
 #### Spark Structured Streaming
 *  后台我已经使用flink替代掉
 ## Flink
-*  [总结文档](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
+*  [总结文档](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
 *  [Flink开发者资料](https://ververica.cn/developers-resources/)
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
