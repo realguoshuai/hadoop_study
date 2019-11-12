@@ -1,0 +1,167 @@
+推荐流计算神书:Streaming Systems!
+无界数据处理过程中最关键的几个问题:
+1:计算什么结果  What results are calculated ?    								 What
+2:在事件时间的哪个地方计算结果  Where in event time are results calculated ?           Where
+3:在处理过程的什么时间点,可以输出结果  When in processing time are results materialized ?    When
+4:如何更新结果     How do refinements of results relate ?  							How
+
+
+
+批处理的基础：What & Where
+
+
+批处理中如何解决 What 和 Where 两个问题?
+
+批处理中,用变换（Transformations）解决 “Whatresults are calculated?”这个问题
+
+引入Beam
+时序图对比
+理论上批数据是流数据的子集,流处理是批处理的超集
+
+
+流处理: When & How
+批处理系统要等到所有数据都到齐才能输出计算结果,在无界数据流上是不可行的
+因此,流计算系统中引入了触发器(Trigger) 和 水位线(watermark)
+
+Trigger 
+触发器解决 When 这个问题
+	触发器会根据事件时间上的watermark来决定,在处理时间的哪个时间点来输出窗口数据!
+
+两种通用的最基础的Trigger类型:
+重复更新触发器(Repeated update triggers),定期触发窗口输出.
+	比如每条数据都输出一个结果,或者在processing time上每隔一分钟输出一个结果
+完整性触发器(Completenesstriggers) 仅当窗口的数据完整时,才输出窗口结果.
+	跟传统批处理非常类似:只不过窗口的大小不同,传统批处理是要等整个数据集的数据都到齐,才进行计算
+
+
+重复更新触发器是最常用的触发器,因为其易于理解和使用,并且跟数据库中的物化视图语义非常相似
+流计算中,完整性触发器的语义跟传统批处理更相似,能够处理late event.
+		Watermark是驱动Completeness Triggers被触发的原语
+		
+流计算中使用重复更新触发器:
+每个事件都触发计算的模式不适合在大规模数据量的情况下使用,系统的计算效率会非常低,
+				并且会对下游系统造成很大的写压力
+一般在实际使用过程中,用户通常会在处理时间上定义一个延时,多长时间输出一次(每秒/分钟)		
+
+在Trigger中,处理时间延时的两种方式:
+对齐延时  &&  非对齐延时
+对齐延时:将处理时间上切分成固定大小的时间片,对每个key的每个窗口,时间片大小都相同
+	对齐延时,就是按固定时间来触发计算
+非对齐延时:延时时间与窗口内数据有关
+	非对齐延时，是按照数据进入系统的时间+延时时间触发计算
+
+	
+重复更新触发器使用和理解起来非常简单,但不能保证计算结果的正确性,无法处理late event.
+而Completeness triggers(完整性触发器)能解决这个问题
+	
+
+WaterMark 
+Watermark标志着在Process Time上,何时应该输出结果
+	即:watermark是某个event time窗口中所有数据都到齐的标志!!!
+一旦窗口的watermark到了,那么这个event time窗口里的数据就到齐了,可以进行计算了
+
+两种类型的Watermark:
+
+完美型的watermark:
+	完美性watermark指-->能够100%保证某个event time X之前的数据都到齐了,不会有late event
+启发式的watermark
+	在真实世界无界数据的处理中,无法确切知道某个event timeX之前的数据是否到齐
+					(无法知道哪一条数据到达后,不会有这之前的数据到达)
+	启发式watermark会根据某些条件推测X之前的数据已经到齐.
+			但推测有可能是错的,有可能会有late event出现
+watermark标志着Event Time窗口中的数据是否完整,是Completeness triggers的基础
+
+Watermark缺点:
+ 输出太慢:  如果数据流中有晚到数据,越趋近于perfect watermark的watermark,
+			将会一直等这个late event,而不会输出结果,这回导致输出的延时增加
+ 输出太快: 启发式watermark的问题是输出太快，会导致结果不准
+优势:
+重复更新触发器(Repeated update triggers)可以保证低延时
+完整性触发器(Completeness triggers)能保证结果正确
+
+将两种触发器的优点结合:即允许在watermark之前/之时/之后使用标准的重复更新触发器
+early/on-time/late trigger
+
+Zero or more early panes:在watermark经过窗口之前,即周期性的输出结果.
+		这些结果可能是不准的,但是避免了watermark 输出太慢的问题.
+A single on-time pane：
+		仅在watermark通过窗口结束时触发一次。这时的结果可以看作是准确的.
+Zero or more late panes：在watermark通过窗口结束边界之后,如果这个窗口有late event,也可以触发计算.
+		这样就可以随时更新窗口结果,避免了输出太快导致的结果不对的问题.
+
+		
+
+引出允许延时:allowed lateness
+为了保证数据正确性,当late event到来后能够更新窗口结果,因此窗口的状态需要被持久化保存下来,
+但到底应该保存多长时间呢？? ?
+因此,定义窗口状态的保存时间为allowed lateness(允许的延迟)
+	过了这个时间,窗口中数据会被清掉,之后到来的late event就不会被处理了
+
+	
+How: Accumulation
+
+late event 数据延迟下,如何修改窗口之前输出的结果呢???
+三种方式: 抛弃 & 累积 & 累积/撤回
+
+Discarding(抛弃):每个窗口产生输出之后,其state都被丢弃.也就是各个窗口之间完全独立.比较适合下游是聚合类的运算,
+
+Accumulating(累积):所有窗口的历史状态都会被保存,每次late event到了之后,都会触发重新计算,更新之前计算结果.这种方式适合下游是可更新的数据存储,比如HBase/带主键的RDS table等.
+
+Accumulating & Retracting(累积&撤回):Accumulating与第二点一样,即保存窗口的所有历史状态.
+	撤回是指:late event到来之后,出了触发重新计算之外,还会把之前窗口的输出撤回.
+
+上述三种模式,耗用资源依次增加
+
+
+流计算的本质:就是平衡正确性,延时和资源这三者的关系
+
+
+
+
+第三章:Watermark
+watermark如何生成,传播和影响输出结果的时间戳
+watermark如何保证结果的正确性
+
+
+对任何一个持续输入和输出数据的管道来说,我们希望知道如何判断事件时间窗口的结束?
+尝试1:按照处理时间来判断,处理时间晚于事件时间 同时会有各种原因导致的乱序,会让数据进入错误的窗口
+尝试2:根据管道处理数据的速率来判断数据是否到齐,输入数据量变化，网络抖动，逻辑错误等太多行为都会影响到数据处理速率
+
+上述方式排除:采用鲁棒(健壮)且合理的方式,来判断无界数据流的窗口结束时间
+
+假设无界数据流中的数据都包含事件时间这一属性(带有这一条数据发生的时间这个字段)
+看一下事件时间在pipeline(计算管道)的流程.
+
+在分布式系统中,这个管道可能在多个计算节点(agent)上执行,多个agents同时消费源头数据,
+并不能保证数据的有序
+
+WaterMark两个基本属性:
+
+完整性(completeness):单调递增,表示如果watermark经过了事件点T,
+			那么T之前的数据已经到齐,T之前的窗口可以关闭了.
+可视性(vilibility):如果管道中消息由于某个原因被堵住了,则这个管道的watermark也就停止了.
+			需要找到阻止watermark更新的消息才能处理问题.
+
+两种类型的Watermark:完美水位线 && 启发式水位线 !!
+
+完美型watermark能严格保证窗口不需要处理晚到数据(late event)
+也就是当watermark通过某个eventtime时,不会再有这个event time之前的数据.
+真实世界的分布式系统数据源是无法保证的,也就是说 真实数据被抛弃了 
+
+启发式watermark假设event time在watermark之前的数据已经到齐
+但是只要方式得当,是可以得到一个比较合理的启发式watermark的.
+	系统需要提供一种方式来处理late event来保证正确性? Flink怎样做的
+
+	
+Watermark传播
+
+
+
+
+
+
+
+
+
+
+
