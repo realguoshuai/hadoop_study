@@ -7,6 +7,8 @@ Checkpoint:
 	简单测试checkpoint
 KafkaFlinkKafka:
 	单独测试source sink功能,sink到kaf用于降低系统耦合度,当时写入阻塞导致的反压现象
+KafkaFlinkPhoenix:
+        实时ETL的需求,直接批量写到phoenix中. 引入了双重kerberos安全认证
 ReadFile:
 	source数据源读取文件测试,用socket自动生成数据,该demo可以忽略
 SocketFlinkES:
