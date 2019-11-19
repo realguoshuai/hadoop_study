@@ -85,3 +85,4 @@
  * 最近任务 开始 es 服务化  替代现有的solr 一天搞定
  * 测试flink table api ok,公司使用Flink DataStream/Process Function API开发 开发稍微有点复杂,
    有时间会尝试使用table/sql api进行替换 简化开发难度.
+ * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延
