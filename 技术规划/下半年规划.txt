@@ -1,39 +1,60 @@
 上半年 将fink kerberos弄起来 flink日常开发没问题,理解solr原理,百亿数据优化
 下半年: 大数据理论基础补牢(面试题) 
-实时  离线   搜索 (面试题+简单示例程序)
+实时  离线   搜索 (面试题+简单示例程序)   SQL
 
 
 实时计算 : kafka + flink + redis + phoenix
 离线计算 : hdfs + hive + spark + mysql
 全文检索 : lucene + solr + es
-数据同步 : jdbc + logstash + datax  + spark
-任务调度 : oozie + azkaban
+数据同步 : fiber + jdbc + logstash + datax  + spark
+任务调度 : oozie + azkaban + crontab
+
+业务规则: 流量 拥堵  车辆轨迹  套牌车
 
 
 到年后规划,多看原理 多练 多说
 1 流 flink,kafka,redis 熟练  侧重于原理
-2 搜索 solr熟练 es熟悉       环境搭建 ok ,es入库/rest数据服务化  ok
+2 搜索 solr熟练 es熟悉       环境搭建 ok ,入库,rest查询
 3 批 sql,spark熟悉
 4 其他 调度,新组件了解 
 
 
 -------------------------------   flink   -------------------------------
-flink cep  demo起码能跑起来      ok
-违法安全驾驶行为 (可以重做,使用flink实时ETL)     
-flink sql  demo起码能跑起来   ok  
-连接器封装 mysql  es  hive 
+违法安全驾驶行为 (可以重做,使用flink实时ETL)       
 flink程序优化
-flink state管理 
-zhisheng知识星球对flink源码的解读
+flink cep  demo起码能跑起来      ok
+flink state demo                    ok
+flink sql/table  demo起码能跑起来      ok
+flink state api 应用  (测试ok 基于1.7.2 )    
+
+flink dataSet api          
+flink sink es              ok 
+flink sink phoenix         ok
+flink sink mysql           ok
+ 
+mtdap-flink中的代码 吸收掉
+flink社区视频  吸收掉  
+Streaming System 书
+面试题准备 
+zhisheng知识星球对flink源码的解读 (性价比太低,优先级最低)
 
 -------------------------------   spark   -------------------------------
-spark 简单离线分析
-spark 数据同步
-
+spark 简单离线分析  
+spark 数据同步     hive-->solr    ok
+				   hive-->phoenix ok
 -------------------------------    es     -------------------------------
 es 集群搭建   ok
 es 接入kafka 入库  ok
-es rest接口查询,代替可视化插件
+es rest接口查询,代替可视化插件  ok ,可以替代solr大部分功能(线上未测试)
+es 聚合查询 
+-------------------------------    solr   -------------------------------
+solr数据分表  ok
+solr 月底手动删除 实时表 三个月前数据
+	 手动执行脚本 历史表 三个月前数据
 
+-------------------------------   sql   -------------------------------
 
 下的学习视频
+
+
+
