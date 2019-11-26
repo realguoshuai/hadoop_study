@@ -86,3 +86,4 @@
  * 测试flink table api ok,公司使用Flink DataStream/Process Function API开发 开发稍微有点复杂,
    有时间会尝试使用table/sql api进行替换 简化开发难度.
  * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延 ok完成,Per模式运行,总共占用5G内存 稳定运行一周
+ * 实时计算NC市几千条路段的实时拥堵指数,flink程序优化中,更新先停2天
