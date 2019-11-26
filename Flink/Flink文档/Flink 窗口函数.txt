@@ -1,0 +1,134 @@
+flink 常用的窗口函数
+	ReduceFunction &&  AggregateFunction && FoldFunction && ProcessWindowFunction	
+
+前两个函数执行效率更高,因为 Flink 可以在每个窗口中元素到达时增量地聚合
+ProcessWindowFunction 将获得一个窗口内 所有元素的迭代器 以及 元素所在窗口的 附加元信息
+	  .timeWindow(Time.seconds(10)) //这里的时间窗口用于保证从外部接收当前批次的所有数据，不宜过小
+      .process(new KeyAreaIndexProcessFunction) //(重点区域编码,计算时间,时间标识,区域拥堵指数)
+注意:	
+	使用 ProcessWindowFunction 的窗口转换操作不能像其他那样有效率
+	是因为 Flink 在调用该函数之前 必须在内部缓存窗口中 的所有元素
+  A:这可以通过将 ProcessWindowFunction 与 ReduceFunction， AggregateFunction 或 FoldFunction 
+	组合使用来获得窗口元素的 增量聚合 以及 WindowFunction接收的附加窗口元数据
+
+
+a:ReduceFunction(递增)
+指定如何组合 输入数据的两个元素以产生相同类型的输出元素
+Flink使用ReduceFunction 增量聚合窗口中的元素
+
+使用:val input: DataStream[(String, Long)] = ...
+input
+    .keyBy(<key selector>)
+    .window(<window assigner>)
+    .reduce { (v1, v2) => (v1._1, v1._2 + v2._2) }
+	
+	
+b:FoldFunction(1.4废弃)
+	指定窗口的输入元素如何与输出类型的元素合并
+	FoldFunction 会被每一个加入到窗口中的元素和当前的输出值增量地调用
+	第一个元素与一个预定义的输出类型的初始值合并
+input
+    .keyBy(<key selector>)
+    .window(<window assigner>)
+    .fold("") { (acc, v) => acc + v._2 }
+注: fold()不能应用于会话窗口或者其他可合并的窗口中 (1.4调用弃用)
+	
+	
+c:AggregateFunction (递增)
+AggregateFunction 是 ReduceFunction 的通用版本
+	具有三种类型：输入类型（IN） 累加器类型（ACC）和 输出类型（OUT）
+
+input
+    .keyBy(<key selector>)
+    .window(<window assigner>)
+    .aggregate(new AverageAggregate)
+	
+自己实现一个方法AverageAggregate继承AggregateFunction ,重写方法实现求计算窗口中元素的第二个字段的平均值
+	
+	
+d:ProcessWindowFunction(非递增,最灵活)
+	获得一个窗口内所有元素的 Iterable
+	以及一个可以访问时间和状态信息的 Context 对象 这使得它可以提供比其他窗口函数更大的灵活性
+这是以牺牲性能和资源消耗为代价的
+因为元素不能增量地聚合 而是需要在内部进行缓冲 直到窗口被认为准备好进行处理为止。
+
+
+val input: DataStream[(String, Long)] = ...
+
+input
+    .keyBy(<key selector>)
+    .window(<window assigner>)
+    .process(new MyProcessWindowFunction())
+//实现
+class MyProcessWindowFunction extends ProcessWindowFunction[(String, Long), String, String, TimeWindow] {
+  def apply(key: String, context: Context, input: Iterable[(String, Long)], out: Collector[String]): () = {
+    var count = 0L
+    for (in <- input) {
+      count = count + 1
+    }
+    out.collect(s"Window ${context.window} count: $count")
+  }
+}
+
+e:使用增量聚合的ProcessWindowFunction
+ProcessWindowFunction 可以跟前三种窗口函数组合使用
+	以便在元素到达窗口时 增量聚合 元素
+e.1:	
+	  ReduceFunction + ProcessWindowFunction 实现增量聚合
+
+-scala实现-
+val input: DataStream[SensorReading] = ...
+
+input
+  .keyBy(<key selector>)
+  .timeWindow(<window assigner>)
+  .reduce(
+    (r1: SensorReading, r2: SensorReading) => { if (r1.value > r2.value) r2 else r1 }, //
+    ( key: String,
+      window: TimeWindow,
+      minReadings: Iterable[SensorReading],
+      out: Collector[(Long, SensorReading)] ) =>{
+        val min = minReadings.iterator.next()
+        out.collect((window.getStart, min))
+      }
+  )
+
+  
+  
+e.2:使用AggregateFunction  + ProcessWindowFunction  结合实现 增量窗口聚合
+
+Scala版本:
+val input: DataStream[(String, Long)] = ...
+
+input
+  .keyBy(<key selector>)
+  .timeWindow(<window assigner>)
+  .aggregate(new AverageAggregate(), new MyProcessWindowFunction())
+
+//代码实现
+
+class AverageAggregate extends AggregateFunction[(String, Long), (Long, Long), Double] {
+  override def createAccumulator() = (0L, 0L)
+
+  override def add(value: (String, Long), accumulator: (Long, Long)) =
+    (accumulator._1 + value._2, accumulator._2 + 1L)
+
+  override def getResult(accumulator: (Long, Long)) = accumulator._1 / accumulator._2
+
+  override def merge(a: (Long, Long), b: (Long, Long)) =
+    (a._1 + b._1, a._2 + b._2)
+}
+
+class MyProcessWindowFunction extends ProcessWindowFunction[Double, (String, Double), String, TimeWindow] {
+
+  def apply(key: String, context: Context, averages: Iterable[Double], out: Collector[(String, Double]): () = {
+    var count = 0L
+    for (in <- input) {
+      count = count + 1
+    }
+    val average = averages.iterator.next()
+    out.collect((key, average))
+  }
+}
+
+e.3:使用FoldFunction +  WindowFunction  实现 增量窗口聚合

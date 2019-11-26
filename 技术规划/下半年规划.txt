@@ -23,14 +23,17 @@
 违法安全驾驶行为 (可以重做,使用flink实时ETL)       
 flink程序优化
 flink cep  demo起码能跑起来      ok
-flink state demo                    ok
 flink sql/table  demo起码能跑起来      ok
-flink state api 应用  (测试ok 基于1.7.2 )    
+flink state demo                    ok
+flink state api 应用  (测试ok 基于1.7.2 )
 
 flink dataSet api          
 flink sink es              ok 
 flink sink phoenix         ok
 flink sink mysql           ok
+ 
+flink 窗口函数  demo       ok   增量process
+flink 自定义触发器  demo
  
 mtdap-flink中的代码 吸收掉
 flink社区视频  吸收掉  
@@ -48,13 +51,10 @@ es 接入kafka 入库  ok
 es rest接口查询,代替可视化插件  ok ,可以替代solr大部分功能(线上未测试)
 es 聚合查询 
 -------------------------------    solr   -------------------------------
-solr数据分表  ok
+solr数据分表 
 solr 月底手动删除 实时表 三个月前数据
 	 手动执行脚本 历史表 三个月前数据
 
 -------------------------------   sql   -------------------------------
 
 下的学习视频
-
-
-
