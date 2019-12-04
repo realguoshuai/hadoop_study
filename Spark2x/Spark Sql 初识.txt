@@ -1,7 +1,7 @@
 SparkSql开发的目的是为用户提供 关系查询和机器学习算法混合应用的灵活性,运行在内存中
 
 ## DataFrame ##
-由列组成的数据集合,在概念上等同于关系型数据库的表
+由 列 组成的数据集合,在概念上等同于关系型数据库的表
 DataFrame 数据源包括 结构化数据文件,hive中的表,外部数据库或RDD
 一行一行的 row[]
 
@@ -10,7 +10,7 @@ DataFrame 数据源包括 结构化数据文件,hive中的表,外部数据库或
 具有rdd的优点(强类型化,强大的lambda函数),以及sparksql优化后执行的优点
 可以使用函数或相关操作并行进行transformation操作  
 
-DataSet DataFrame RDD 相互转换
+DataSet && DataFrame && RDD 相互转换
 伪代码:
 case class model =(pointId:String,passingTime:String)
 
@@ -26,9 +26,45 @@ val rdd:RDD[model] = ds.rdd    //DataSet转RDD
 val df2:DataFrame = ds.toDF()  //DataSet转DataFrame
 val rdd2:RDD[Row] = df.rdd     //DataFrame转RDD
 
+RDD转DataFrame:
+overview += Row(s"稽查布控分析", checkUnionJsons.toString())
+val rddRow = spark.sparkContext.parallelize(overview)
+val schema = StructType(Seq(StructField("overview", DataTypes.StringType), 
+							StructField("values", DataTypes.StringType)))
+val df: DataFrame = spark.createDataFrame(rddRow, schema)
+		
 
 spark:
-建测试表 开发一个完整的功能
+mysql建测试表 开发一个完整的功能:交通报表
+
+--------------scala----------------
+scala seq :
+	Seq是列表,适合存有序重复数据,进行快速插入/删除元素等场
+---------spark.functions 包-----------
+udf: 自定义函数 
+//SQL中自定义UDF函数,保留N位小数 注意:udf函数是在sql中使用 所以参数也是Column
+	val keepDecimalN =  functions.udf((num: Double, n: Int) => {
+		val newNum = num.formatted(s"%.${n}f")
+		newNum
+	})
+	udf(参数=>返回结果)
+val periodCol = udf(() => period) //()表示不传参, 直接给返回值period
+	变形:val periodCol = udf(()=>{
+		period
+	})
+lit: 添加一列   自定义函数toTwoLocal,传参时也需要 传列 而非 数值 
+	.withColumn("avg_jam_num", toTwoLocal(col("avg(congest_index)"), lit("2"))) //生成列值为2,作为参数传入
+
+
+---------Spark SQL-----------
+sql:to_date 函数
+	to_date('2019-11-02 00:02:00') -->2019-11-02
+
+
+
+
+Stage 2000+多 是怎样生成的，怎样调优？
+
 
 
 
