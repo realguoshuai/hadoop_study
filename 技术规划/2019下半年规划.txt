@@ -34,9 +34,9 @@ flink程序优化
 flink cep  demo起码能跑起来      ok
 flink sql/table  demo起码能跑起来      ok
 flink state demo                    ok
-flink state api 应用  (测试ok 基于1.7.2 )
+flink state api 应用  (测试ok 基于1.7.2 )  ok
 
-flink dataSet api          
+flink dataSet api          ok
 flink sink es              ok 
 flink sink phoenix         ok
 flink sink mysql           ok
