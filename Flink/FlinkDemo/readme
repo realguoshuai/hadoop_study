@@ -17,3 +17,8 @@ StreamJoin:
 	测试双流关联
 Table && SQL:
 	测试Flink-SQL 和 Flink Table 进行实时分析,开发难度降低,SQL化是趋势...
+Trigger:
+	flink 自定义触发器: 数据达到指定条数 || 水位线到达窗口结束时间
+	  .keyBy(0)
+          .timeWindow(Time.seconds(60)) //时间时间
+          .trigger(new CountTriggerWithTimeOut[(String, String, String, Long, Long, String, String)](1, TimeCharacteristic.EventTime))
