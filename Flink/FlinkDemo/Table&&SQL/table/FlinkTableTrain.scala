@@ -10,8 +10,8 @@ import org.apache.flink.table.api.scala._
 import scala.collection.mutable
 
 /**
-  * Description  测试1.7+的 table api
-  * 数据引入 fromCollection
+  * Description flink table wordcount
+  *     since flink 1.7.0
   * Created with guoshuai
   * date 2019/10/25 13:18
   **/
