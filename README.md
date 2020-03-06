@@ -74,6 +74,8 @@
 *  [示例模板](https://github.com/realguoshuai/hadoop_study/tree/master/SpringBoot/HelloWorld%E6%A8%A1%E6%9D%BF/spring-boot-hello)
 *  大数据开发,有能力的还是要学一下,数据服务化不求人(个人感觉,如果不懂代码,把这个交给应用层开发,性能没有优化,用户体验是真的差) 
 *  已经实现了solr和es对上层提供的rest接口
+### leetcode
+*  [刷题]() 
 #### 持续更新...
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中
 * 今年计划重心是在实时计算上Flink,下半年的规划 : sparksql或flinksql  flinksql推荐使用1.7.0+  
