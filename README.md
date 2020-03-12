@@ -54,7 +54,7 @@
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-*  全文检索 solr+kerberos验证(巨坑,文档稍后上传)
+*  全文检索 solr+kerberos验证
 *  solr 实时创建索引延迟问题 (增量3000-4000w/天)
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 *  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
