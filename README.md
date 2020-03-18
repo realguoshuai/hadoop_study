@@ -38,8 +38,8 @@
 *  [Flink接入socket实时数据源实现热门商品topN写入es](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
 *  [Flink Table Demo 基于1.7.0+](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/FlinkDemo/table)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
-*  Flink开发满一年了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近20个job; 
-*  不足:主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep state/table api)
+*  Flink开发一年半了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近20个job; 
+*  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep/table)
 ### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
 *  [phoenix 自定义UDFs函数](https://github.com/realguoshuai/hadoop_study/tree/master/HBase/Phoenix%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0UDF)
