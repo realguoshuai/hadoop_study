@@ -25,7 +25,7 @@
 #### SparkSQL 
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
 #### Spark Structured Streaming
-*  后台我已经使用flink替代掉 
+*  后台我已经使用flink替代掉
 ## Flink 
 *  [Flink文档&&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
@@ -95,11 +95,12 @@
  * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延 ok完成,Per模式运行,总共占用5G内存 稳定运行一周
  * 实时计算NC市几千条路段的实时拥堵指数,flink程序优化中,更新先停2天.
  * 最近晚上计划学点spark DataFrame,需要熟悉下批处理 在大数据平台的周报表上练手
- * 最近接手这个接口一直变,增加到32个了 
+ * 最近接手这个接口一直变,增加到32个了
  * 离线开发 处理后直接写到mysql,表结构都是默认的,varchar都是text的,现在又要切换到Oracle 表结构也是默认的
    导致sql基本上要重写一遍 .
  * 实时计算-将中间计算结果保存在状态中,之前想的是放到redis里,页面程序可以直接获取,但是job数一多,对redis会造成过大的压力,所以使用状态保存,需要的结
    果一起发送到kafka,测试两天 稳定运行(注:flink1.4.0不能设置state的过期时间,程序中逻辑处理(每天清空);1.6.0引入ttl) 
  * spark统计全市/路段/区域 流量/拥堵 (完成) 完善Lambda架构,做成新增配置重算历史数据sh 
  * springboot实现win远程执行linux服务器sh脚本,需要使用ssh2工具包 
- * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本     
+ * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本
+ * springboot实现基础信息同步到大数据平台      
