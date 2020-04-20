@@ -103,4 +103,4 @@
  * spark统计全市/路段/区域 流量/拥堵 (完成) 完善Lambda架构,做成新增配置重算历史数据sh 
  * springboot实现win远程执行linux服务器sh脚本,需要使用ssh2工具包 
  * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本
- * springboot实现基础信息同步到大数据平台      
+ * springboot实现基础信息同步到大数据平台 
