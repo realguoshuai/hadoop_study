@@ -68,7 +68,7 @@
 ## Kylin
 ## kerberos
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
-*  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战 
+*  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战  
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
 ### springboot 
 *  [示例模板](https://github.com/realguoshuai/hadoop_study/tree/master/SpringBoot/HelloWorld%E6%A8%A1%E6%9D%BF/spring-boot-hello)
@@ -104,3 +104,4 @@
  * springboot实现win远程执行linux服务器sh脚本,需要使用ssh2工具包 
  * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本
  * springboot实现基础信息同步到大数据平台 
+ 
