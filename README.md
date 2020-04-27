@@ -25,7 +25,7 @@
 #### SparkSQL 
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
 #### Spark Structured Streaming
-*  后台我已经使用flink替代掉
+*  后台我已经使用flink替代掉 
 ## Flink 
 *  [Flink文档&&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
