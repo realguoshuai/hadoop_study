@@ -16,8 +16,8 @@
 ### Scala
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-*  scala 工作中flink/spark代码一般都是使用 Scala 实现 优先学!  
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/scala)
+*  scala 工作中flink/spark代码一般都是使用 Scala 实现 优先学!  
 ## Spark 
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -40,6 +40,9 @@
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
 *  Flink开发一年半了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近20个job; 
 *  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep/table)
+#### Flink-1.10
+*    [flink1.10单机版快速搭建]()
+*    [学习flink-1.10新特性的train项目]()
 ### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
 *  [phoenix 自定义UDFs函数](https://github.com/realguoshuai/hadoop_study/tree/master/HBase/Phoenix%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0UDF)
