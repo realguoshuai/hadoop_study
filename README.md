@@ -41,7 +41,7 @@
 *  Flink开发一年半了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近20个job; 
 *  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep/table)
 #### Flink-1.10
-*    [flink1.10单机版快速搭建]()
+*    [flink1.10单机版快速搭建](https://github.com/realguoshuai/flink-1.10-train/blob/master/doc/Flink%201.10%20%E5%8D%95%E6%9C%BA%E7%89%88%E6%90%AD%E5%BB%BA)
 *    [学习flink-1.10新特性的train项目](https://github.com/realguoshuai/flink-1.10-train)
 ### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
