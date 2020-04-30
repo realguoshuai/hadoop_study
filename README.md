@@ -42,7 +42,7 @@
 *  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep/table)
 #### Flink-1.10
 *    [flink1.10单机版快速搭建](https://github.com/realguoshuai/flink-1.10-train/blob/master/doc/Flink%201.10%20%E5%8D%95%E6%9C%BA%E7%89%88%E6%90%AD%E5%BB%BA)
-*    [学习flink-1.10新特性的train项目](https://github.com/realguoshuai/flink-1.10-train)
+*    [学习flink-1.10的Maven项目](https://github.com/realguoshuai/flink-1.10-train)
 ### HBase(phoenix)
 *  [文档笔记](https://github.com/realguoshuai/hadoop_study/tree/master/HBase) 
 *  [phoenix 自定义UDFs函数](https://github.com/realguoshuai/hadoop_study/tree/master/HBase/Phoenix%E8%87%AA%E5%AE%9A%E4%B9%89%E5%87%BD%E6%95%B0UDF)
