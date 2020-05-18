@@ -29,7 +29,7 @@
 ## Flink
 *  [Flink文档&&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
-*  [Flink开发者资料](https://ververica.cn/developers-resources/)
+*  [Flink开发者资料](https://ververica.cn/developers-resources/) 
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
 *  [Flink 测试项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train) 
 *  [不搭建环境,使用socket代码模拟kafka数据源 进行flink流处理](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink%2Bsocket%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8FWC)
