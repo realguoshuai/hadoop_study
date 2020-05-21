@@ -19,7 +19,7 @@
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/scala)
 *  scala 工作中flink/spark代码一般都是使用 Scala 实现 优先学!  
 ## Spark 
-*  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
+*  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/spark)
 #### SparkSQL 
@@ -52,13 +52,13 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
 *  开源的消息队列,流计算架构一定要有的一个组件 
 ## redis 
-*  [Redis命令参考](//http://doc.redisfans.com/)
+*  [Redis命令参考](//http://doc.redisfans.com/) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 ## solr
 *  [阅读官方文档](http://lucene.apache.org/solr/6_2_0/solr-core/overview-summary.html)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  全文检索 solr+kerberos验证
-*  solr 实时创建索引延迟问题
+*  solr 实时创建索引延迟问题  
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 *  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
 *  solr分collection的卡口过车数据100亿+  (增量4000-5000w/天)
