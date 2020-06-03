@@ -27,8 +27,9 @@
 #### Spark Structured Streaming
 *  后台我已经使用flink替代掉
 ## Flink
-*  [Flink文档&&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
-*  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA)
+*  [Flink初识](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
+*  [Flink原理&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%8E%9F%E7%90%86.txt)
+*  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA%E5%BD%92%E6%A1%A3)
 *  [Flink开发者资料](https://ververica.cn/developers-resources/) 
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
 *  [Flink 测试项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train) 
@@ -38,8 +39,8 @@
 *  [Flink接入socket实时数据源实现热门商品topN写入es](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
 *  [Flink Table Demo 基于1.7.0+](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/FlinkDemo/table)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
-*  Flink开发一年半了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近20个job; 
-*  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没应用过(比如cep/table)
+*  Flink开发近2年了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job; 
+*  不足:使用的版本较低1.4.0 主要是写业务函数+DataStream/Process Function,深点的东西还是没实际应用过(比如cep/table)
 #### Flink-1.10
 *    [flink1.10单机版快速搭建](https://github.com/realguoshuai/flink-1.10-train/blob/master/doc/Flink%201.10%20%E5%8D%95%E6%9C%BA%E7%89%88%E6%90%AD%E5%BB%BA)
 *    [学习flink-1.10的Maven项目](https://github.com/realguoshuai/flink-1.10-train)
