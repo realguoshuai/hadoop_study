@@ -73,7 +73,6 @@
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 *  [SpringBoot实现ES服务化,提供rest接口]()
-## MongoDB
 ## Kylin
 ## kerberos
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
@@ -81,15 +80,16 @@
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
 ### springboot 
 *  [示例模板](https://github.com/realguoshuai/hadoop_study/tree/master/SpringBoot/HelloWorld%E6%A8%A1%E6%9D%BF/spring-boot-hello)
-*  大数据开发,有能力的还是要学一下,数据服务化不求人(个人感觉,如果不懂代码,把这个交给应用层开发,性能没有优化,用户体验是真的差) 
-*  已经实现了solr和es对上层提供的rest接口
-*  新增接口中调用服务器sh脚本服务
+*  大数据开发,有能力的还是要学一下,数据服务化不求人(个人感觉,关于Solr和Es部分,服务化如果交给应用层开发,查询语句可能没有优化,用户体验会很差) 
+*  已经实现了solr和es对上层提供的rest接口,直接跟前端对接
+*  新增接口中调用执行sh脚本服务
 ### 数据服务化
+   将全文检索,离线或实时统计出来的数据,通过后台接口->dubbo(可省略)->rest服务化.
 ### leetcode
 *  [刷题]()
 #### 持续更新...
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中 
-* 今年计划重心是在实时计算上Flink,下半年的规划 : sparksql或flinksql  flinksql推荐使用1.7.0+  
+* 今年(19)计划重心是在实时计算上Flink,下半年的规划 : sparksql或flinksql  flinksql推荐使用1.7.0+  
 * 最新工作 : Solr出现问题(从存量50亿查当天数据,晚上查询30-50s,早上2s),50亿数据,查一天的最后一页,内存一下满了导致的(最后一页用户非得留着)
 * 今天用到了jieba分词,需要自定词库+solr来获取警情的空间经纬度坐标(已实现,代码测试去敏后上传) 
 * es+kerberos https证书卡着了(已解决,需要用华为二次开发的jar),先将DSL语法熟悉下上传   
