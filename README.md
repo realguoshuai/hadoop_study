@@ -33,8 +33,8 @@
 *  [Flink开发者资料](https://ververica.cn/developers-resources/) 
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
-*  Flink开发近2年了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job; 
-*  不足:FI平台的局限性,线上只能使用较低1.4.0版本 主要是写业务函数+DataStream/Process Function,深点的东西还是没实际应用过(比如cep/table)
+*  18年夏天开始接手,到现在Flink开发近2年了,现独自负责公司实时计算部分.两年成果:后台使用flink 基于交通卡口数据(过车数据)实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job,已上线一个省会两个地级市; 
+*  不足:FI平台的局限性,线上只能使用较低1.4.0版本 主要是写业务函数+DataStream/Process Function+缓存层,深点的东西还是没实际应用过(比如cep/table)
 #### Flink项目
 *  [Flink 学习项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train) 
 *  [IDEA内使用socket模拟实时数据源 进行flink流处理](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink%2Bsocket%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8FWC)
@@ -88,29 +88,27 @@
 ### leetcode
 *  [刷题]()
 #### 持续更新...
-* 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中 
+* 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路    
+  包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中 
 * 今年(19)计划重心是在实时计算上Flink,下半年的规划 : sparksql或flinksql  flinksql推荐使用1.7.0+  
-* 最新工作 : Solr出现问题(从存量50亿查当天数据,晚上查询30-50s,早上2s),50亿数据,查一天的最后一页,内存一下满了导致的(最后一页用户非得留着)
-* 今天用到了jieba分词,需要自定词库+solr来获取警情的空间经纬度坐标(已实现,代码测试去敏后上传) 
+* 最新工作 : Solr出现问题(从存量50亿查当天数据,晚上查询30-50s,早上2s),50亿数据,查一天的最后一页,内存一下满了导致的(最后一页用户非得留着),参数配置修改为2w条
+* 警情地址匹配经纬度用到了jieba分词,需要自定词库+solr(已实现服务化,代码测试去敏后上传) 
 * es+kerberos https证书卡着了(已解决,需要用华为二次开发的jar),先将DSL语法熟悉下上传   
 * 这两天调试spark同步hive到es程序,es是kerberos安全认证的,网上的都是http的方式访问,难受,最终使用jdbc的方式在安全模式的集群下从hive读数据到es ok
  断断续续优化的flink程序  加入rebalance,解决数据倾斜,导致背压,优化背压 对过车时间进行取余处理进行分流... 最终发现优化需要减操作步骤  而不是增加!!
- 跑了两天 离线程序白天还在跑导致CPU负载很高 实时计算程序受到影响  
+ 跑了两天 离线程序白天还在跑导致CPU负载很高 实时计算程序和Solr查询速度受到影响  
  * 优化实时计算代码(代码开发很简单,数据量一上来就算不过来) 原因:内存隔离 CPU共享  50亿+solr 查询导致集群CPU负载高
  * solr分库后 高CPU的现象解决 遗留问题:程序定时删除出bug  
- * 最近任务 开始 es 服务化  替代现有的solr 一天搞定
+ * 最近任务 开始 es 服务化  替代现有的solr 一天初步搞定
  * 测试flink table api ok,公司使用Flink DataStream/Process Function API开发 开发稍微有点复杂,
    有时间会尝试使用table/sql api进行替换 简化开发难度.
  * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延 ok完成,Per模式运行,总共占用5G内存 稳定运行一周
  * 实时计算NC市几千条路段的实时拥堵指数,flink程序优化中,更新先停2天.
  * 最近晚上计划学点spark DataFrame,需要熟悉下批处理 在大数据平台的周报表上练手
- * 最近接手这个接口一直变,增加到32个了
- * 离线开发 处理后直接写到mysql,表结构都是默认的,varchar都是text的,现在又要切换到Oracle 表结构也是默认的
-   导致sql基本上要重写一遍 .
+ * 最近接手这个事故接口一直变,增加到32个了
  * 实时计算-将中间计算结果保存在状态中,之前想的是放到redis里,页面程序可以直接获取,但是job数一多,对redis会造成过大的压力,所以使用状态保存,需要的结
    果一起发送到kafka,测试两天 稳定运行(注:flink1.4.0不能设置state的过期时间,程序中逻辑处理(每天清空);1.6.0引入ttl) 
  * spark统计全市/路段/区域 流量/拥堵 (完成) 完善Lambda架构,做成新增配置重算历史数据sh 
- * springboot实现win远程执行linux服务器sh脚本,需要使用ssh2工具包 
  * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本
  * springboot实现基础信息同步到大数据平台   6-10基本搞完了
  
