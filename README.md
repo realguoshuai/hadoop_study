@@ -36,11 +36,11 @@
 *  Flink开发近2年了,实时计算现在都是自己一个人在搞,现在后台使用flink 基于交通卡口数据实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job; 
 *  不足:FI平台的局限性,线上只能使用较低1.4.0版本 主要是写业务函数+DataStream/Process Function,深点的东西还是没实际应用过(比如cep/table)
 #### Flink项目
-*  [Flink 测试项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train) 
-*  [不搭建环境,使用socket代码模拟kafka数据源 进行flink流处理](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink%2Bsocket%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8FWC)
-*  [Flink示例代码-实时计算违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
+*  [Flink 学习项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train) 
+*  [IDEA内使用socket模拟实时数据源 进行flink流处理](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink%2Bsocket%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8FWC)
+*  [Flink示例Demo-识别违反尾号限行车辆](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink-rtc-tailnumlimit/src/com.guoshuai/realtime/details/TailNumVioDetails.scala)
 *  [Flink电商Demo-用户行为实时分析](https://github.com/realguoshuai/UserBehaviorAnalysis)
-*  [Flink接入socket实时数据源实现热门商品topN写入es](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
+*  [Flink接入socket实时数据源实现热门商品topN,数据下沉ES](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/FlinkDemo/SocketFlinkEs/LogAnalysis2Es.scala)
 *  [Flink Table Demo 基于1.7.0+](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/FlinkDemo/table)
 #### Flink-1.10
 *    [flink1.10单机版快速搭建](https://github.com/realguoshuai/flink-1.10-train/blob/master/doc/Flink%201.10%20%E5%8D%95%E6%9C%BA%E7%89%88%E6%90%AD%E5%BB%BA)
