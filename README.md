@@ -28,7 +28,7 @@
 *  后台我已经使用flink替代掉 
 ## Flink 
 *  [Flink初识](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
-*  [Flink原理&面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%8E%9F%E7%90%86.txt)
+*  [Flink原理&40道面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%8E%9F%E7%90%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA%E5%BD%92%E6%A1%A3)
 *  [Flink开发者资料](https://ververica.cn/developers-resources/) 
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
