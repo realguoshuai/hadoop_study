@@ -25,7 +25,7 @@
 #### SparkSQL 
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
 #### Spark Structured Streaming
-*  后台我已经使用flink替代掉 
+*  后台我已经使用flink替代掉
 ## Flink 
 *  [Flink初识](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink原理&40道面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%8E%9F%E7%90%86.txt)
@@ -104,7 +104,7 @@
    有时间会尝试使用table/sql api进行替换 简化开发难度.
  * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延 ok完成,Per模式运行,总共占用5G内存 稳定运行一周
  * 实时计算NC市几千条路段的实时拥堵指数,flink程序优化中,更新先停2天.
- * 最近晚上计划学点spark DataFrame,需要熟悉下批处理 在大数据平台的周报表上练手
+ * 最近晚上计划学点spark DataFrame,需要熟悉下批处理 在大数据平台的周报表上练手19.11
  * 最近接手这个事故接口一直变,增加到32个了
  * 实时计算-将中间计算结果保存在状态中,之前想的是放到redis里,页面程序可以直接获取,但是job数一多,对redis会造成过大的压力,所以使用状态保存,需要的结
    果一起发送到kafka,测试两天 稳定运行(注:flink1.4.0不能设置state的过期时间,程序中逻辑处理(每天清空);1.6.0引入ttl) 
