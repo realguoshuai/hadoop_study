@@ -30,7 +30,7 @@
 *  [Flink初识](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%88%9D%E8%AF%86.txt)
 *  [Flink原理&40道面试题](https://github.com/realguoshuai/hadoop_study/blob/master/Flink/Flink%E6%96%87%E6%A1%A3/Flink%20%E5%8E%9F%E7%90%86.txt)
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA%E5%BD%92%E6%A1%A3)
-*  [Flink开发者资料](https://ververica.cn/developers-resources/) 
+*  [Flink开发者资料](https://ververica.cn/developers-resources/)  
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
 *  18年夏天开始接手,到现在Flink开发近2年了,现独自负责公司实时计算部分.两年成果:后台使用flink 基于交通卡口数据(过车数据)实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job,已上线一个省会两个地级市; 
