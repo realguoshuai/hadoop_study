@@ -67,7 +67,7 @@
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 *  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
 *  solr分collection的卡口过车数据100亿+  (增量4000-5000w/天)
-## Eleasticsearch
+## Eleasticsearch 
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 *  [ES6.1.3集群搭建(+jdk1.8.0_131)](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/ES%E6%96%87%E6%A1%A3)
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
@@ -105,7 +105,7 @@
 * 近期 写Flink sink工具类,实现实时ETL秒级入库,现在仍是window+sink有时延 ok完成,Per模式运行,总共占用5G内存 稳定运行一周
 * 实时计算NC市几千条路段的实时拥堵指数,flink程序优化中,更新先停2天.
 * 最近晚上计划学点spark DataFrame,需要熟悉下批处理 在大数据平台的周报表上练手19.11
-* 最近接手这个事故接口一直变,增加到32个了
+* 最近接手这个事故接口一直变,增加到32个了 
 * 实时计算-将中间计算结果保存在状态中,之前想的是放到redis里,页面程序可以直接获取,但是job数一多,对redis会造成过大的压力,所以使用状态保存,需要的结
   果一起发送到kafka,测试两天 稳定运行(注:flink1.4.0不能设置state的过期时间,程序中逻辑处理(每天清空);1.6.0引入ttl)
 * spark统计全市/路段/区域 流量/拥堵 (完成) 完善Lambda架构,做成新增配置重算历史数据sh
