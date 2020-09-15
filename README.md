@@ -90,6 +90,7 @@
 ### 面试题
 *  [常见面试题](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
 *  [电话一面](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
+*  [现场二面](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
 #### 持续更新...
 * 会不定期的将在工作中接触大数据组件时做的去敏测试代码上传到对应的文件夹下供初学者参考,少走弯路 
   包括自己每天更新的大数据印象笔记  更新的进度和规划在issues 中 
