@@ -59,8 +59,8 @@
 ## redis 
 *  [Redis命令参考](//http://doc.redisfans.com/) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
-*  [主从模式&&哨兵模式]
-*  [布隆过滤器]
+*  [主从模式&&哨兵模式]()
+*  [布隆过滤器]()
 ## lucene 
 *  [什么是倒排索引](https://www.cnblogs.com/pc-boke/articles/9857532.html)
 *  [MySQL和Lucene索引对比分析(转)](https://www.cnblogs.com/luxiaoxun/p/5452502.html)
