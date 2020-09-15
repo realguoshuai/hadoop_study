@@ -92,7 +92,7 @@
    将全文检索,离线或实时统计出来的数据,通过后台接口->dubbo(可省略)->rest服务化.
 ### leetcode 
 *  [刷题]()
-### 面试题
+### 面试
 *  [常见面试题](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
 *  [电话一面](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
 *  [现场二面](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
