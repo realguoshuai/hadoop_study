@@ -78,7 +78,10 @@
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 *  [SpringBoot实现ES服务化,提供rest接口]()
+## ClickHouse
+*  TODO
 ## Kylin
+*  TODO
 ## kerberos
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
 *  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战  
