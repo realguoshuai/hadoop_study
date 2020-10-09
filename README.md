@@ -12,7 +12,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  [hive必会50道sql](https://blog.csdn.net/yanzhiguo98/article/details/100765946)
 *  [hive开窗函数](https://blog.csdn.net/wangpei1949/article/details/81437574) 
-*  hive基本是大数据入门必学的,在离线计算用的比较多,市场需求大,有sql基础入门比较快 
+*  hive基本是大数据入门必学的,在离线计算用的比较多,市场需求大,有sql基础入门比较快
 ### Scala
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -55,7 +55,7 @@
 ## kafka 
 *  [阅读官方文档](https://github.com/realguoshuai/hadoop_study/wiki/hadoop%E7%A4%BE%E5%8C%BA%E5%AE%98%E7%BD%91)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/blob/master/Kafka/%E5%8D%B0%E8%B1%A1%E7%AC%94%E8%AE%B0%E6%88%AA%E5%9B%BE.png)
-*  开源的消息队列,流计算架构一定要有的一个组件 
+*  开源的消息队列,流计算架构一定要有的一个组件
 ## redis 
 *  [Redis命令参考](//http://doc.redisfans.com/) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
