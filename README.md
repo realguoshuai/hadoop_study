@@ -72,7 +72,7 @@
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 *  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
 *  solr分collection的卡口过车数据100亿+  (增量4000-5000w/天)
-## Eleasticsearch 
+## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 *  [ES6.1.3集群搭建(+jdk1.8.0_131)](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/ES%E6%96%87%E6%A1%A3)
 *  [ES性能优化-转载](http://www.aboutyun.com/thread-27026-1-1.html)
@@ -91,6 +91,8 @@
 *  大数据开发,有能力的还是要学一下,数据服务化不求人(个人感觉,关于Solr和Es部分,服务化如果交给应用层开发,查询语句可能没有优化,用户体验会很差) 
 *  已经实现了solr和es对上层提供的rest接口,直接跟前端对接
 *  新增接口中调用执行sh脚本服务
+### jvm
+*  [常见参数](https://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html)
 ### 数据服务化
    将全文检索,离线或实时统计出来的数据,通过后台接口->dubbo(可省略)->rest服务化.
 ### leetcode 
@@ -122,5 +124,5 @@
   果一起发送到kafka,测试两天 稳定运行(注:flink1.4.0不能设置state的过期时间,程序中逻辑处理(每天清空);1.6.0引入ttl)
 * spark统计全市/路段/区域 流量/拥堵 (完成) 完善Lambda架构,做成新增配置重算历史数据sh
 * 使用springboot + spark + ftp+ sh 实现导入文件统计 导出 脚本
-* springboot实现基础信息同步到大数据平台   6-10基本搞完了
+* springboot实现基础信息同步到大数据平台   6-10基本搞完了 
 * flink开发浮动车GPS数据路径推测功能(gps->匹配路网得到相似度高的多个网格范围->计算点距离每条路段距离->确定车辆在哪条路段) ok
