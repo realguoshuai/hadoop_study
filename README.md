@@ -13,7 +13,7 @@
 *  [hive必会50道sql](https://blog.csdn.net/yanzhiguo98/article/details/100765946)
 *  [hive开窗函数](https://blog.csdn.net/wangpei1949/article/details/81437574)
 *  hive基本是大数据入门必学的,在离线计算用的比较多,市场需求大,有sql基础入门比较快
-### Scala
+### Scala 
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/scala)
