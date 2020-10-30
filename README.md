@@ -83,7 +83,7 @@
 *  TODO
 ## Kylin
 *  TODO
-## kerberos
+## kerberos 
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
 *  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战  
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
