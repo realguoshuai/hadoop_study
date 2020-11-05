@@ -23,6 +23,7 @@
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/spark)
 #### SparkSQL 
+*  [Spark DSL语法操作DF](https://github.com/realguoshuai/hadoop_study/blob/master/Spark2x/SparkSqlTrain.scala)
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
 #### Spark Structured Streaming
 *  后台我已经使用flink替代掉 
