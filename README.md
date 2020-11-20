@@ -1,5 +1,5 @@
 ![image](https://github.com/realguoshuai/hadoop_study/blob/master/hadoop%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/hadoop/index.jpg)
-## hadoop 
+## hadoop
 * [hadoop科普](https://github.com/realguoshuai/hadoop_study/wiki/%E7%A7%91%E6%99%AEHadoop)
 * [大数据书籍](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%A6%E7%B1%8D)
 * [大数据学习路线图](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF)
@@ -33,6 +33,7 @@
 *  [Flink 常见QA](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/QA%E5%BD%92%E6%A1%A3)
 *  [Flink开发者资料](https://ververica.cn/developers-resources/)  
 *  [Flink 阿里直播(每周四晚20:00-21:00))](https://github.com/flink-china/flink-training-course/)
+*  [新老手都值得看的Flink关键技术解析与优化实战(转)](https://mp.weixin.qq.com/s/wrb_mSLbt_Zn5l8l-hKEBw)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
 *  18年夏天开始接手,到现在Flink开发近2年了,现独自负责公司实时计算部分.两年成果:后台使用flink 基于交通卡口数据(过车数据)实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job,已上线一个省会两个地级市; 
 *  不足:FI平台的局限性,线上只能使用较低1.4.0版本 主要是写业务函数+DataStream/Process Function+缓存层,深点的东西还是没实际应用过(比如cep/table)
