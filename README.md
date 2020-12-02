@@ -24,6 +24,7 @@
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/spark)
 #### SparkSQL 
 *  [Spark DSL语法操作DF](https://github.com/realguoshuai/hadoop_study/blob/master/Spark2x/SparkSqlTrain.scala)
+*  [Spark/Hive开窗函数](https://github.com/realguoshuai/hadoop_study/blob/master/Spark2x/SparkWindowSqlTrain.scala)
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
 #### Spark Structured Streaming
 *  后台我已经使用flink替代掉 
