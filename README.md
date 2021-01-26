@@ -100,6 +100,8 @@
 *  [简单概念](https://blog.csdn.net/zc19921215/article/details/83029952)
 ### 数据服务化
    将全文检索,离线或实时统计出来的数据,通过后台接口->dubbo(可省略)->rest服务化.
+### 机器学习
+ *  [图像识别](https://github.com/nickliqian/darknet_captcha)
 ### leetcode 
 *  [刷题]()
 ### 面试
