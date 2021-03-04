@@ -37,7 +37,7 @@
 *  [新老手都值得看的Flink关键技术解析与优化实战(转)](https://mp.weixin.qq.com/s/wrb_mSLbt_Zn5l8l-hKEBw)
 *  真.流计算利器,但是资料比较少,建议直接看官方文档 我会不定期的将整理的文档和遇到bug的解决方式上传到Flink的对应目录下
 *  18年夏天开始接手,到现在Flink开发近2年了,现独自负责公司实时计算部分.两年成果:后台使用flink 基于交通卡口数据(过车数据)实现了(实时ETL&&实时指标汇总&&实时预警)三大类,近30个job,已上线一个省会两个地级市; 
-*  不足:FI平台的局限性,线上只能使用较低1.4.0版本 主要是写业务函数+DataStream/Process Function+缓存层,深点的东西还是没实际应用过(比如cep/table)
+*  不足:FI平台的局限性,线上只能使用较低1.4.0版本(已更新1.7.2) 主要是写业务函数+DataStream/Process Function+缓存层,深点的东西还是没实际应用过(比如cep/table)
 #### Flink项目
 *  [Flink 学习项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train)
 *  [IDEA内使用socket模拟实时数据源 进行flink流处理](https://github.com/realguoshuai/hadoop_study/tree/master/Flink/Flink%E9%A1%B9%E7%9B%AE/flink%2Bsocket%E5%AE%9E%E7%8E%B0%E6%B5%81%E5%BC%8FWC)
