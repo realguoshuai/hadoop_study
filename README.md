@@ -74,7 +74,8 @@
 *  solr 实时创建索引延迟问题
 *  [solr百亿规模数据优化](https://github.com/realguoshuai/hadoop_study/tree/master/Solr)
 *  [结巴分词](https://github.com/realguoshuai/hadoop_study/tree/master/Solr/Jieba%E5%88%86%E8%AF%8D)
-*  solr分collection的卡口过车数据100亿+  (增量4000-5000w/天)
+*  solr分collection的卡口过车数据100亿+  (增量8000-12000w/天  120G)
+*   [高并发+百亿数据如何优化(待整理)]()
 ## Eleasticsearch
 *  占坑,可以直接使用dbms+es实现几千万数据可视化展示 汇总,底层跟solr一样,都是基于lucene 
 *  [ES6.1.3集群搭建(+jdk1.8.0_131)](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/ES%E6%96%87%E6%A1%A3)
