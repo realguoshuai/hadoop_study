@@ -105,6 +105,8 @@
  *  [图像识别](https://github.com/nickliqian/darknet_captcha)
 ### leetcode 
 *  [刷题]()
+*  ### Python
+*  [利用Python进行数据分析·第2版](https://github.com/iamseancheney/python_for_data_analysis_2nd_chinese_version/blob/master/%E7%AC%AC14%E7%AB%A0%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B.md)
 ### 面试
 *  [常见面试题](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
 *  [电话一面]()
