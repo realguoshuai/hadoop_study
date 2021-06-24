@@ -84,7 +84,7 @@
 *  [SpringBoot实现ES服务化,提供rest接口](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-rest-elasticsearch)
 ## ClickHouse
 *  [官方文档](https://clickhouse.tech/docs/zh/)
-*  TODO 开更
+*  TODO 近期正在加进学习 
 ## Kylin
 *  TODO
 ## kerberos 
