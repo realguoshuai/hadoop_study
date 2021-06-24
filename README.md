@@ -13,6 +13,7 @@
 *  [hive必会50道sql && 答案](https://github.com/realguoshuai/hadoop_study/blob/master/HiveSQL50.scala)
 *  [hive开窗函数](https://blog.csdn.net/wangpei1949/article/details/81437574)
 *  hive基本是大数据入门必学的,在离线计算用的比较多,市场需求大,有sql基础入门比较快
+*  TODO hive调优 ...
 ### Scala
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543)
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
@@ -85,7 +86,9 @@
 ## ClickHouse
 *  [官方文档](https://clickhouse.tech/docs/zh/)
 *  [安装/数据导入/简单查询](https://github.com/realguoshuai/hadoop_study/blob/master/%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92/clickhouse.txt)
-*  TODO 近期正在加进学习 
+*  TODO 近期正在加进学习,期望替代Solr
+*  数据导入
+*  查询服务
 ## Kylin
 *  TODO
 ## kerberos 
@@ -98,15 +101,19 @@
 *  已经实现了solr和es对上层提供的rest接口,直接跟前端对接
 *  新增接口中调用执行sh脚本服务
 ### jvm
+*  调优/面试 ...
 *  [常见参数](https://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html)
 *  [简单概念](https://blog.csdn.net/zc19921215/article/details/83029952)
 ### 数据服务化
    将全文检索,离线或实时统计出来的数据,通过后台接口->dubbo(可省略)->rest服务化.
 ### 机器学习
+ *  有时间尝试验证码训练/换脸...
  *  [图像识别](https://github.com/nickliqian/darknet_captcha)
 ### leetcode 
+*  进大厂必备
 *  [刷题]()
 *  ### Python
+*  人生苦短 
 *  [利用Python进行数据分析·第2版](https://github.com/iamseancheney/python_for_data_analysis_2nd_chinese_version/blob/master/%E7%AC%AC14%E7%AB%A0%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B.md)
 ### 面试
 *  [常见面试题](https://github.com/realguoshuai/hadoop_study/tree/master/%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%9D%A2%E8%AF%95%E9%A2%98)
