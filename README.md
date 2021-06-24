@@ -95,7 +95,7 @@
 *  [印象笔记](https://github.com/realguoshuai/hadoop_study/tree/master/Kerberos)
 *  主要分为人机/机机认证,大数据环境安装kerberos认证后,所有组件互通都需要互相认证,对开发有不小挑战  
 *  2019-5-5 更新 Fusioninsigh下的所有组件互通已经调试好 
-### springboot 
+## springboot 
 *  [示例模板](https://github.com/realguoshuai/hadoop_study/tree/master/SpringBoot/HelloWorld%E6%A8%A1%E6%9D%BF/spring-boot-hello)
 *  大数据开发,有能力的还是要学一下,数据服务化不求人(个人感觉,关于Solr和Es部分,服务化如果交给应用层开发,查询语句可能没有优化,用户体验会很差) 
 *  已经实现了solr和es对上层提供的rest接口,直接跟前端对接
@@ -112,7 +112,7 @@
 ### leetcode 
 *  进大厂必备
 *  [刷题]()
-*  ### Python
+### Python
 *  人生苦短 
 *  [利用Python进行数据分析·第2版](https://github.com/iamseancheney/python_for_data_analysis_2nd_chinese_version/blob/master/%E7%AC%AC14%E7%AB%A0%20%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E6%A1%88%E4%BE%8B.md)
 ### 面试
