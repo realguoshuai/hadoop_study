@@ -63,6 +63,7 @@
 ## redis 
 *  [Redis命令参考](//http://doc.redisfans.com/) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
+*  [Redis的过期策略和内存淘汰机制、热点数据及问题](https://www.cnblogs.com/hypo106/p/13299412.html) 
 *  [主从模式&&哨兵模式]()
 *  [布隆过滤器]() 
 ## lucene 
