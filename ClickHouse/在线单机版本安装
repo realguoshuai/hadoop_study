@@ -1,0 +1,46 @@
+在线安装:
+grep -q sse4_2 /proc/cpuinfo && echo "SSE 4.2 supported" || echo "SSE 4.2 not supported"
+
+curl -s https://packagecloud.io/install/repositories/altinity/clickhouse/script.rpm.sh | sudo bash
+
+sudo yum list 'clickhouse*'
+sudo yum install yum-utils
+cd /opt/clickhouse/
+rpm -ivh *
+vim /etc/clickhouse-server/config.xml
+sudo /etc/init.d/clickhouse-server start
+
+
+启动命令:
+clickhouse-client --port 9001
+Connected to ClickHouse server version 20.9.2 revision 54439
+
+测试:
+select 1;
+
+建库
+CREATE DATABASE test ENGINE = Ordinary;
+
+建表:(每张表必须有一个日期字段)
+CREATE TABLE poi( objectid String,name String,adname String,address String,type String,typecode String,id String,x String,y String,create_date date) ENGINE = MergeTree(create_date, (id), 8192);
+
+删除表:
+drop table  poi;
+
+
+查看所有表:
+show tables;
+
+csv 导入入数据:
+cat /opt/clickhouse/poi_date.csv | iconv -f GBK -t UTF-8 | clickhouse-client --port 9001 --query="INSERT INTO poi FORMAT CSV"
+
+
+
+
+注:字段对应 csv逗号隔开  必须有时间字段 默认要求YYYY-MM-DD
+第一次导入乱码 是因为cat 时未转换
+
+
+
+参考:
+https://blog.csdn.net/weixin_34128411/article/details/89540699
