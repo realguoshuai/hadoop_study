@@ -86,7 +86,7 @@
 ## ClickHouse
 *  TODO 近期正在加紧学习,期望替代Solr查询千亿过车记录
 *  [官方文档](https://clickhouse.tech/docs/zh/)
-*  [安装/数据导入/简单查询](https://github.com/realguoshuai/hadoop_study/blob/master/%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92/clickhouse.txt)
+*  [安装/数据导入/简单查询](https://github.com/realguoshuai/hadoop_study/blob/master/ClickHouse/%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85)
 *  数据导入
 *  查询服务
 ## Kylin
