@@ -84,9 +84,9 @@
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 *  [SpringBoot实现ES服务化,提供rest接口](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-rest-elasticsearch)
 ## ClickHouse
+*  TODO 近期正在加紧学习,期望替代Solr查询千亿过车记录
 *  [官方文档](https://clickhouse.tech/docs/zh/)
 *  [安装/数据导入/简单查询](https://github.com/realguoshuai/hadoop_study/blob/master/%E6%8A%80%E6%9C%AF%E8%A7%84%E5%88%92/clickhouse.txt)
-*  TODO 近期正在加进学习,期望替代Solr
 *  数据导入
 *  查询服务
 ## Kylin
