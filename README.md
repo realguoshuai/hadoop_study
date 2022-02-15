@@ -1,5 +1,5 @@
 ![image](https://github.com/realguoshuai/hadoop_study/blob/master/hadoop%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/hadoop/index.jpg)
-## hadoop           
+## hadoop          
 * [hadoop科普](https://github.com/realguoshuai/hadoop_study/wiki/%E7%A7%91%E6%99%AEHadoop) 
 * [大数据书籍](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E4%B9%A6%E7%B1%8D)
 * [大数据学习路线图](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF)
@@ -23,7 +23,7 @@
 *  [阅读官方文档](https://yq.aliyun.com/topic/69?utm_content=m_17543) 
 *  [导图笔记](https://github.com/realguoshuai/hadoop_study/wiki/%E5%A4%A7%E7%89%9BBlog)
 *  [练手项目](https://github.com/realguoshuai/flink-train/tree/master/flink-train/src/main/scala/com/bigdata/train/spark)
-#### SparkSQL  
+#### SparkSQL 
 *  [Spark DSL语法操作DF](https://github.com/realguoshuai/hadoop_study/blob/master/Spark2x/SparkSqlTrain.scala)
 *  [Spark/Hive开窗函数](https://github.com/realguoshuai/hadoop_study/blob/master/Spark2x/SparkWindowSqlTrain.scala)
 *  [Spark同步hive数据到solr](https://github.com/realguoshuai/hadoop_study/tree/master/Spark2x/mtdap-sparksql)
@@ -50,7 +50,7 @@
 *    [flink1.10单机版快速搭建](https://github.com/realguoshuai/flink-1.10-train/blob/master/doc/Flink%201.10%20%E5%8D%95%E6%9C%BA%E7%89%88%E6%90%AD%E5%BB%BA)
 *    [学习flink-1.10的Maven项目](https://github.com/realguoshuai/flink-1.10-train)
 #### Flink-1.14
-*    [TODO]()
+*    [TODO]() 
 #### FlinkX
      有计划尝试下袋鼠云开源的FlinkX
 ### HBase(phoenix)
@@ -87,7 +87,7 @@
 *  [ES代码-入库查询](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-elastic)
 *  [SpringBoot实现ES服务化,提供rest接口](https://github.com/realguoshuai/hadoop_study/tree/master/ELK/ElasticSerach6.1.3/%E4%BB%A3%E7%A0%81/mtdap-rest-elasticsearch)
 ## ClickHouse
-*  TODO 近期正在加紧学习,期望替代Solr查询千亿过车记录
+*  TODO 近期正在加紧学习,期望替代Solr查询千亿过车记录 
 *  [官方文档](https://clickhouse.tech/docs/zh/)
 *  [安装/数据导入/简单查询](https://github.com/realguoshuai/hadoop_study/blob/master/ClickHouse/%E5%8D%95%E6%9C%BA%E7%89%88%E6%9C%AC%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85)
 *  数据导入
